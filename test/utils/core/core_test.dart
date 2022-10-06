@@ -15,6 +15,11 @@ void main() {
       test('Returned UID from GetUid function has length of 11', () {
         expect(Core.getUid(), hasLength(11));
       });
+
+      test('Returned UID from GetUid function does not start with number', () {
+        var alphaRegEx = RegExp(r'^[a-zA-Z]');
+        expect(Core.getUid(), (String value) => alphaRegEx.hasMatch(value));
+      });
     });
   });
 }
