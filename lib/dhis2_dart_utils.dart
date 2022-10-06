@@ -7,7 +7,9 @@ export 'src/main_directive.dart'
     show
         Core,
         IndicatorEngine,
-        PeriodEngine,
         ProgramIndicatorEngine,
         ProgramRuleEngine,
-        ValidationRuleEngine;
+        ValidationRuleEngine,
+        Period,
+        PeriodType,
+        PeriodUtility;
