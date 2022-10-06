@@ -79,7 +79,7 @@ class PeriodType {
 
     Map<String, dynamic> config = periodTypeConfigs
         .firstWhere((element) => element['id'] == id, orElse: () => {});
-    if (config == {}) {
+    if (config.isEmpty) {
       throw Exception("Invalid period type id");
     }
     _init(config, year: year);
