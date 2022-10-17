@@ -1,12 +1,13 @@
+import '../../shared/constants/operators_constants.dart';
 import '../../shared/helpers/data_object_helper.dart';
 import '../../shared/helpers/mathematical_operations_util.dart';
+import '../exceptions/program_indicator_exception.dart';
 import '../models/program_indicator.dart';
 
 class ProgramIndicatorHelper {
   static double evaluateExpressionWithinBrackets(String expression) {
-    List<String> operators = ['+', '-', '*', '/', '%'];
     bool hasOperator = false;
-    for (String operator in operators) {
+    for (String operator in OperatorsConstants.arithmeticOperators) {
       int operatorIndex = expression.indexOf(operator);
       if (operatorIndex >= 0) {
         hasOperator = true;
@@ -97,7 +98,7 @@ class ProgramIndicatorHelper {
         evaluatedValue = value.toStringAsFixed(1);
       }
     } catch (e) {
-      //
+      throw ProgramIndicatorException('evaluateArithmeticExpression: $e');
     }
     evaluatedValue =
         ['Infinity', 'NaN'].contains(evaluatedValue) ? '0' : evaluatedValue;
@@ -107,20 +108,29 @@ class ProgramIndicatorHelper {
   static List<String> getUidsFromExpression(String expression) {
     RegExp regExp = RegExp('(#{.*?})');
     List<String> matchedUids = [];
-    Iterable<Match> matches = regExp.allMatches(expression);
-    for (Match m in matches) {
-      matchedUids.add(m[0]!);
+    try {
+      Iterable<Match> matches = regExp.allMatches(expression);
+      for (Match m in matches) {
+        matchedUids.add(m[0]!);
+      }
+    } catch (e) {
+      throw ProgramIndicatorException('getUidsFromExpression: $e');
     }
+
     return matchedUids;
   }
 
   static String getExpressionWithValues(
       String expression, List<String> uids, Map dataObject) {
-    for (String uid in uids) {
-      String value = DataObjectHelper.getValueFromDataObject(uid, dataObject);
-      expression = expression.replaceAll(uid, value);
+    try {
+      for (String uid in uids) {
+        String value = DataObjectHelper.getValueFromDataObject(uid, dataObject);
+        expression = expression.replaceAll(uid, value);
+      }
+      return expression;
+    } catch (e) {
+      throw ProgramIndicatorException('getExpressionWithValues: $e');
     }
-    return expression;
   }
 
   static String evaluateExpressionValueFromProgramIndicator({
