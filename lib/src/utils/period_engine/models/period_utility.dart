@@ -1,4 +1,4 @@
-import '../constants/fixed.dart';
+import '../constants/fixed_period_types.dart';
 import 'period_type.dart';
 
 class PeriodUtility {

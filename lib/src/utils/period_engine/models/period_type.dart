@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:dart_date/dart_date.dart';
 
-import '../constants/enums.dart';
-import '../constants/fixed.dart';
-import '../constants/relative.dart';
+import '../constants/period_categories.dart';
+import '../constants/fixed_period_types.dart';
+import '../constants/relative_period_types.dart';
 import '../helpers/date.dart';
 import 'period.dart';
 

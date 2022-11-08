@@ -1,6 +1,7 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:dhis2_dart_utils/dhis2_dart_utils.dart';
-import 'package:dhis2_dart_utils/src/utils/period_engine/constants/enums.dart';
+import 'package:dhis2_dart_utils/src/utils/period_engine/constants/period_categories.dart';
+import 'package:dhis2_dart_utils/src/utils/period_engine/constants/period_types.dart';
 import 'package:test/test.dart';
 
 List<int> years = [

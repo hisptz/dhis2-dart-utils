@@ -1,4 +1,71 @@
-import 'enums.dart';
+import 'period_categories.dart';
+import 'period_types.dart';
+
+List<Map<String, dynamic>> relativePeriodTypes = [
+  {
+    "id": PeriodTypes.daily,
+    "getPeriods": () => getDaysPeriodType(),
+    "name": 'Days',
+    "category": PeriodTypeCategory.relative,
+    "unit": "day"
+  },
+  {
+    "id": PeriodTypes.weekly,
+    "getPeriods": () => getWeeksPeriodType(),
+    "name": 'Weeks',
+    "category": PeriodTypeCategory.relative,
+    "unit": 'week',
+  },
+  {
+    "id": PeriodTypes.biWeekly,
+    "getPeriods": () => getBiWeeksPeriodType(),
+    "category": PeriodTypeCategory.relative,
+    "name": 'Bi-weeks',
+    "unit": "week"
+  },
+  {
+    "id": PeriodTypes.monthly,
+    "getPeriods": () => getMonthsPeriodType(),
+    "name": 'Months',
+    "category": PeriodTypeCategory.relative,
+    "unit": "month",
+  },
+  {
+    "id": PeriodTypes.biMonthly,
+    "getPeriods": () => getBiMonthsPeriodType(),
+    "name": 'Bi-months',
+    "category": PeriodTypeCategory.relative,
+    "unit": "month",
+  },
+  {
+    "id": PeriodTypes.quarterly,
+    "getPeriods": () => getQuartersPeriodType(),
+    "name": 'Quarters',
+    "category": PeriodTypeCategory.relative,
+    "unit": "month"
+  },
+  {
+    "id": PeriodTypes.sixMonthly,
+    "getPeriods": () => getSixMonthsPeriodType(),
+    "name": 'Six-months',
+    "category": PeriodTypeCategory.relative,
+    "unit": "month"
+  },
+  {
+    "id": PeriodTypes.financial,
+    "getPeriods": () => getFinancialYearsPeriodType(),
+    "name": 'Financial Years',
+    "category": PeriodTypeCategory.relative,
+    "unit": "year"
+  },
+  {
+    "id": PeriodTypes.yearly,
+    "getPeriods": () => getYearsPeriodType(),
+    "name": 'Years',
+    "category": PeriodTypeCategory.relative,
+    "unit": "year"
+  },
+];
 
 getDaysPeriodType() => [
       {"id": 'TODAY', "name": 'Today'},
@@ -92,69 +159,3 @@ getYearsPeriodType() => [
       {"id": 'LAST_5_YEARS', "name": 'Last 5 years'},
       {"id": 'LAST_10_YEARS', "name": 'Last 10 years'},
     ];
-
-List<Map<String, dynamic>> relativePeriodTypes = [
-  {
-    "id": PeriodTypes.daily,
-    "getPeriods": () => getDaysPeriodType(),
-    "name": 'Days',
-    "category": PeriodTypeCategory.relative,
-    "unit": "day"
-  },
-  {
-    "id": PeriodTypes.weekly,
-    "getPeriods": () => getWeeksPeriodType(),
-    "name": 'Weeks',
-    "category": PeriodTypeCategory.relative,
-    "unit": 'week',
-  },
-  {
-    "id": PeriodTypes.biWeekly,
-    "getPeriods": () => getBiWeeksPeriodType(),
-    "category": PeriodTypeCategory.relative,
-    "name": 'Bi-weeks',
-    "unit": "week"
-  },
-  {
-    "id": PeriodTypes.monthly,
-    "getPeriods": () => getMonthsPeriodType(),
-    "name": 'Months',
-    "category": PeriodTypeCategory.relative,
-    "unit": "month",
-  },
-  {
-    "id": PeriodTypes.biMonthly,
-    "getPeriods": () => getBiMonthsPeriodType(),
-    "name": 'Bi-months',
-    "category": PeriodTypeCategory.relative,
-    "unit": "month",
-  },
-  {
-    "id": PeriodTypes.quarterly,
-    "getPeriods": () => getQuartersPeriodType(),
-    "name": 'Quarters',
-    "category": PeriodTypeCategory.relative,
-    "unit": "month"
-  },
-  {
-    "id": PeriodTypes.sixMonthly,
-    "getPeriods": () => getSixMonthsPeriodType(),
-    "name": 'Six-months',
-    "category": PeriodTypeCategory.relative,
-    "unit": "month"
-  },
-  {
-    "id": PeriodTypes.financial,
-    "getPeriods": () => getFinancialYearsPeriodType(),
-    "name": 'Financial Years',
-    "category": PeriodTypeCategory.relative,
-    "unit": "year"
-  },
-  {
-    "id": PeriodTypes.yearly,
-    "getPeriods": () => getYearsPeriodType(),
-    "name": 'Years',
-    "category": PeriodTypeCategory.relative,
-    "unit": "year"
-  },
-];

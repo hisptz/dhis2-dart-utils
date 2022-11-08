@@ -1,7 +1,8 @@
 import 'package:dart_date/dart_date.dart';
 
 import '../helpers/date.dart';
-import 'enums.dart';
+import 'period_categories.dart';
+import 'period_types.dart';
 
 List<Map<String, dynamic>> fixedPeriodTypes = [
   {
