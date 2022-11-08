@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:dhis2_dart_utils/dhis2_dart_utils.dart';
 import 'package:dhis2_dart_utils/src/utils/program_indicator_engine/models/program_indicator.dart';
 import 'package:test/test.dart';

@@ -18,7 +18,7 @@ getWeeksPeriodType() => [
       {"id": 'LAST_4_WEEKS', "name": 'Last 4 weeks'},
       {"id": 'LAST_12_WEEKS', "name": 'Last 12 weeks'},
       {"id": 'LAST_52_WEEKS', "name": 'Last 52 weeks'},
-      {"id": PeriodTypes.WEEKS_THIS_YEAR, "name": 'Weeks this year'},
+      {"id": PeriodTypes.weeksThisYear, "name": 'Weeks this year'},
     ];
 
 getBiWeeksPeriodType() => [
@@ -93,68 +93,68 @@ getYearsPeriodType() => [
       {"id": 'LAST_10_YEARS', "name": 'Last 10 years'},
     ];
 
-List<Map<String, dynamic>> RELATIVE_PERIOD_TYPES = [
+List<Map<String, dynamic>> relativePeriodTypes = [
   {
-    "id": PeriodTypes.DAILY,
+    "id": PeriodTypes.daily,
     "getPeriods": () => getDaysPeriodType(),
     "name": 'Days',
-    "category": PeriodTypeCategory.RELATIVE,
+    "category": PeriodTypeCategory.relative,
     "unit": "day"
   },
   {
-    "id": PeriodTypes.WEEKLY,
+    "id": PeriodTypes.weekly,
     "getPeriods": () => getWeeksPeriodType(),
     "name": 'Weeks',
-    "category": PeriodTypeCategory.RELATIVE,
+    "category": PeriodTypeCategory.relative,
     "unit": 'week',
   },
   {
-    "id": PeriodTypes.BIWEEKLY,
+    "id": PeriodTypes.biWeekly,
     "getPeriods": () => getBiWeeksPeriodType(),
-    "category": PeriodTypeCategory.RELATIVE,
+    "category": PeriodTypeCategory.relative,
     "name": 'Bi-weeks',
     "unit": "week"
   },
   {
-    "id": PeriodTypes.MONTHLY,
+    "id": PeriodTypes.monthly,
     "getPeriods": () => getMonthsPeriodType(),
     "name": 'Months',
-    "category": PeriodTypeCategory.RELATIVE,
+    "category": PeriodTypeCategory.relative,
     "unit": "month",
   },
   {
-    "id": PeriodTypes.BIMONTHLY,
+    "id": PeriodTypes.biMonthly,
     "getPeriods": () => getBiMonthsPeriodType(),
     "name": 'Bi-months',
-    "category": PeriodTypeCategory.RELATIVE,
+    "category": PeriodTypeCategory.relative,
     "unit": "month",
   },
   {
-    "id": PeriodTypes.QUARTERLY,
+    "id": PeriodTypes.quarterly,
     "getPeriods": () => getQuartersPeriodType(),
     "name": 'Quarters',
-    "category": PeriodTypeCategory.RELATIVE,
+    "category": PeriodTypeCategory.relative,
     "unit": "month"
   },
   {
-    "id": PeriodTypes.SIXMONTHLY,
+    "id": PeriodTypes.sixMonthly,
     "getPeriods": () => getSixMonthsPeriodType(),
     "name": 'Six-months',
-    "category": PeriodTypeCategory.RELATIVE,
+    "category": PeriodTypeCategory.relative,
     "unit": "month"
   },
   {
-    "id": PeriodTypes.FINANCIAL,
+    "id": PeriodTypes.financial,
     "getPeriods": () => getFinancialYearsPeriodType(),
     "name": 'Financial Years',
-    "category": PeriodTypeCategory.RELATIVE,
+    "category": PeriodTypeCategory.relative,
     "unit": "year"
   },
   {
-    "id": PeriodTypes.YEARLY,
+    "id": PeriodTypes.yearly,
     "getPeriods": () => getYearsPeriodType(),
     "name": 'Years',
-    "category": PeriodTypeCategory.RELATIVE,
+    "category": PeriodTypeCategory.relative,
     "unit": "year"
   },
 ];

@@ -1,27 +1,27 @@
 class PeriodTypeCategory {
-  static const FIXED = 'FIXED';
-  static const RELATIVE = 'RELATIVE';
-  static const RANGE = 'RANGE';
+  static const fixed = 'FIXED';
+  static const relative = 'RELATIVE';
+  static const range = 'RANGE';
 }
 
 class PeriodTypes {
-  static const DAILY = 'DAILY';
-  static const WEEKLY = 'WEEKLY';
-  static const WEEKLYWED = 'WEEKLYWED';
-  static const WEEKLYTHU = 'WEEKLYTHU';
-  static const WEEKLYSAT = 'WEEKLYSAT';
-  static const WEEKLYSUN = 'WEEKLYSUN';
-  static const WEEKS_THIS_YEAR = 'WEEKS_THIS_YEAR';
-  static const BIWEEKLY = 'BIWEEKLY';
-  static const MONTHLY = 'MONTHLY';
-  static const BIMONTHLY = 'BIMONTHLY';
-  static const QUARTERLY = 'QUARTERLY';
-  static const SIXMONTHLY = 'SIXMONTHLY';
-  static const SIXMONTHLYAPR = 'SIXMONTHLYAPR';
-  static const YEARLY = 'YEARLY';
-  static const FINANCIAL = 'FINANCIAL';
-  static const FYNOV = 'FYNOV';
-  static const FYOCT = 'FYOCT';
-  static const FYJUL = 'FYJUL';
-  static const FYAPR = 'FYAPR';
+  static const daily = 'DAILY';
+  static const weekly = 'WEEKLY';
+  static const weeklyWednesday = 'WEEKLYWED';
+  static const weeklyThursday = 'WEEKLYTHU';
+  static const weeklySaturday = 'WEEKLYSAT';
+  static const weeklySunday = 'WEEKLYSUN';
+  static const weeksThisYear = 'WEEKS_THIS_YEAR';
+  static const biWeekly = 'BIWEEKLY';
+  static const monthly = 'MONTHLY';
+  static const biMonthly = 'BIMONTHLY';
+  static const quarterly = 'QUARTERLY';
+  static const sixMonthly = 'SIXMONTHLY';
+  static const sixMonthlyApril = 'SIXMONTHLYAPR';
+  static const yearly = 'YEARLY';
+  static const financial = 'FINANCIAL';
+  static const financialYearNovember = 'FYNOV';
+  static const financialYearOctober = 'FYOCT';
+  static const financialYearJuly = 'FYJUL';
+  static const financialYearApril = 'FYAPR';
 }

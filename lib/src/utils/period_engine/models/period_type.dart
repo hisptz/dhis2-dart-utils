@@ -62,19 +62,19 @@ class PeriodType {
     offset = config['offset'];
     _getDuration();
     this.year = year;
-    if (category == PeriodTypeCategory.FIXED) {
+    if (category == PeriodTypeCategory.fixed) {
       _periods = _getFixedPeriods();
-    } else if (category == PeriodTypeCategory.RELATIVE) {
+    } else if (category == PeriodTypeCategory.relative) {
       _periods = _getRelativePeriods(config);
     }
   }
 
   PeriodType.fromId(String id, {String? category, int? year}) {
     List<Map<String, dynamic>> periodTypeConfigs = [];
-    if (category != null && category == PeriodTypeCategory.RELATIVE) {
-      periodTypeConfigs.addAll(RELATIVE_PERIOD_TYPES);
+    if (category != null && category == PeriodTypeCategory.relative) {
+      periodTypeConfigs.addAll(relativePeriodTypes);
     } else {
-      periodTypeConfigs.addAll(FIXED_PERIODS_TYPES);
+      periodTypeConfigs.addAll(fixedPeriodTypes);
     }
 
     Map<String, dynamic> config = periodTypeConfigs
@@ -118,7 +118,7 @@ class PeriodType {
         int.tryParse(RegExp(r'^\d{4}').firstMatch(id)?.groups([0]).first ?? '');
     if (year != null) {
       Map<String, dynamic>? periodTypeObject =
-          FIXED_PERIODS_TYPES.firstWhereOrNull(
+          fixedPeriodTypes.firstWhereOrNull(
         (type) => (type['regex'] as RegExp).hasMatch(id),
       );
       if (periodTypeObject == null) {
@@ -132,7 +132,7 @@ class PeriodType {
       }
       return period;
     } else {
-      Map<String, dynamic>? periodTypeObject = RELATIVE_PERIOD_TYPES
+      Map<String, dynamic>? periodTypeObject = relativePeriodTypes
           .firstWhereOrNull((Map type) => (type['getPeriods']() as List)
               .where((element) => element['id'] as String == id)
               .isNotEmpty);
