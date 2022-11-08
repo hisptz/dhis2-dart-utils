@@ -25,6 +25,11 @@ class ProgramRule {
     id = mapData['id'];
     program = mapData['program'];
     condition = mapData['condition'];
+    programRuleActions =
+        ((mapData['programRuleActions'] as List<Map<String, dynamic>>?) ?? [])
+            .map((programRuleAction) =>
+                ProgramRuleAction.fromMap(programRuleAction))
+            .toList();
   }
 
   factory ProgramRule.fromJson(

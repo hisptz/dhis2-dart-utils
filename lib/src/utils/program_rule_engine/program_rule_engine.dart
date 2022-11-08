@@ -178,6 +178,7 @@ class ProgramRuleEngine {
         }
       }
     }
+
     return {
       "hiddenFields": hiddenFields,
       "assignedFields": assignedFields,
