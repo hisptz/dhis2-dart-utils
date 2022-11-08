@@ -30,9 +30,6 @@ void main() {
   );
 
   //  EXAMPLE: program rule engine
-  Map programRuleEngineDataObject = {
-    "oZg33kd9taw": "Male",
-  };
   List<ProgramRule> programRules = [
     {
       "id": "fd3wL1quxGb",
@@ -49,15 +46,30 @@ void main() {
       ]
     },
     {
+      "id": "xZe5qCzRS0Y",
+      "condition": "#{gender} == 'Male'",
+      "program": "lxAQ7Zs9VYR",
+      "programRuleActions": [
+        {
+          "id": "hwgyO59SSxu",
+          "programRuleActionType": "ASSIGN",
+          "programRule": "xOe5qCzRS0Y",
+          "dataElement": "sWoqcoByYmD",
+          "data": "false"
+        }
+      ]
+    },
+    {
       "id": "xOe5qCzRS0Y",
-      "condition": "!#{womanSmoking} ",
+      "condition": "!#{womanSmoking}",
       "program": "lxAQ7Zs9VYR",
       "programRuleActions": [
         {
           "id": "hwgyO59SSxu",
           "programRuleActionType": "HIDEFIELD",
           "programRule": "xOe5qCzRS0Y",
-          "dataElement": "Ok9OQpitjQr"
+          "dataElement": "sWoqcoByYmD",
+          "data": "false"
         }
       ]
     }
@@ -84,9 +96,12 @@ void main() {
       .map((Map<String, dynamic> programRuleVariable) =>
           ProgramRuleVariable.fromMap(programRuleVariable))
       .toList();
+  Map programRuleEngineDataObject = {
+    "oZg33kd9taw": "Male",
+  };
 
   print(
-    'Evaluation of program rules $programRules based on variables $programRuleVariables on $programRuleEngineDataObject = ${ProgramRuleEngine.evaluateProgramRule(
+    '${ProgramRuleEngine.evaluateProgramRule(
       programRules: programRules,
       programRuleVariables: programRuleVariables,
       dataObject: programRuleEngineDataObject,

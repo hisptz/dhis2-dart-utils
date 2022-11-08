@@ -41,7 +41,7 @@ class ProgramRuleAction {
   ProgramRuleAction.fromMap(Map<String, dynamic> mapData) {
     id = mapData['id'];
     programRule = mapData['programRule'];
-    data = mapData['data'];
+    data = mapData['data'] ?? '';
     content = mapData['content'];
     programRuleActionType = mapData['programRuleActionType'];
     location = mapData['location'];

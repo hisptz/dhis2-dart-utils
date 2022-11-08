@@ -28,12 +28,6 @@ void main() {
       }
     ].map((indicator) => ProgramIndicator.fromMap(indicator)).toList();
 
-    var value = ProgramIndicatorEngine.evaluateProgramIndicators(
-      programIndicators: programIndicators,
-      dataObject: dataObject,
-    );
-
-    print(value);
     test('Program indicator has value', () {
       expect(
           ProgramIndicatorEngine.evaluateProgramIndicators(
