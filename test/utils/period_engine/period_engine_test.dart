@@ -1,6 +1,7 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:dhis2_dart_utils/dhis2_dart_utils.dart';
-import 'package:dhis2_dart_utils/src/utils/period_engine/constants/enums.dart';
+import 'package:dhis2_dart_utils/src/utils/period_engine/constants/period_categories.dart';
+import 'package:dhis2_dart_utils/src/utils/period_engine/constants/period_types.dart';
 import 'package:test/test.dart';
 
 List<int> years = [
@@ -23,14 +24,14 @@ List<int> years = [
 ];
 List<Map<String, dynamic>> fixedPeriodsTests = [
   {
-    "id": PeriodTypes.DAILY,
+    "id": PeriodTypes.daily,
     "periodIdTest": RegExp(r'^(\d{4})(\d{2})(\d{2})$'),
     "periodNameTest": RegExp(r'^(\d{4})-(\d{2})-(\d{2})$'),
     "noOfPeriods": (year) => DateTime(year).getDaysInYear,
     "description": "Daily Period type test",
   },
   {
-    "id": PeriodTypes.WEEKLY,
+    "id": PeriodTypes.weekly,
     "periodIdTest": RegExp(r'^(\d{4})W(\d{1,2})$'),
     "periodNameTest": RegExp(
         r'^Week ([0-9]+) ([0-9]{4})-([0-9]{2})-([0-9]{2}) - ([0-9]{4})-([0-9]{2})-([0-9]{2})$'),
@@ -38,7 +39,7 @@ List<Map<String, dynamic>> fixedPeriodsTests = [
     "description": "Weekly Period type test",
   },
   {
-    "id": PeriodTypes.WEEKLYWED,
+    "id": PeriodTypes.weeklyWednesday,
     "periodIdTest": RegExp(r'^(\d{4})(Wed)W(\d{1,2})$'),
     "periodNameTest": RegExp(
         r'^Week ([0-9]+) ([0-9]{4})-([0-9]{2})-([0-9]{2}) - ([0-9]{4})-([0-9]{2})-([0-9]{2})$'),
@@ -46,7 +47,7 @@ List<Map<String, dynamic>> fixedPeriodsTests = [
     "description": "Weekly Period type test",
   },
   {
-    "id": PeriodTypes.WEEKLYTHU,
+    "id": PeriodTypes.weeklyThursday,
     "periodIdTest": RegExp(r'^(\d{4})(Thu)W(\d{1,2})$'),
     "periodNameTest": RegExp(
         r'^Week ([0-9]+) ([0-9]{4})-([0-9]{2})-([0-9]{2}) - ([0-9]{4})-([0-9]{2})-([0-9]{2})$'),
@@ -54,7 +55,7 @@ List<Map<String, dynamic>> fixedPeriodsTests = [
     "description": "Weekly Period type test",
   },
   {
-    "id": PeriodTypes.WEEKLYSAT,
+    "id": PeriodTypes.weeklySaturday,
     "periodIdTest": RegExp(r'^(\d{4})(Sat)W(\d{1,2})$'),
     "periodNameTest": RegExp(
         r'^Week ([0-9]+) ([0-9]{4})-([0-9]{2})-([0-9]{2}) - ([0-9]{4})-([0-9]{2})-([0-9]{2})$'),
@@ -62,7 +63,7 @@ List<Map<String, dynamic>> fixedPeriodsTests = [
     "description": "Weekly Period type test",
   },
   {
-    "id": PeriodTypes.WEEKLYSUN,
+    "id": PeriodTypes.weeklySunday,
     "periodIdTest": RegExp(r'^(\d{4})(Sun)W(\d{1,2})$'),
     "periodNameTest": RegExp(
         r'^Week ([0-9]+) ([0-9]{4})-([0-9]{2})-([0-9]{2}) - ([0-9]{4})-([0-9]{2})-([0-9]{2})$'),
@@ -70,7 +71,7 @@ List<Map<String, dynamic>> fixedPeriodsTests = [
     "description": "Weekly Period type test",
   },
   {
-    "id": PeriodTypes.BIWEEKLY,
+    "id": PeriodTypes.biWeekly,
     "periodIdTest": RegExp(r'^([0-9]{4})BiW([0-9]{1,2})$'),
     "periodNameTest": RegExp(
         r'Bi-Week ([0-9]+) ([0-9]{4})-([0-9]{2})-([0-9]{2}) - ([0-9]{4})-([0-9]{2})-([0-9]{2})'),
@@ -78,70 +79,70 @@ List<Map<String, dynamic>> fixedPeriodsTests = [
     "description": "Bi-Weekly Period type test",
   },
   {
-    "id": PeriodTypes.MONTHLY,
+    "id": PeriodTypes.monthly,
     "periodIdTest": RegExp(r'^([0-9]{4})([0-9]{2})$'),
     "periodNameTest": RegExp(r'^([A-Za-z])+ ([0-9]{4})$'),
     "noOfPeriods": (year) => 12,
     "description": "Monthly Period type test",
   },
   {
-    "id": PeriodTypes.BIMONTHLY,
+    "id": PeriodTypes.biMonthly,
     "periodIdTest": RegExp(r'^([0-9]{4})([0-9]{2})B$'),
     "periodNameTest": RegExp(r'([A-za-z]+) - ([A-za-z]+) (\d{4})'),
     "noOfPeriods": (year) => 6,
     "description": "Bi-Monthly Period type test",
   },
   {
-    "id": PeriodTypes.QUARTERLY,
+    "id": PeriodTypes.quarterly,
     "periodIdTest": RegExp(r'^([0-9]{4})Q([1234])$'),
     "periodNameTest": RegExp(r'([A-za-z]+) - ([A-za-z]+) (\d{4})'),
     "noOfPeriods": 4,
     "description": "Quarterly Period type test",
   },
   {
-    "id": PeriodTypes.SIXMONTHLY,
+    "id": PeriodTypes.sixMonthly,
     "periodIdTest": RegExp(r'^([0-9]{4})S([12])$'),
     "periodNameTest": RegExp(r'([A-za-z]+) - ([A-za-z]+) (\d{4})'),
     "noOfPeriods": 2,
     "description": "Six-Monthly Period type test",
   },
   {
-    "id": PeriodTypes.SIXMONTHLYAPR,
+    "id": PeriodTypes.sixMonthlyApril,
     "periodIdTest": RegExp(r'^([0-9]{4})AprilS([12])$'),
     "periodNameTest": RegExp(r'^([a-zA-Z]+)( | \d{4} )- ([a-zA-Z]+) \d{4}$'),
     "noOfPeriods": 2,
     "description": "Six-Monthly Period type test",
   },
   {
-    "id": PeriodTypes.YEARLY,
+    "id": PeriodTypes.yearly,
     "periodIdTest": RegExp(r'^(\d{4})$'),
     "periodNameTest": RegExp(r'(\d{4})'),
     "noOfPeriods": 10,
     "description": "Yearly Period type test",
   },
   {
-    "id": PeriodTypes.FYNOV,
+    "id": PeriodTypes.financialYearNovember,
     "description": "Financial Year November Period type test",
     "periodIdTest": RegExp(r'^([0-9]{4})Nov$'),
     "periodNameTest": RegExp(r'([A-za-z]+) (\d{4}) - ([A-za-z]+) (\d{4})'),
     "noOfPeriods": 10,
   },
   {
-    "id": PeriodTypes.FYOCT,
+    "id": PeriodTypes.financialYearOctober,
     "description": "Financial Year October Period type test",
     "periodIdTest": RegExp(r'^([0-9]{4})Oct$'),
     "periodNameTest": RegExp(r'([A-za-z]+) (\d{4}) - ([A-za-z]+) (\d{4})'),
     "noOfPeriods": 10,
   },
   {
-    "id": PeriodTypes.FYJUL,
+    "id": PeriodTypes.financialYearJuly,
     "description": "Financial Year July Period type test",
     "periodIdTest": RegExp(r'^([0-9]{4})July$'),
     "periodNameTest": RegExp(r'([A-za-z]+) (\d{4}) - ([A-za-z]+) (\d{4})'),
     "noOfPeriods": 10,
   },
   {
-    "id": PeriodTypes.FYAPR,
+    "id": PeriodTypes.financialYearApril,
     "description": "Financial Year April Period type test",
     "periodIdTest": RegExp(r'^([0-9]{4})April$'),
     "periodNameTest": RegExp(r'([A-za-z]+) (\d{4}) - ([A-za-z]+) (\d{4})'),
@@ -151,31 +152,31 @@ List<Map<String, dynamic>> fixedPeriodsTests = [
 
 List<Map<String, dynamic>> relativePeriodTests = [
   {
-    "id": PeriodTypes.DAILY,
+    "id": PeriodTypes.daily,
   },
   {
-    "id": PeriodTypes.WEEKLY,
+    "id": PeriodTypes.weekly,
   },
   {
-    "id": PeriodTypes.BIWEEKLY,
+    "id": PeriodTypes.biWeekly,
   },
   {
-    "id": PeriodTypes.MONTHLY,
+    "id": PeriodTypes.monthly,
   },
   {
-    "id": PeriodTypes.BIMONTHLY,
+    "id": PeriodTypes.biMonthly,
   },
   {
-    "id": PeriodTypes.QUARTERLY,
+    "id": PeriodTypes.quarterly,
   },
   {
-    "id": PeriodTypes.SIXMONTHLY,
+    "id": PeriodTypes.sixMonthly,
   },
   {
-    "id": PeriodTypes.FINANCIAL,
+    "id": PeriodTypes.financial,
   },
   {
-    "id": PeriodTypes.YEARLY,
+    "id": PeriodTypes.yearly,
   },
 ];
 
@@ -206,7 +207,7 @@ void main() {
   for (Map suite in relativePeriodTests) {
     test("", () {
       PeriodType periodType =
-          PeriodType.fromId(suite['id'], category: PeriodTypeCategory.RELATIVE);
+          PeriodType.fromId(suite['id'], category: PeriodTypeCategory.relative);
       expect(periodType.periods.length > 0, isTrue);
     });
   }

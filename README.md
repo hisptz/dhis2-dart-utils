@@ -1,4 +1,3 @@
-
 <h3 align="center">DHIS2 DART UTILITIES </h3>
 
 <p align="center"> A collection of data models, constants and utility functions used to build a DHIS2 app in dart.  
@@ -6,14 +5,21 @@
 </p>
 
 ### Contents:
+
 - [Getting Started](#getting_started)
 - [Testing and Development](#test_and_develop)
 - [Usage](#usage)
 
 ## Features
 
-- Generator function for DHIS2 uid.
-- Utilities, data models and constants for DHI2 periods.
+Available features in this util libary are:
+
+<ul>
+  <li>Generator function for DHIS2 uid.</li>
+  <li>Utilities, data models and constants for DHI2 periods.</li>
+  <li>DHI2 Program indicator engine.</li>
+  <li>DHI2 Program rule engine.</li>
+</ul>
 
 ## Getting Started <a name = "getting_started"></a>
 
@@ -22,11 +28,13 @@
 The package can be installed using following alternatives:
 
 - For a dart project use the command:
+
 ```
 dart pub add dhis2_dart_utils
 ```
 
 - For a flutter project use the command:
+
 ```
 flutter pub add dhis2_dart_utils
 ```
@@ -35,7 +43,7 @@ flutter pub add dhis2_dart_utils
 
 ```
 dependencies:
-  dhis2_dart_utils: ^1.0.0
+  dhis2_dart_utils: <version>
 ```
 
 ### <li>Testing and Development</li> <a name = "test_and_develop"></a>
@@ -54,6 +62,8 @@ After getting a copy of the project source code, the following command will down
  dart pub get
 ```
 
+Examples can be run from the examples folder using the `dart run` commands.
+
 Tests can be run on the project folder by the command
 
 ```
@@ -63,12 +73,9 @@ dart test
 ## Usage <a name = "usage"></a>
 
 ### <li>How to Import</li>
+
 ```
 import 'package:dhis2_dart_utils/dhis2_dart_utils.dart';
 ```
 
-
-### <li>Generation of DHIS2 UID</li>
-```
-var uid = Core.getUid();
-```
+For more examples, [click here!](https://github.com/hisptz/dhis2-dart-utils/blob/main/example/README.md)
