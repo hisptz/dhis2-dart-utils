@@ -7,7 +7,7 @@ void main() {
       // Additional setup goes here.
     });
 
-    group('UID generator tests', () {
+    group('UID generator tests: ', () {
       test('GetUid function returns a string', () {
         expect(Core.getUid(), isNotEmpty);
       });
