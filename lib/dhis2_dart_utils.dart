@@ -1,8 +1,23 @@
-/// Support for doing something awesome.
 ///
-/// More dartdocs go here.
+/// Entry point to the library
+///
 library dhis2_dart_utils;
 
-export 'src/dhis2_dart_utils_base.dart';
-
-// TODO: Export any libraries intended for clients of this package.
+export 'src/main_directive.dart'
+    show
+        Core,
+        IndicatorEngine,
+        ProgramIndicatorEngine,
+        ProgramIndicator,
+        ProgramRuleEngine,
+        ProgramRule,
+        ProgramRuleAction,
+        ProgramRuleVariable,
+        ValidationRuleEngine,
+        Period,
+        PeriodType,
+        PeriodTypes,
+        PeriodTypeCategory,
+        fixedPeriodTypes,
+        relativePeriodTypes,
+        PeriodUtility;

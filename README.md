@@ -1,39 +1,81 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<h3 align="center">DHIS2 DART UTILITIES </h3>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+<p align="center"> A collection of data models, constants and utility functions used to build a DHIS2 app in dart.  
+    <br> 
+</p>
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+### Contents:
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+- [Getting Started](#getting_started)
+- [Testing and Development](#test_and_develop)
+- [Usage](#usage)
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Available features in this util libary are:
 
-## Getting started
+<ul>
+  <li>Generator function for DHIS2 uid.</li>
+  <li>Utilities, data models and constants for DHI2 periods.</li>
+  <li>DHI2 Program indicator engine.</li>
+  <li>DHI2 Program rule engine.</li>
+</ul>
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+## Getting Started <a name = "getting_started"></a>
 
-## Usage
+### <li>Package Installation</li>
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+The package can be installed using following alternatives:
 
-```dart
-const like = 'sample';
+- For a dart project use the command:
+
+```
+dart pub add dhis2_dart_utils
 ```
 
-## Additional information
+- For a flutter project use the command:
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```
+flutter pub add dhis2_dart_utils
+```
+
+- Adding it directly on the `pubspec.yaml` dependencies and running `flutter pug get` or `dart pub get`.
+
+```
+dependencies:
+  dhis2_dart_utils: <version>
+```
+
+### <li>Testing and Development</li> <a name = "test_and_develop"></a>
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+```
+ git clone <github_repository_url>
+```
+
+After getting a copy of the project source code, the following command will download all the project dependencies ready for testing, running and deploying the package
+
+```
+ cd <repository_name>
+
+ dart pub get
+```
+
+Examples can be run from the examples folder using the `dart run` commands.
+
+Tests can be run on the project folder by the command
+
+```
+dart test
+```
+
+## Usage <a name = "usage"></a>
+
+### <li>How to Import</li>
+
+```
+import 'package:dhis2_dart_utils/dhis2_dart_utils.dart';
+```
+
+For more examples, [click here!](https://github.com/hisptz/dhis2-dart-utils/blob/main/example/README.md)
