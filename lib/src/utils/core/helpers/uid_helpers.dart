@@ -1,6 +1,21 @@
+// Copyright (c) 2012, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
 import 'dart:math';
 
+/// Collection of helpers for generation of DHIS2 uid
+/// The class exposes a single static method `generateUid() `that generates the random id
+///
+///
 class UidHelpers {
+  /// This is a method for generating random uids with DHIS2 requirements
+  /// Uid returned needs to be of 11  alphanumeric character length starting with an alphabet
+  /// ```dart
+  /// var uid = UidHelpers.generateUid(); // uid will be the random DHI2 uid of 11 characters length
+  ///
+  /// ```
+  ///
   static String generateUid() {
     Random rnd = Random();
     const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
