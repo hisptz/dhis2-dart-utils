@@ -1,9 +1,17 @@
+// Copyright (c) 2022, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
 import 'package:dart_date/dart_date.dart';
 
 import '../helpers/date.dart';
 import 'period_categories.dart';
 import 'period_types.dart';
 
+/// This is a list of all DHIS2 supported fixed period types
+// / Each individual period item from this list is a fixed period formatted onto a map necessary for different DHIS2 functionalities
+///
+///
 List<Map<String, dynamic>> fixedPeriodTypes = [
   {
     "id": PeriodTypes.weekly,

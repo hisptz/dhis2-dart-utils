@@ -1,5 +1,12 @@
+// Copyright (c) 2022, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
 import 'period_categories.dart';
 import 'period_types.dart';
+
+/// This is the list of the supported relative period types on DHIS2
+///
 
 List<Map<String, dynamic>> relativePeriodTypes = [
   {
@@ -67,6 +74,10 @@ List<Map<String, dynamic>> relativePeriodTypes = [
   },
 ];
 
+///
+/// This is a getter function for the daily relative periods
+/// It returns the list of Map of relative daily period types
+///
 getDaysPeriodType() => [
       {"id": 'TODAY', "name": 'Today'},
       {"id": 'YESTERDAY', "name": 'Yesterday'},
@@ -79,6 +90,10 @@ getDaysPeriodType() => [
       {"id": 'LAST_180_DAYS', "name": 'Last 180 days'},
     ];
 
+///
+/// This is a getter function for the weekly relative periods
+/// It returns the list of Map of relative weekly period types
+///
 getWeeksPeriodType() => [
       {"id": 'THIS_WEEK', "name": 'This week'},
       {"id": 'LAST_WEEK', "name": 'Last week'},
@@ -88,12 +103,20 @@ getWeeksPeriodType() => [
       {"id": PeriodTypes.weeksThisYear, "name": 'Weeks this year'},
     ];
 
+///
+/// This is a getter function for the biweekly relative periods
+/// It returns the list of Map of relative biweekly period types
+///
 getBiWeeksPeriodType() => [
       {"id": 'THIS_BIWEEK', "name": 'This bi-week'},
       {"id": 'LAST_BIWEEK', "name": 'Last bi-week'},
       {"id": 'LAST_4_BIWEEKS', "name": 'Last 4 bi-weeks'},
     ];
 
+///
+/// This is a getter function for the monthly relative periods
+/// It returns the list of Map of relative monthly period types
+///
 getMonthsPeriodType() => [
       {"id": 'THIS_MONTH', "name": 'This month'},
       {"id": 'LAST_MONTH', "name": 'Last month'},
@@ -106,6 +129,10 @@ getMonthsPeriodType() => [
       },
     ];
 
+///
+/// This is a getter function for the bimonthly relative periods
+/// It returns the list of Map of relative bimonthly period types
+///
 getBiMonthsPeriodType() => [
       {"id": 'THIS_BIMONTH', "name": 'This bi-month'},
       {"id": 'LAST_BIMONTH', "name": 'Last bi-month'},
@@ -119,6 +146,10 @@ getBiMonthsPeriodType() => [
       },
     ];
 
+///
+/// This is a getter function for the quarterly relative periods
+/// It returns the list of Map of relative quarterly period types
+///
 getQuartersPeriodType() => [
       {"id": 'THIS_QUARTER', "name": 'This quarter'},
       {"id": 'LAST_QUARTER', "name": 'Last quarter'},
@@ -129,6 +160,10 @@ getQuartersPeriodType() => [
       },
     ];
 
+///
+/// This is a getter function for the six monthly relative periods
+/// It returns the list of Map of relative six monthly period types
+///
 getSixMonthsPeriodType() => [
       {"id": 'THIS_SIX_MONTH', "name": 'This six-month'},
       {"id": 'LAST_SIX_MONTH', "name": 'Last six-month'},
@@ -138,6 +173,10 @@ getSixMonthsPeriodType() => [
       },
     ];
 
+///
+/// This is a getter function for the financial years relative periods
+/// It returns the list of Map of relative financial years period types
+///
 getFinancialYearsPeriodType() => [
       {
         "id": 'THIS_FINANCIAL_YEAR',
@@ -153,6 +192,10 @@ getFinancialYearsPeriodType() => [
       },
     ];
 
+///
+/// This is a getter function for the yearly relative periods
+/// It returns the list of Map of relative yearly period types
+///
 getYearsPeriodType() => [
       {"id": 'THIS_YEAR', "name": 'This year'},
       {"id": 'LAST_YEAR', "name": 'Last year'},
