@@ -1,6 +1,5 @@
-// Copyright (c) 2022, HISP Tanzania Developers.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright (c) 2022, HISP Tanzania Developers.
+// All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
 ///
 /// `ProgramRuleActionsConstants` This constant class that has is a collection of program rule actions supported by the Library
