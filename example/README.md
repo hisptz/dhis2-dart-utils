@@ -145,8 +145,12 @@ void main() {
 
 ## Indicator <a name = "indicator"></a>
 
-### Coming soon! 👨🏾‍💻🤩
+### Coming soon!
+
+🚧 👨🏾‍💻
 
 ## Validation Rules <a name = "validations"></a>
 
-### Coming soon! 🚧 🚧
+### Coming soon!
+
+🚧 👨🏾‍💻

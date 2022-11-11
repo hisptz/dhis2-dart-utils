@@ -1,10 +1,30 @@
+// Copyright (c) 2022, HISP Tanzania Developers.
+// All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
+
 import 'constants/program_rule_actions_constants.dart';
 import 'helpers/program_rule_helper.dart';
 import 'models/program_rule.dart';
 import 'models/program_rule_action.dart';
 import 'models/program_rule_variable.dart';
 
+///
+/// `ProgramRuleEngine` is the engine class for evaluation of DHI2 program rules
+///
 class ProgramRuleEngine {
+  ///
+  /// `ProgramRuleEngine.evaluateProgramRule` is a helper function for evaluation of program rule on given form data object
+  ///  The function takes a list of `ProgramRule`, a list of `ProgramRuleVariable` and a `Map` of form data object to return a `Map` result
+  ///  The result from this function follows below format:
+  /// ```dart
+  ///   {
+  ///     "hiddenFields" : {...}
+  ///     "assignedFields" : {...}
+  ///     "hiddenSections" : {...}
+  ///     "hiddenProgramStages" : {...}
+  ///     "errorOrWarningMessage" : {...}
+  ///   }
+  /// ```
+  ///
   static Map evaluateProgramRule({
     required List<ProgramRule> programRules,
     required List<ProgramRuleVariable> programRuleVariables,

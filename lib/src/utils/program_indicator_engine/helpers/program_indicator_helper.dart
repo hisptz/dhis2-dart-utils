@@ -1,10 +1,20 @@
+// Copyright (c) 2022, HISP Tanzania Developers.
+// All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
+
 import '../../shared/constants/operators_constants.dart';
 import '../../shared/helpers/data_object_helper.dart';
 import '../../shared/helpers/mathematical_operations_util.dart';
 import '../exceptions/program_indicator_exception.dart';
 import '../models/program_indicator.dart';
 
+///
+/// This is a class having a collection of helper methods for evaluation of program indicator
+///
 class ProgramIndicatorHelper {
+  ///
+  /// `evaluateExpressionWithinBrackets` is the method that breaks down an expression to its core based on brackets
+  ///  It takes in a `String` expression and returns a `Double` value from the expression
+  ///
   static double evaluateExpressionWithinBrackets(String expression) {
     bool hasOperator = false;
     for (String operator in OperatorsConstants.arithmeticOperators) {
@@ -35,6 +45,10 @@ class ProgramIndicatorHelper {
     return 0;
   }
 
+  ///
+  /// `evaluatedD2BuiltInFunctions` function evaluates the D2 functions present in a expression.
+  ///  It takes a `String` expression as a parameter and returns the results as a `String`
+  ///
   static String evaluatedD2BuiltInFunctions(String expression) {
     var value = "0";
     var startIndex = expression.indexOf(
@@ -81,6 +95,10 @@ class ProgramIndicatorHelper {
     return expression;
   }
 
+  ///
+  /// `evaluateArithmeticExpression` function evaluates the arithmetic expression
+  ///  The function takes in a `String` expression and return the resulted `String` value
+  ///
   static String evaluateArithmeticExpression(String expression) {
     String evaluatedValue = '0';
     try {
@@ -105,6 +123,10 @@ class ProgramIndicatorHelper {
     return double.parse(evaluatedValue).toStringAsFixed(1);
   }
 
+  ///
+  /// `getUidsFromExpression` helper function translates the expression by collecting the dataElement Uids from the expression
+  /// Its takes in a `String` expression and returns a `List` of uids that are contained in the expression
+  ///
   static List<String> getUidsFromExpression(String expression) {
     RegExp regExp = RegExp('(#{.*?})');
     List<String> matchedUids = [];
@@ -120,6 +142,11 @@ class ProgramIndicatorHelper {
     return matchedUids;
   }
 
+  ///
+  /// `getExpressionWithValues` helper function translates the expression with the existing values from the form data object
+  ///  The functions takes parameters as `String` expression, `List` of contained uids ana a `Map` form data object
+  ///  This function return a `String` expression that is substituted with the data object values
+  ///
   static String getExpressionWithValues(
       String expression, List<String> uids, Map dataObject) {
     try {
@@ -133,6 +160,11 @@ class ProgramIndicatorHelper {
     }
   }
 
+  ///
+  /// `evaluateExpressionValueFromProgramIndicator` is the helper function to start evaluation of the program indicator
+  /// The function takes in `ProgramIndicator` and a `Map` form data object.
+  /// After evaluation, the function returns the `String` result from the expression
+  ///
   static String evaluateExpressionValueFromProgramIndicator({
     required ProgramIndicator programIndicator,
     Map dataObject = const {},
