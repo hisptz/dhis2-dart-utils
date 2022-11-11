@@ -1,4 +1,4 @@
-// Copyright (c) 2022, the Dart project authors.  Please see the AUTHORS file
+// Copyright (c) 2022, HISP Tanzania Developers.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
@@ -27,7 +27,7 @@ class Period {
   late String category;
 
   /// `Period.fromObject` is a constructor method that creates a Period from a `Map` object.
-  /// The constructor accepts a `Map<String, dynamic>` object, `String` period type and  `String` period category as required parameters  
+  /// The constructor accepts a `Map<String, dynamic>` object, `String` period type and  `String` period category as required parameters
   Period.fromObject(Map<String, dynamic> object,
       {required this.type, required this.category}) {
     id = object['id'];
@@ -36,7 +36,7 @@ class Period {
     end = null;
   }
 
-  /// `Period.fromInterval` is a constructor function that generates period based on the passed `interval`, `idGenerator` function, `nameGenerator` function, `String` period type and  `String` period category as required parameters 
+  /// `Period.fromInterval` is a constructor function that generates period based on the passed `interval`, `idGenerator` function, `nameGenerator` function, `String` period type and  `String` period category as required parameters
   Period.fromInterval(Interval interval,
       {required Function idGenerator,
       required Function nameGenerator,
@@ -48,7 +48,7 @@ class Period {
     name = nameGenerator(interval);
   }
 
-  /// This is the `toString()` method that return the string representation of the 
+  /// This is the `toString()` method that return the string representation of the
   @override
   String toString() {
     return "$id $name ${start != null ? "(${start?.toHumanString() ?? ''} - ${end?.toHumanString() ?? ''})" : ""}";

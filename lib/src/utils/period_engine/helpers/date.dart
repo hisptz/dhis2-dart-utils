@@ -1,14 +1,13 @@
-// Copyright (c) 2022, the Dart project authors.  Please see the AUTHORS file
+// Copyright (c) 2022, HISP Tanzania Developers.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:dart_date/dart_date.dart';
 
-
 /// This is a helper method for adding an offset for a given date
-/// Parameters involved are the `date` and `offset` which is to be added or subtracted 
+/// Parameters involved are the `date` and `offset` which is to be added or subtracted
 /// this method return the updated date as a `DateTime` object.
- addOffset(DateTime date, Map offset) {
+addOffset(DateTime date, Map offset) {
   int value = offset['value'];
   String unit = offset['unit'];
   switch (unit) {

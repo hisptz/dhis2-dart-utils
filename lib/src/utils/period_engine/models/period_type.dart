@@ -1,4 +1,4 @@
-// Copyright (c) 2022, the Dart project authors.  Please see the AUTHORS file
+// Copyright (c) 2022, HISP Tanzania Developers.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
@@ -17,7 +17,6 @@ Duration unitDuration =
     const Duration(hours: 23, minutes: 59, seconds: 59, milliseconds: 999);
 Duration yearDuration =
     Duration(milliseconds: (daysInYearAccurate * 24 * 60 * 60 * 1000).ceil());
-
 
 /// This is modal class for DHIS2 period types
 /// It is a collection of different methods and  properties of the Period type
@@ -58,7 +57,6 @@ class PeriodType {
   /// This is the offset value for the period class. It is is a nullable `Map` value.
   late Map? offset;
 
-
   /// This is a private method for getting a period type's duration
   _getDuration() {
     switch (unit) {
@@ -75,7 +73,6 @@ class PeriodType {
             (factor ?? 1);
     }
   }
-
 
   /// This is the default constructor of the the Period type class
   /// The default constructor accepts the `Map` object and an optional `int` period type year.
@@ -141,8 +138,7 @@ class PeriodType {
         .toList();
   }
 
-
-///
+  ///
   _getRelativePeriods(Map<String, dynamic> object) {
     List<Map<String, dynamic>> periodObject = object['getPeriods']() ?? [];
     return periodObject
@@ -189,7 +185,6 @@ class PeriodType {
       return period;
     }
   }
-
 
   /// this is a getter function for the periods from the current Period type object
   get periods {
