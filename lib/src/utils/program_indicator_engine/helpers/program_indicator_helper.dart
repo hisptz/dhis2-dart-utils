@@ -1,9 +1,11 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import '../../shared/constants/string_constants.dart';
 import '../../shared/constants/operators_constants.dart';
 import '../../shared/helpers/data_object_helper.dart';
 import '../../shared/helpers/mathematical_operations_util.dart';
+import '../../shared/helpers/string_helpers.dart';
 import '../exceptions/program_indicator_exception.dart';
 import '../models/program_indicator.dart';
 
@@ -169,7 +171,10 @@ class ProgramIndicatorHelper {
     required ProgramIndicator programIndicator,
     Map dataObject = const {},
   }) {
-    String expression = programIndicator.expression ?? '';
+    String expression = StringHelpers.escapeCharacter(
+      programIndicator.expression ?? '',
+      escapeChar: StringConstants.escapedCharacters,
+    );
     var uids = getUidsFromExpression(expression);
     expression = getExpressionWithValues(expression, uids, dataObject);
     return evaluateArithmeticExpression(expression);
