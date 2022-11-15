@@ -3,6 +3,7 @@
 
 import '../../shared/constants/string_constants.dart';
 import '../../shared/constants/operators_constants.dart';
+import '../../shared/helpers/d2_operations_utils.dart';
 import '../../shared/helpers/data_object_helper.dart';
 import '../../shared/helpers/mathematical_operations_util.dart';
 import '../../shared/helpers/string_helpers.dart';
@@ -48,63 +49,13 @@ class ProgramIndicatorHelper {
   }
 
   ///
-  /// `evaluatedD2BuiltInFunctions` function evaluates the D2 functions present in a expression.
-  ///  It takes a `String` expression as a parameter and returns the results as a `String`
-  ///
-  static String evaluatedD2BuiltInFunctions(String expression) {
-    var value = "0";
-    var startIndex = expression.indexOf(
-      expression.contains("d2:") ? "d2:" : "if(",
-    );
-    if (startIndex >= 0) {
-      var endIndex = expression.indexOf(")", startIndex);
-      var d2Expression = expression.substring(
-        startIndex,
-        endIndex + 1,
-      );
-      List<String> expressionSections = d2Expression
-          .substring(
-            d2Expression.indexOf('(') + 1,
-            d2Expression.lastIndexOf(')'),
-          )
-          .split(',');
-      if (d2Expression.contains('d2:condition(') ||
-          d2Expression.contains('if(')) {
-        var condition = expressionSections.first.replaceAll("'", '');
-        var conditionResults =
-            MathematicalOperationsUtil.evaluateMathematicalOperation(
-          condition,
-          resolveToNumber: false,
-        );
-        var d2ExpressionValue = conditionResults == true
-            ? MathematicalOperationsUtil.evaluateMathematicalOperation(
-                expressionSections[1],
-                resolveToNumber: true,
-              )
-            : MathematicalOperationsUtil.evaluateMathematicalOperation(
-                expressionSections[2],
-                resolveToNumber: true,
-              );
-        expression = expression.replaceRange(
-            startIndex, endIndex + 1, "$d2ExpressionValue");
-      } else {
-        expression = expression.replaceRange(startIndex, endIndex + 1, value);
-      }
-    } else {
-      return expression;
-    }
-
-    return expression;
-  }
-
-  ///
   /// `evaluateArithmeticExpression` function evaluates the arithmetic expression
   ///  The function takes in a `String` expression and return the resulted `String` value
   ///
   static String evaluateArithmeticExpression(String expression) {
     String evaluatedValue = '0';
     try {
-      expression = evaluatedD2BuiltInFunctions(expression);
+      expression = D2OperationsUtils.evaluatedD2BuiltInFunctions(expression);
       if (expression.contains('(') || expression.contains(')')) {
         int startIndex = expression.lastIndexOf('(');
         int endIndex = expression.indexOf(')', startIndex);
