@@ -21,9 +21,11 @@ class DataObjectHelper {
           return;
         }
       });
-      return value;
     } catch (e) {
-      throw DataObjectException('getValueFromDataObject $e');
+      var exception = DataObjectException('getValueFromDataObject($uid) $e');
+      print(exception.toString());
     }
+
+    return value;
   }
 }

@@ -14,6 +14,6 @@ class DataObjectException implements Exception {
   /// This is an override  `toString()`function for debugging
   @override
   String toString() {
-    return 'PROGRAM INDICATOR EXCEPTION: $source';
+    return 'DATA OBJECT EXCEPTION: $source';
   }
 }
