@@ -1,8 +1,8 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'package:dhis2_dart_utils/src/utils/shared/constants/default_values.dart';
-
+import '../constants/default_values.dart';
+import '../constants/operators_constants.dart';
 import 'mathematical_operations_util.dart';
 
 ///
@@ -20,8 +20,7 @@ class D2OperationsUtils {
   ///
   static String evaluatedD2BuiltInFunctions(String expression) {
     var value = "0";
-    // TODO add support for isNull(), isNotNull() and d2:hasValue()
-    var startIndex = expression.indexOf(
+    var startIndex = expression.lastIndexOf(
       expression.contains("d2:") ? "d2:" : RegExp(r'if\(|isNull\(|isNotNull\('),
     );
     if (startIndex >= 0) {
@@ -85,6 +84,9 @@ class D2OperationsUtils {
       return expression;
     }
 
-    return expression;
+    return OperatorsConstants.dhis2Operators
+            .any((operator) => expression.contains(operator))
+        ? evaluatedD2BuiltInFunctions(expression)
+        : expression;
   }
 }
