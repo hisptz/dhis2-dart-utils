@@ -20,18 +20,19 @@ void main() {
         "id": "yFTplrY7NaL",
         "aggregationType": "CUSTOM",
         "expression":
-            "(#{Zj7UnCAulEk.vV9UWAZohSf}  #{Zj7UnCAulEk.GieVkTxp4HH}) + (#{Zj7UnCAulEk.qrur9Dvnyt5})",
+            "(#{Zj7UnCAulEk.vV9UWAZohSf} * #{Zj7UnCAulEk.GieVkTxp4HH}) + (#{Zj7UnCAulEk.qrur9Dvnyt5})",
         "program": "eBAyeGv0exc"
       }
     ].map((indicator) => ProgramIndicator.fromMap(indicator)).toList();
 
+    var programIndicatorValue =
+        ProgramIndicatorEngine.evaluateProgramIndicators(
+      programIndicators: programIndicators,
+      dataObject: dataObject,
+    );
+
     test('Program indicator has value', () {
-      expect(
-          ProgramIndicatorEngine.evaluateProgramIndicators(
-            programIndicators: programIndicators,
-            dataObject: dataObject,
-          ),
-          isNotEmpty);
+      expect(programIndicatorValue, isNotEmpty);
     });
   });
 }

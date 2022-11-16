@@ -14,6 +14,12 @@ void main() {
       "expression":
           "(#{Zj7UnCAulEk.vV9UWAZohSf} * #{Zj7UnCAulEk.GieVkTxp4HH}) + (#{Zj7UnCAulEk.qrur9Dvnyt5})",
       "program": "eBAyeGv0exc"
+    },
+    {
+      "id": "mubfKE304dy",
+      "aggregationType": "CUSTOM",
+      "expression": "if(isNull(#{nabon8T5WUT.GR6MYw2N8j0}), 0, 1)",
+      "program": "hcFmHC9yXgy"
     }
   ].map((indicator) => ProgramIndicator.fromMap(indicator)).toList();
   print(

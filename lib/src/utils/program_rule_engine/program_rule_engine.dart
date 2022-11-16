@@ -1,10 +1,33 @@
+// Copyright (c) 2022, HISP Tanzania Developers.
+// All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
+
+import '../shared/constants/string_constants.dart';
+import '../shared/helpers/string_helpers.dart';
 import 'constants/program_rule_actions_constants.dart';
+import 'exceptions/program_rule_exception.dart';
 import 'helpers/program_rule_helper.dart';
 import 'models/program_rule.dart';
 import 'models/program_rule_action.dart';
 import 'models/program_rule_variable.dart';
 
+///
+/// `ProgramRuleEngine` is the engine class for evaluation of DHI2 program rules
+///
 class ProgramRuleEngine {
+  ///
+  /// `ProgramRuleEngine.evaluateProgramRule` is a helper function for evaluation of program rule on given form data object
+  ///  The function takes a list of `ProgramRule`, a list of `ProgramRuleVariable` and a `Map` of form data object to return a `Map` result
+  ///  The result from this function follows below format:
+  /// ```dart
+  ///   {
+  ///     "hiddenFields" : {...}
+  ///     "assignedFields" : {...}
+  ///     "hiddenSections" : {...}
+  ///     "hiddenProgramStages" : {...}
+  ///     "errorOrWarningMessage" : {...}
+  ///   }
+  /// ```
+  ///
   static Map evaluateProgramRule({
     required List<ProgramRule> programRules,
     required List<ProgramRuleVariable> programRuleVariables,
@@ -21,7 +44,10 @@ class ProgramRuleEngine {
         String condition = programRule.condition ?? '';
         for (ProgramRuleAction programRuleAction
             in programRule.programRuleActions ?? []) {
-          String sanitizedCondition = condition;
+          String sanitizedCondition = StringHelpers.escapeCharacter(
+            condition,
+            escapeChar: StringConstants.escapedCharacters,
+          );
           String? data = programRuleAction.data;
           String? content = programRuleAction.content;
           String? evalDataCondition = programRuleAction.data;
@@ -49,9 +75,9 @@ class ProgramRuleEngine {
                     dataObject[ruleVariableDataElementAttributeId]);
                 value = doubleValue as String;
               } catch (error) {
-                value = dataObject[ruleVariableDataElementAttributeId];
+                value = "${dataObject[ruleVariableDataElementAttributeId]}";
                 if (dataObject[ruleVariableDataElementAttributeId] != '') {
-                  value = dataObject[ruleVariableDataElementAttributeId];
+                  value = "${dataObject[ruleVariableDataElementAttributeId]}";
                 }
               }
               if (programRuleVariable.name != null &&
@@ -173,7 +199,9 @@ class ProgramRuleEngine {
               }
             }
           } catch (error) {
-            //
+            var exception = ProgramRuleException(
+                'evaluateProgramRule(${programRule.id}): $error');
+            print(exception.toString());
           }
         }
       }
