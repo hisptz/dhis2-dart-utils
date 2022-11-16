@@ -4,6 +4,7 @@
 import '../shared/constants/string_constants.dart';
 import '../shared/helpers/string_helpers.dart';
 import 'constants/program_rule_actions_constants.dart';
+import 'exceptions/program_rule_exception.dart';
 import 'helpers/program_rule_helper.dart';
 import 'models/program_rule.dart';
 import 'models/program_rule_action.dart';
@@ -198,7 +199,8 @@ class ProgramRuleEngine {
               }
             }
           } catch (error) {
-            //
+            var exception = ProgramRuleException(
+                'evaluateProgramRule(${programRule.id}): $error');
           }
         }
       }
