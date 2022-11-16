@@ -1,9 +1,12 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import '../../shared/constants/string_constants.dart';
 import '../../shared/constants/operators_constants.dart';
+import '../../shared/helpers/d2_operations_utils.dart';
 import '../../shared/helpers/data_object_helper.dart';
 import '../../shared/helpers/mathematical_operations_util.dart';
+import '../../shared/helpers/string_helpers.dart';
 import '../exceptions/program_indicator_exception.dart';
 import '../models/program_indicator.dart';
 
@@ -46,63 +49,14 @@ class ProgramIndicatorHelper {
   }
 
   ///
-  /// `evaluatedD2BuiltInFunctions` function evaluates the D2 functions present in a expression.
-  ///  It takes a `String` expression as a parameter and returns the results as a `String`
-  ///
-  static String evaluatedD2BuiltInFunctions(String expression) {
-    var value = "0";
-    var startIndex = expression.indexOf(
-      expression.contains("d2:") ? "d2:" : "if(",
-    );
-    if (startIndex >= 0) {
-      var endIndex = expression.indexOf(")", startIndex);
-      var d2Expression = expression.substring(
-        startIndex,
-        endIndex + 1,
-      );
-      List<String> expressionSections = d2Expression
-          .substring(
-            d2Expression.indexOf('(') + 1,
-            d2Expression.lastIndexOf(')'),
-          )
-          .split(',');
-      if (d2Expression.contains('d2:condition(') ||
-          d2Expression.contains('if(')) {
-        var condition = expressionSections.first.replaceAll("'", '');
-        var conditionResults =
-            MathematicalOperationsUtil.evaluateMathematicalOperation(
-          condition,
-          resolveToNumber: false,
-        );
-        var d2ExpressionValue = conditionResults == true
-            ? MathematicalOperationsUtil.evaluateMathematicalOperation(
-                expressionSections[1],
-                resolveToNumber: true,
-              )
-            : MathematicalOperationsUtil.evaluateMathematicalOperation(
-                expressionSections[2],
-                resolveToNumber: true,
-              );
-        expression = expression.replaceRange(
-            startIndex, endIndex + 1, "$d2ExpressionValue");
-      } else {
-        expression = expression.replaceRange(startIndex, endIndex + 1, value);
-      }
-    } else {
-      return expression;
-    }
-
-    return expression;
-  }
-
-  ///
   /// `evaluateArithmeticExpression` function evaluates the arithmetic expression
   ///  The function takes in a `String` expression and return the resulted `String` value
   ///
-  static String evaluateArithmeticExpression(String expression) {
+  static String evaluateArithmeticExpression(
+      String expression, String programIndicatorId) {
     String evaluatedValue = '0';
     try {
-      expression = evaluatedD2BuiltInFunctions(expression);
+      expression = D2OperationsUtils.evaluatedD2BuiltInFunctions(expression);
       if (expression.contains('(') || expression.contains(')')) {
         int startIndex = expression.lastIndexOf('(');
         int endIndex = expression.indexOf(')', startIndex);
@@ -110,13 +64,17 @@ class ProgramIndicatorHelper {
         double value = evaluateExpressionWithinBrackets(
             subExpression.replaceAll('(', '').replaceAll(')', ''));
         evaluatedValue = evaluateArithmeticExpression(
-            expression.replaceAll(subExpression, '$value'));
+          expression.replaceAll(subExpression, '$value'),
+          programIndicatorId,
+        );
       } else {
         double value = evaluateExpressionWithinBrackets(expression);
         evaluatedValue = value.toStringAsFixed(1);
       }
     } catch (e) {
-      throw ProgramIndicatorException('evaluateArithmeticExpression: $e');
+      var exception = ProgramIndicatorException(
+          'evaluateArithmeticExpression($programIndicatorId): $e');
+      print(exception.toString());
     }
     evaluatedValue =
         ['Infinity', 'NaN'].contains(evaluatedValue) ? '0' : evaluatedValue;
@@ -125,18 +83,23 @@ class ProgramIndicatorHelper {
 
   ///
   /// `getUidsFromExpression` helper function translates the expression by collecting the dataElement Uids from the expression
-  /// Its takes in a `String` expression and returns a `List` of uids that are contained in the expression
+  /// Its takes in a `String` expression and `String` program indicator id as parameters and returns a `List` of uids that are contained in the expression
   ///
-  static List<String> getUidsFromExpression(String expression) {
+  static List<String> getUidsFromExpression(
+    String expression,
+    String programIndicatorId,
+  ) {
     RegExp regExp = RegExp('(#{.*?})');
     List<String> matchedUids = [];
     try {
       Iterable<Match> matches = regExp.allMatches(expression);
-      for (Match m in matches) {
-        matchedUids.add(m[0]!);
+      for (Match match in matches) {
+        matchedUids.add(match[0]!);
       }
     } catch (e) {
-      throw ProgramIndicatorException('getUidsFromExpression: $e');
+      var exception = ProgramIndicatorException(
+          'getUidsFromExpression($programIndicatorId): $e');
+      print(exception.toString());
     }
 
     return matchedUids;
@@ -154,10 +117,11 @@ class ProgramIndicatorHelper {
         String value = DataObjectHelper.getValueFromDataObject(uid, dataObject);
         expression = expression.replaceAll(uid, value);
       }
-      return expression;
     } catch (e) {
-      throw ProgramIndicatorException('getExpressionWithValues: $e');
+      var exception = ProgramIndicatorException('getExpressionWithValues: $e');
+      print(exception.toString());
     }
+    return expression;
   }
 
   ///
@@ -169,9 +133,18 @@ class ProgramIndicatorHelper {
     required ProgramIndicator programIndicator,
     Map dataObject = const {},
   }) {
-    String expression = programIndicator.expression ?? '';
-    var uids = getUidsFromExpression(expression);
+    String expression = StringHelpers.escapeCharacter(
+      programIndicator.expression ?? '',
+      escapeChar: StringConstants.escapedCharacters,
+    );
+    var uids = getUidsFromExpression(
+      expression,
+      programIndicator.id ?? '',
+    );
     expression = getExpressionWithValues(expression, uids, dataObject);
-    return evaluateArithmeticExpression(expression);
+    return evaluateArithmeticExpression(
+      expression,
+      programIndicator.id ?? '',
+    );
   }
 }

@@ -1,7 +1,10 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import '../shared/constants/string_constants.dart';
+import '../shared/helpers/string_helpers.dart';
 import 'constants/program_rule_actions_constants.dart';
+import 'exceptions/program_rule_exception.dart';
 import 'helpers/program_rule_helper.dart';
 import 'models/program_rule.dart';
 import 'models/program_rule_action.dart';
@@ -41,7 +44,10 @@ class ProgramRuleEngine {
         String condition = programRule.condition ?? '';
         for (ProgramRuleAction programRuleAction
             in programRule.programRuleActions ?? []) {
-          String sanitizedCondition = condition;
+          String sanitizedCondition = StringHelpers.escapeCharacter(
+            condition,
+            escapeChar: StringConstants.escapedCharacters,
+          );
           String? data = programRuleAction.data;
           String? content = programRuleAction.content;
           String? evalDataCondition = programRuleAction.data;
@@ -69,9 +75,9 @@ class ProgramRuleEngine {
                     dataObject[ruleVariableDataElementAttributeId]);
                 value = doubleValue as String;
               } catch (error) {
-                value = dataObject[ruleVariableDataElementAttributeId];
+                value = "${dataObject[ruleVariableDataElementAttributeId]}";
                 if (dataObject[ruleVariableDataElementAttributeId] != '') {
-                  value = dataObject[ruleVariableDataElementAttributeId];
+                  value = "${dataObject[ruleVariableDataElementAttributeId]}";
                 }
               }
               if (programRuleVariable.name != null &&
@@ -193,7 +199,8 @@ class ProgramRuleEngine {
               }
             }
           } catch (error) {
-            //
+            var exception = ProgramRuleException(
+                'evaluateProgramRule(${programRule.id}): $error');
           }
         }
       }
