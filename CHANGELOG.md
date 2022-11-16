@@ -1,3 +1,15 @@
+## 1.0.1
+
+- Support for additional operators such as:
+  - NOT(!)
+  - d2:hasValue
+  - isNull
+  - isNotNull
+- Added recursive evaluation of d2 functions in expressions
+- Handled exceptions without blocking engine's processes
+- Escaped the String escaped characters during expression evaluation
+- Added file level dartdoc
+
 ## 1.0.0
 
 - Support for Program rule engine implementation for form data objects.

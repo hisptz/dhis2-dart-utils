@@ -201,6 +201,7 @@ class ProgramRuleEngine {
           } catch (error) {
             var exception = ProgramRuleException(
                 'evaluateProgramRule(${programRule.id}): $error');
+            print(exception.toString());
           }
         }
       }
