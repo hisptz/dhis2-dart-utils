@@ -1,8 +1,7 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'package:dhis2_dart_utils/src/utils/shared/constants/default_values.dart';
-
+import '../constants/default_values.dart';
 import '../constants/operators_constants.dart';
 
 ///
@@ -78,11 +77,12 @@ class MathematicalOperationsUtil {
 
         var sanitizedLeftValue = sanitizeStringValue(leftValue);
         var sanitizedRightValue = sanitizeStringValue(rightValue);
-        return evaluateLogicalOperation(
+        var val = evaluateLogicalOperation(
           operator: logicalOperator,
           leftOperand: sanitizedLeftValue,
           rightOperand: sanitizedRightValue,
         );
+        return val;
       }
     }
     if (expression.contains('!')) {
@@ -161,6 +161,8 @@ class MathematicalOperationsUtil {
         return leftOperand != rightOperand;
       case '===':
         return leftOperand == rightOperand;
+      case '!':
+        return '$rightOperand' != 'true';
       case '==':
         return leftOperand == rightOperand;
       case '&&':

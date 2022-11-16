@@ -75,9 +75,9 @@ class ProgramRuleEngine {
                     dataObject[ruleVariableDataElementAttributeId]);
                 value = doubleValue as String;
               } catch (error) {
-                value = dataObject[ruleVariableDataElementAttributeId];
+                value = "${dataObject[ruleVariableDataElementAttributeId]}";
                 if (dataObject[ruleVariableDataElementAttributeId] != '') {
-                  value = dataObject[ruleVariableDataElementAttributeId];
+                  value = "${dataObject[ruleVariableDataElementAttributeId]}";
                 }
               }
               if (programRuleVariable.name != null &&
