@@ -21,6 +21,9 @@ export './utils/program_indicator_engine/models/program_indicator.dart'
 // Data Element
 export './utils/core/models/dhis2_data_element.dart' show Dhis2DataElement;
 
+// Options
+export './utils/core/models/dhis2_option.dart' show Dhis2Option;
+
 ///
 /// CONSTANTS
 ///
