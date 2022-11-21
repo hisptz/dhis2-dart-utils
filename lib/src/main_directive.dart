@@ -28,6 +28,9 @@ export './utils/core/models/dhis2_option.dart' show Dhis2Option;
 export './utils/core/models/dhis2_event_data_value.dart'
     show Dhis2EventDataValue;
 
+/// Event
+export './utils/core/models/dhis2_event.dart';
+
 ///
 /// CONSTANTS
 ///
