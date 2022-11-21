@@ -35,6 +35,9 @@ export './utils/core/models/dhis2_event.dart';
 export './utils/core/models/dhis2_organisation_unit.dart'
     show Dhis2OrganisationUnit;
 
+/// System info
+export './utils/core/models/dhis2_system_info.dart' show Dhis2SystemInfo;
+
 ///
 /// CONSTANTS
 ///
