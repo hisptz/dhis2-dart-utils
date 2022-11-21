@@ -2,27 +2,29 @@
 /// DATA MODELS
 ///
 
-// Period
+/// Period
 export './utils/period_engine/models/period.dart' show Period;
 export './utils/period_engine/models/period_type.dart' show PeriodType;
 export './utils/period_engine/models/period_utility.dart' show PeriodUtility;
 
-//Program rules
+/// Program rules
 export './utils/program_rule_engine/models/program_rule.dart' show ProgramRule;
 export './utils/program_rule_engine/models/program_rule_variable.dart'
     show ProgramRuleVariable;
 export './utils/program_rule_engine/models/program_rule_action.dart'
     show ProgramRuleAction;
 
-// Program indicator
+/// Program indicator
 export './utils/program_indicator_engine/models/program_indicator.dart'
     show ProgramIndicator;
 
-// Data Element
+/// Data Element
 export './utils/core/models/dhis2_data_element.dart' show Dhis2DataElement;
 
-// Options
+/// Options
 export './utils/core/models/dhis2_option.dart' show Dhis2Option;
+
+/// Event Data values
 
 ///
 /// CONSTANTS
