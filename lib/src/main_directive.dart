@@ -2,23 +2,45 @@
 /// DATA MODELS
 ///
 
-// Period
+/// Period
 export './utils/period_engine/models/period.dart' show Period;
 export './utils/period_engine/models/period_type.dart' show PeriodType;
 export './utils/period_engine/models/period_utility.dart' show PeriodUtility;
 
-//Program rules
+/// Program rules
 export './utils/program_rule_engine/models/program_rule.dart' show ProgramRule;
 export './utils/program_rule_engine/models/program_rule_variable.dart'
     show ProgramRuleVariable;
 export './utils/program_rule_engine/models/program_rule_action.dart'
     show ProgramRuleAction;
 
-// Program indicator
+/// Program indicator
 export './utils/program_indicator_engine/models/program_indicator.dart'
     show ProgramIndicator;
 
+/// Data Element
+export './utils/core/models/dhis2_data_element.dart' show Dhis2DataElement;
+
+/// Options
+export './utils/core/models/dhis2_option.dart' show Dhis2Option;
+
+/// Event Data values
+export './utils/core/models/dhis2_event_data_value.dart'
+    show Dhis2EventDataValue;
+
+/// Event
+export './utils/core/models/dhis2_event.dart';
+
+/// Organisation unit
+export './utils/core/models/dhis2_organisation_unit.dart'
+    show Dhis2OrganisationUnit;
+
+/// System info
+export './utils/core/models/dhis2_system_info.dart' show Dhis2SystemInfo;
+
+///
 /// CONSTANTS
+///
 export 'utils/period_engine/constants/period_types.dart' show PeriodTypes;
 export 'utils/period_engine/constants/period_categories.dart'
     show PeriodTypeCategory;
