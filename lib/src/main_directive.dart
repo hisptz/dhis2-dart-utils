@@ -31,6 +31,10 @@ export './utils/core/models/dhis2_event_data_value.dart'
 /// Event
 export './utils/core/models/dhis2_event.dart';
 
+/// Organisation unit
+export './utils/core/models/dhis2_organisation_unit.dart'
+    show Dhis2OrganisationUnit;
+
 ///
 /// CONSTANTS
 ///
