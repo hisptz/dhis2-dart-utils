@@ -18,7 +18,12 @@ export './utils/program_rule_engine/models/program_rule_action.dart'
 export './utils/program_indicator_engine/models/program_indicator.dart'
     show ProgramIndicator;
 
+// Data Element
+export './utils/core/models/dhis2_data_element.dart' show Dhis2DataElement;
+
+///
 /// CONSTANTS
+///
 export 'utils/period_engine/constants/period_types.dart' show PeriodTypes;
 export 'utils/period_engine/constants/period_categories.dart'
     show PeriodTypeCategory;
