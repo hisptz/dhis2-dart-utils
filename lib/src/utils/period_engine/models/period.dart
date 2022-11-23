@@ -47,7 +47,7 @@ class Period {
     name = nameGenerator(interval);
   }
 
-  /// This is the `toString()` method that return the string representation of the
+  /// This is the `toString()` method that return the string representation of the `Period`
   @override
   String toString() {
     return "$id $name ${start != null ? "(${start?.toHumanString() ?? ''} - ${end?.toHumanString() ?? ''})" : ""}";
