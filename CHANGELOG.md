@@ -1,3 +1,13 @@
+## 1.0.2
+
+- Support for DHIS2 data models
+  - Event
+  - Event Data Value
+  - Data Elements
+  - Option
+  - Organisation unit
+  - System info
+
 ## 1.0.1
 
 - Support for additional operators such as:
