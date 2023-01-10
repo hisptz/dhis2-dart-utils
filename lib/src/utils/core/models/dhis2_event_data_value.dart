@@ -17,10 +17,18 @@ class Dhis2EventDataValue {
   /// This is the value of the `Dhis2EventDataValue`
   String? value;
 
+  /// This is the time for creation of the `Dhis2EventDataValue`
+  String? created;
+
+  /// This is the time stamp for the last updating time of the `Dhis2EventDataValue`
+  String? lastUpdated;
+
   /// This is the default constructor for `Dhis2EventDataValue`
   Dhis2EventDataValue({
     required this.event,
     required this.dataElement,
+    this.created = '',
+    this.lastUpdated = '',
     this.value = '',
   }) {
     id = '${event}_$dataElement';
@@ -32,6 +40,8 @@ class Dhis2EventDataValue {
     data['id'] = id;
     data['event'] = event;
     data['dataElement'] = dataElement;
+    data['created'] = created;
+    data['lastUpdated'] = lastUpdated;
     data['value'] = value;
     return data;
   }
@@ -41,6 +51,8 @@ class Dhis2EventDataValue {
     id = mapData['id'];
     event = mapData['event'];
     dataElement = mapData['dataElement'];
+    created = mapData['created'];
+    lastUpdated = mapData['lastUpdated'];
     value = mapData['value'];
   }
 
@@ -52,6 +64,8 @@ class Dhis2EventDataValue {
     return Dhis2EventDataValue(
       event: eventId,
       dataElement: json['dataElement'] ?? '',
+      created: json['created'] ?? '',
+      lastUpdated: json['lastUpdated'] ?? '',
       value: json['value'] ?? '',
     );
   }
