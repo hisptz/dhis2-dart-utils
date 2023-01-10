@@ -1,3 +1,9 @@
+## 1.0.3
+
+- improved the DHIS data model for Event Data values
+  - Added created and lastUpdated fields
+- Removed unused dependencies
+
 ## 1.0.2
 
 - Support for DHIS2 data models
