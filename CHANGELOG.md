@@ -1,3 +1,9 @@
+## 1.0.4
+
+- Bugfix
+  - Fixed the evaluation of the mathematical operations.
+    - This fixed the bug with program rule evaluation.
+
 ## 1.0.3
 
 - improved the DHIS data model for Event Data values
