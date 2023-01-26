@@ -97,7 +97,7 @@ class MathematicalOperationsUtil {
 
     if (!hasOperator) {
       try {
-        double value = double.parse(expression.trim());
+        var value = expression.trim();
         return value;
       } catch (e) {
         return expression.toLowerCase() == 'true'
