@@ -1,3 +1,20 @@
+## 1.1.0
+
+- Add data model for TEIs (Tracked entity Instance, relationships, tracked entity attributes)
+- Improvement for event based data models
+
+## 1.0.4
+
+- Bugfix
+  - Fixed the evaluation of the mathematical operations.
+    - This fixed the bug with program rule evaluation.
+
+## 1.0.3
+
+- improved the DHIS data model for Event Data values
+  - Added created and lastUpdated fields
+- Removed unused dependencies
+
 ## 1.0.2
 
 - Support for DHIS2 data models

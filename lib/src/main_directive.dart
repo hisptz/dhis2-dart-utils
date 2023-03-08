@@ -1,42 +1,38 @@
-///
-/// DATA MODELS
-///
-
 /// Period
 export './utils/period_engine/models/period.dart' show Period;
 export './utils/period_engine/models/period_type.dart' show PeriodType;
 export './utils/period_engine/models/period_utility.dart' show PeriodUtility;
 
-/// Program rules
+/// Program rules data models
 export './utils/program_rule_engine/models/program_rule.dart' show ProgramRule;
 export './utils/program_rule_engine/models/program_rule_variable.dart'
     show ProgramRuleVariable;
 export './utils/program_rule_engine/models/program_rule_action.dart'
     show ProgramRuleAction;
 
-/// Program indicator
+/// Program indicator data models
 export './utils/program_indicator_engine/models/program_indicator.dart'
     show ProgramIndicator;
 
-/// Data Element
+/// Core data models
+
 export './utils/core/models/dhis2_data_element.dart' show Dhis2DataElement;
-
-/// Options
-export './utils/core/models/dhis2_option.dart' show Dhis2Option;
-
-/// Event Data values
+export './utils/core/models/dhis2_enrollment.dart' show Dhis2Enrollment;
 export './utils/core/models/dhis2_event_data_value.dart'
     show Dhis2EventDataValue;
-
-/// Event
-export './utils/core/models/dhis2_event.dart';
-
-/// Organisation unit
+export './utils/core/models/dhis2_event.dart' show Dhis2Event;
+export './utils/core/models/dhis2_option.dart' show Dhis2Option;
 export './utils/core/models/dhis2_organisation_unit.dart'
     show Dhis2OrganisationUnit;
-
-/// System info
 export './utils/core/models/dhis2_system_info.dart' show Dhis2SystemInfo;
+export './utils/core/models/dhis2_tei_relationship.dart'
+    show Dhis2TeiRelationship;
+export './utils/core/models/dhis2_tracked_entity_attribute.dart'
+    show Dhis2TrackedEntityAttribute;
+export './utils/core/models/dhis2_tracked_entity_instance_value.dart'
+    show Dhis2TrackedEntityInstanceValue;
+export './utils/core/models/dhis2_tracked_entity_instance.dart'
+    show Dhis2TrackedEntityInstance;
 
 ///
 /// CONSTANTS
