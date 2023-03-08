@@ -1,3 +1,8 @@
+## 1.1.0
+
+- Add data model for TEIs (Tracked entity Instance, relationships, tracked entity attributes)
+- Improvement for event based data models
+
 ## 1.0.4
 
 - Bugfix
