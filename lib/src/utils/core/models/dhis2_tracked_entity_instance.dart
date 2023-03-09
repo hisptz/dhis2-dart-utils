@@ -56,12 +56,34 @@ class Dhis2TrackedEntityInstance {
 
   /// `Dhis2TrackedEntityInstance.fromJson` is a factory constructor that generated a `Dhis2TrackedEntityInstance` from a `dynamic` json
   factory Dhis2TrackedEntityInstance.fromJson(dynamic json) {
+    String trackedEntityInstanceId = json['trackedEntityInstanceId'] ?? '';
     return Dhis2TrackedEntityInstance(
-      trackedEntityInstance: json['trackedEntityInstance'] ?? '',
+      trackedEntityInstance: trackedEntityInstanceId,
       trackedEntityType: json['trackedEntityType'] ?? '',
       orgUnit: json['orgUnit'] ?? '',
-      attributes: json['attributes'] ?? [],
+      attributes: getAtributeValues(json, trackedEntityInstanceId),
     );
+  }
+
+  /// This is a method that gets a `List` of all `Dhis2TrackedEntityInstanceValue` associate with a given `Dhis2TrackedEntityInstance`
+  /// The method accepts a `dynamic` attribute json and `String` id for the TEI
+  /// The method return a `List<Dhis2TrackedEntityInstanceValue>`
+  static List<Dhis2TrackedEntityInstanceValue> getAtributeValues(
+    dynamic json,
+    String trackedEntityInstanceId,
+  ) {
+    List<Dhis2TrackedEntityInstanceValue> dhis2AttributeValues = [];
+    try {
+      for (dynamic attributeValueJson in json['attributes'] ?? []) {
+        dhis2AttributeValues.add(Dhis2TrackedEntityInstanceValue.fromJson(
+          attributeValueJson,
+          trackedEntityInstanceId,
+        ));
+      }
+    } catch (error) {
+      //
+    }
+    return dhis2AttributeValues;
   }
 
   /// This is the `toString()` method that return the string representation of the `Dhis2TeiRelationship`
