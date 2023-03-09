@@ -3,6 +3,9 @@
 
 import 'dhis2_tracked_entity_instance_value.dart';
 
+///
+/// `Dhis2TrackedEntityInstance` is a data model class for the DHIS2 TEIs metadata
+///
 class Dhis2TrackedEntityInstance {
   /// This is a DHIS2 uid for a given trackedEntityInstance
   String? trackedEntityInstance;
