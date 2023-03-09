@@ -3,6 +3,9 @@
 
 import 'dhis2_option.dart';
 
+///
+/// `Dhis2TrackedEntityAttribute` is a data model class for the DHIS2 Tracked entity attributes metadata
+///
 class Dhis2TrackedEntityAttribute {
   /// This is the DHIS2 id that identified a data element
   String? id;

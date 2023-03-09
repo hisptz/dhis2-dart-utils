@@ -1,6 +1,9 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+///
+/// `Dhis2TeiRelationship` is a data model class for the DHIS2 TEI releationship metadata
+///
 class Dhis2TeiRelationship {
   /// This is a DHIS2 uid for a given TEI relationship
   String? id;
