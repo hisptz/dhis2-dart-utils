@@ -1,3 +1,8 @@
+### 1.1.2
+
+- Model improvement for TEIs
+- Improvements on models classess
+
 ## 1.1.1
 
 - Add default values for created and last update timestamps
