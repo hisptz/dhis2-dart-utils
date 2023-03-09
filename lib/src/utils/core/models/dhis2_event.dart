@@ -127,13 +127,13 @@ class Dhis2Event {
   static List<Dhis2EventDataValue> getDataValues(dynamic json, String eventId) {
     List<Dhis2EventDataValue> dhis2DataValues = [];
     try {
-      for (dynamic dataValueJson in json['dataValues']) {
+      for (dynamic dataValueJson in json['dataValues'] ?? []) {
         dhis2DataValues.add(Dhis2EventDataValue.fromJson(
           dataValueJson,
           eventId,
         ));
       }
-    } catch (e) {
+    } catch (error) {
       //
     }
     return dhis2DataValues;
