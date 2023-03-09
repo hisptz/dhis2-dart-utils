@@ -27,8 +27,8 @@ class Dhis2TrackedEntityInstanceValue {
   Dhis2TrackedEntityInstanceValue({
     required this.trackedEntityInstance,
     required this.attribute,
-    this.created = '',
-    this.lastUpdated = '',
+    this.created,
+    this.lastUpdated,
     this.value = '',
   }) {
     id = '${trackedEntityInstance}_$attribute';
@@ -36,12 +36,13 @@ class Dhis2TrackedEntityInstanceValue {
 
   /// `Dhis2TrackedEntityInstanceValue.toMap` is a method that converts the `Dhis2TrackedEntityInstanceValue` to a `Map` object
   Map<String, dynamic> toMap() {
+    var now = DateTime.now().toIso8601String();
     var data = <String, dynamic>{};
     data['id'] = id;
     data['trackedEntityInstance'] = trackedEntityInstance;
-    data['dataElement'] = attribute;
-    data['created'] = created;
-    data['lastUpdated'] = lastUpdated;
+    data['attribute'] = attribute;
+    data['created'] = created ?? now;
+    data['lastUpdated'] = lastUpdated ?? now;
     data['value'] = value;
     return data;
   }
@@ -61,11 +62,12 @@ class Dhis2TrackedEntityInstanceValue {
     dynamic json,
     String trackedEntityInstanceId,
   ) {
+    var now = DateTime.now().toIso8601String();
     return Dhis2TrackedEntityInstanceValue(
       trackedEntityInstance: trackedEntityInstanceId,
       attribute: json['attribute'] ?? '',
-      created: json['created'] ?? '',
-      lastUpdated: json['lastUpdated'] ?? '',
+      created: json['created'] ?? now,
+      lastUpdated: json['lastUpdated'] ?? now,
       value: json['value'] ?? '',
     );
   }

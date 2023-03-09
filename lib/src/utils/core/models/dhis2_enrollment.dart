@@ -1,6 +1,9 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+///
+/// `Dhis2Enrollment` is a data model class for the DHIS2 enrollment metadata
+///
 class Dhis2Enrollment {
   /// This is a DHIS2 uid for a given enrollment
   String? enrollment;
@@ -30,6 +33,15 @@ class Dhis2Enrollment {
   ///  It holds two values, `synced` and `not-synced`
   String? syncStatus;
 
+  /// This is the time for creation of the `Dhis2Enrollment`
+  String? created;
+
+  /// This is the time stamp for the last updating time of the `Dhis2Enrollment`
+  String? lastUpdated;
+
+  // This String value in case of searching ceriterial for TEI throug enrollment
+  String? searchableValue;
+
   /// This is the default constructor for the `Dhis2Enrollment`
   Dhis2Enrollment({
     this.enrollment,
@@ -39,6 +51,10 @@ class Dhis2Enrollment {
     this.orgUnit,
     this.trackedEntityInstance,
     this.status,
+    this.created,
+    this.lastUpdated,
+    this.syncStatus = 'synced',
+    this.searchableValue = '',
   });
 
   /// This is a getter for the offline `syncStatus` of a `Dhis2Enrollment`
@@ -46,6 +62,7 @@ class Dhis2Enrollment {
 
   /// `Dhis2Enrollment.toMap` is a method that converts the `Dhis2Enrollment` to a `Map` object
   Map<String, dynamic> toMap() {
+    var now = DateTime.now().toIso8601String();
     var data = <String, dynamic>{};
     data['enrollment'] = enrollment;
     data['enrollmentDate'] = enrollmentDate;
@@ -54,6 +71,8 @@ class Dhis2Enrollment {
     data['orgUnit'] = orgUnit;
     data['trackedEntityInstance'] = trackedEntityInstance;
     data['status'] = status;
+    data['created'] = created ?? now;
+    data['lastUpdated'] = lastUpdated ?? now;
     return data;
   }
 
@@ -66,11 +85,14 @@ class Dhis2Enrollment {
     orgUnit = mapData['orgUnit'];
     trackedEntityInstance = mapData['trackedEntityInstance'];
     status = mapData['status'];
+    created = mapData['created'];
+    lastUpdated = mapData['lastUpdated'];
   }
 
   /// `Dhis2Enrollment.fromJson` is a factory constructor that generated a `Dhis2Enrollment` from a `dynamic` json
 
   factory Dhis2Enrollment.fromJson(dynamic json) {
+    var now = DateTime.now().toIso8601String();
     return Dhis2Enrollment(
       enrollment: json['enrollment'] ?? '',
       enrollmentDate: "${json['enrollmentDate']}".split('T')[0],
@@ -79,6 +101,8 @@ class Dhis2Enrollment {
       orgUnit: json['orgUnit'],
       trackedEntityInstance: json['trackedEntityInstance'],
       status: json['status'],
+      created: json['created'] ?? now,
+      lastUpdated: json['lastUpdated'] ?? now,
     );
   }
 
