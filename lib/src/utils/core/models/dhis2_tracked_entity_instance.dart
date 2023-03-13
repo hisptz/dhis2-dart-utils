@@ -56,9 +56,10 @@ class Dhis2TrackedEntityInstance {
 
   /// `Dhis2TrackedEntityInstance.fromJson` is a factory constructor that generated a `Dhis2TrackedEntityInstance` from a `dynamic` json
   factory Dhis2TrackedEntityInstance.fromJson(dynamic json) {
-    String trackedEntityInstanceId = json['trackedEntityInstanceId'] ?? '';
+    String trackedEntityInstanceId = json['trackedEntityInstance'] ?? '';
     return Dhis2TrackedEntityInstance(
       trackedEntityInstance: trackedEntityInstanceId,
+      syncStatus: json['syncStatus'] ?? 'synced',
       trackedEntityType: json['trackedEntityType'] ?? '',
       orgUnit: json['orgUnit'] ?? '',
       attributes: getAtributeValues(json, trackedEntityInstanceId),
