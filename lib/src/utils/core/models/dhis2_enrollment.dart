@@ -100,6 +100,7 @@ class Dhis2Enrollment {
       program: json['program'],
       orgUnit: json['orgUnit'],
       trackedEntityInstance: json['trackedEntityInstance'],
+      syncStatus: json['syncStatus'] ?? 'synced',
       status: json['status'],
       created: json['created'] ?? now,
       lastUpdated: json['lastUpdated'] ?? now,

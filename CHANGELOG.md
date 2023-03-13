@@ -1,4 +1,8 @@
-### 1.1.2
+## 1.1.3
+
+- Model fixing for assignment of default value on fromJson function
+
+## 1.1.2
 
 - Model improvement for TEIs
 - Improvements on models classess
