@@ -82,16 +82,20 @@ class ProgramRuleEngine {
               }
               if (programRuleVariable.name != null &&
                   sanitizedCondition.contains(programRuleVariable.name!)) {
-                sanitizedCondition = sanitizedCondition
-                    .split("#{${programRuleVariable.name}}")
-                    .join("'$value'");
+                sanitizedCondition = ProgramRuleHelper.sanitizeExpression(
+                  expression: sanitizedCondition,
+                  programRuleVariable: programRuleVariable.name ?? '',
+                  value: value,
+                );
               }
               if (data != null &&
                   programRuleVariable.name != null &&
                   data.contains(programRuleVariable.name!)) {
-                evalDataCondition = evalDataCondition!
-                    .split("#{${programRuleVariable.name}}")
-                    .join("'$value'");
+                evalDataCondition = ProgramRuleHelper.sanitizeExpression(
+                  expression: evalDataCondition!,
+                  programRuleVariable: programRuleVariable.name ?? '',
+                  value: value,
+                );
               }
             }
           }
