@@ -1,3 +1,8 @@
+## 1.1.4
+
+- Bugfix: Program rule engine failures:
+  - Added support of decoding attributes and variables in the program rule expression.
+
 ## 1.1.3
 
 - Model fixing for assignment of default value on fromJson function
@@ -5,12 +10,12 @@
 ## 1.1.2
 
 - Model improvement for TEIs
-- Improvements on models classess
+- Improvements on models classes
 
 ## 1.1.1
 
 - Add default values for created and last update timestamps
-- Improvement for Dhis2 enrollemnt data model
+- Improvement for Dhis2 enrollment data model
 - Documentation for models classes
 
 ## 1.1.0
