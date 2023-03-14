@@ -27,8 +27,8 @@ class Dhis2EventDataValue {
   Dhis2EventDataValue({
     required this.event,
     required this.dataElement,
-    this.created = '',
-    this.lastUpdated = '',
+    this.created,
+    this.lastUpdated,
     this.value = '',
   }) {
     id = '${event}_$dataElement';
@@ -36,12 +36,13 @@ class Dhis2EventDataValue {
 
   /// `Dhis2EventDataValue.toMap` is a method that converts the `Dhis2EventDataValue` to a `Map` object
   Map<String, dynamic> toMap() {
+    var now = DateTime.now().toIso8601String();
     var data = <String, dynamic>{};
     data['id'] = id;
     data['event'] = event;
     data['dataElement'] = dataElement;
-    data['created'] = created;
-    data['lastUpdated'] = lastUpdated;
+    data['created'] = created ?? now;
+    data['lastUpdated'] = lastUpdated ?? now;
     data['value'] = value;
     return data;
   }
@@ -61,11 +62,12 @@ class Dhis2EventDataValue {
     dynamic json,
     String eventId,
   ) {
+    var now = DateTime.now().toIso8601String();
     return Dhis2EventDataValue(
       event: eventId,
       dataElement: json['dataElement'] ?? '',
-      created: json['created'] ?? '',
-      lastUpdated: json['lastUpdated'] ?? '',
+      created: json['created'] ?? now,
+      lastUpdated: json['lastUpdated'] ?? now,
       value: json['value'] ?? '',
     );
   }

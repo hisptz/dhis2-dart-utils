@@ -1,6 +1,9 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+///
+/// `Dhis2SystemInfo` is a data model class for the DHIS2 System info metadata
+///
 class Dhis2SystemInfo {
   /// this is the DHIS2 context path
   String? contextPath;

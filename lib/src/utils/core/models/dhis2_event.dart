@@ -14,6 +14,9 @@ class Dhis2Event {
   /// This is a DHIS2 uid for a given event
   String? event;
 
+  /// This is a DHIS2 uid for a given trackedEntityInstance
+  String? trackedEntityInstance;
+
   /// This is a string representation of a date when the `Dhis2Event` occured
   /// It conforms to the structure `YYYY-MM-DD`
   String? eventDate;
@@ -35,7 +38,7 @@ class Dhis2Event {
   String? completedDate;
 
   /// This is a DHIS2 defined status for an event
-  /// Status could be `COMPLETED`, `SCHEDULED` or `COMPLETED`
+  /// Status could be `ACTIVE`, `SCHEDULED` or `COMPLETED`
   String? status;
 
   ///  This is the offline synchronization status for an event
@@ -53,6 +56,7 @@ class Dhis2Event {
     required this.program,
     required this.programStage,
     required this.status,
+    this.trackedEntityInstance = '',
     this.storedBy = '',
     this.completedDate = '',
     this.syncStatus = 'synced',
@@ -69,6 +73,7 @@ class Dhis2Event {
     var data = <String, dynamic>{};
     data['id'] = id;
     data['event'] = event;
+    data['trackedEntityInstance'] = trackedEntityInstance;
     data['eventDate'] = eventDate;
     data['orgUnit'] = orgUnit;
     data['program'] = program;
@@ -84,6 +89,7 @@ class Dhis2Event {
   Dhis2Event.fromMap(Map<String, dynamic> mapData) {
     id = mapData['id'];
     event = mapData['event'];
+    trackedEntityInstance = mapData['trackedEntityInstance'] ?? '';
     eventDate = (mapData['eventDate'] ?? '').split('T')[0];
     orgUnit = mapData['orgUnit'] ?? '';
     program = mapData['program'] ?? '';
@@ -102,6 +108,7 @@ class Dhis2Event {
     String event = json['event'] ?? '';
     return Dhis2Event(
       event: event,
+      trackedEntityInstance: json['trackedEntityInstance'] ?? '',
       eventDate: json['eventDate'] ?? '',
       orgUnit: json['orgUnit'] ?? '',
       program: json['program'] ?? '',
@@ -120,13 +127,13 @@ class Dhis2Event {
   static List<Dhis2EventDataValue> getDataValues(dynamic json, String eventId) {
     List<Dhis2EventDataValue> dhis2DataValues = [];
     try {
-      for (dynamic dataValueJson in json['dataValues']) {
+      for (dynamic dataValueJson in json['dataValues'] ?? []) {
         dhis2DataValues.add(Dhis2EventDataValue.fromJson(
           dataValueJson,
           eventId,
         ));
       }
-    } catch (e) {
+    } catch (error) {
       //
     }
     return dhis2DataValues;

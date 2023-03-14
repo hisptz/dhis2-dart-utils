@@ -1,3 +1,23 @@
+## 1.1.3
+
+- Model fixing for assignment of default value on fromJson function
+
+## 1.1.2
+
+- Model improvement for TEIs
+- Improvements on models classess
+
+## 1.1.1
+
+- Add default values for created and last update timestamps
+- Improvement for Dhis2 enrollemnt data model
+- Documentation for models classes
+
+## 1.1.0
+
+- Add data model for TEIs (Tracked entity Instance, relationships, tracked entity attributes)
+- Improvement for event based data models
+
 ## 1.0.4
 
 - Bugfix
