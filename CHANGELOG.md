@@ -1,5 +1,12 @@
-## 1.1.4
+## 1.1.5
+
 - Model fixing for type casting in Dhis2Organization fromJson function
+
+## 1.1.4
+
+- Bugfix: Program rule engine failures:
+  - Added support of decoding attributes and variables in the program rule expression.
+
 ## 1.1.3
 
 - Model fixing for assignment of default value on fromJson function
