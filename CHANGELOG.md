@@ -1,3 +1,5 @@
+## 1.1.4
+- Model fixing for type casting in Dhis2Organization fromJson function
 ## 1.1.3
 
 - Model fixing for assignment of default value on fromJson function

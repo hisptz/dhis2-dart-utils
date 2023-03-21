@@ -73,18 +73,20 @@ class Dhis2OrganisationUnit {
     dynamic json,
   ) {
     Map parentObj = json['parent'] ?? {};
-    List programList = json['programs'] as List<dynamic>;
-    List dataSetList = json['dataSets'] as List<dynamic>;
-    List childrenList = json['children'] as List<dynamic>;
+    List<dynamic>? programList = json['programs'] as List<dynamic>?;
+    List<dynamic>? dataSetList = json['dataSets'] as List<dynamic>?;
+    List<dynamic>? childrenList = json['children'] as List<dynamic>?;
     return Dhis2OrganisationUnit(
       id: json['id'],
       name: json['name'] ?? '',
       parent: parentObj['id'] ?? '',
       code: json['code'],
       level: json['level'],
-      programs: programList.map((program) => '${program["id"]}').toList(),
-      dataSets: dataSetList.map((dataSet) => '${dataSet["id"]}').toList(),
-      children: childrenList.map((child) => '${child["id"]}').toList(),
+      programs:
+          (programList ?? []).map((program) => '${program["id"]}').toList(),
+      dataSets:
+          (dataSetList ?? []).map((dataSet) => '${dataSet["id"]}').toList(),
+      children: (childrenList ?? []).map((child) => '${child["id"]}').toList(),
     );
   }
 
