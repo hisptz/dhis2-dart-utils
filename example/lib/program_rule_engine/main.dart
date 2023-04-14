@@ -5,7 +5,7 @@ void main() {
   List<ProgramRule> programRules = [
     {
       "id": "fd3wL1quxGb",
-      "condition": "#{gender} == 'Male'",
+      "condition": "#{gender of client} == 'Male'",
       "program": "eBAyeGv0exc",
       "programRuleActions": [
         {
@@ -19,7 +19,7 @@ void main() {
     },
     {
       "id": "xZe5qCzRS0Y",
-      "condition": "#{gender} == 'Male'",
+      "condition": "#{gender of client} == 'Female'",
       "program": "lxAQ7Zs9VYR",
       "programRuleActions": [
         {
@@ -33,7 +33,7 @@ void main() {
     },
     {
       "id": "xOe5qCzRS0Y",
-      "condition": "!#{womanSmoking}",
+      "condition": "!#{woman smoking}",
       "program": "lxAQ7Zs9VYR",
       "programRuleActions": [
         {
@@ -51,14 +51,14 @@ void main() {
       .toList();
   List<ProgramRuleVariable> programRuleVariables = [
     {
-      "name": "gender",
+      "name": "gender of client",
       "id": "zINGRka3g9N",
       "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
       "program": "eBAyeGv0exc",
       "dataElement": "oZg33kd9taw"
     },
     {
-      "name": "womanSmoking",
+      "name": "woman smoking",
       "id": "Z92dJO9gIje",
       "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
       "program": "lxAQ7Zs9VYR",
