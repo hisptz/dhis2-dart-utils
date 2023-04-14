@@ -1,3 +1,8 @@
+## 1.1.6
+
+- Bugfix: Program rule engine failures:
+  - Removed the escaping of empty spaces betweens words on the sanitized mathematical operands.
+
 ## 1.1.5
 
 - Model fixing for type casting in Dhis2Organization fromJson function
