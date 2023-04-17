@@ -19,7 +19,7 @@ void main() {
     },
     {
       "id": "xZe5qCzRS0Y",
-      "condition": "#{gender of client} == 'Female'",
+      "condition": "#{gender of client} == 'Male'",
       "program": "lxAQ7Zs9VYR",
       "programRuleActions": [
         {
@@ -53,9 +53,9 @@ void main() {
     {
       "name": "gender of client",
       "id": "zINGRka3g9N",
-      "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
+      "programRuleVariableSourceType": "TEI_ATTRIBUTE",
       "program": "eBAyeGv0exc",
-      "dataElement": "oZg33kd9taw"
+      "trackedEntityAttribute": "oZg33kd9taw"
     },
     {
       "name": "woman smoking",

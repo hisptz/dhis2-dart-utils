@@ -54,9 +54,9 @@ List<ProgramRuleVariable> programRuleVariables = [
   {
     "name": "gender of client",
     "id": "zINGRka3g9N",
-    "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
+    "programRuleVariableSourceType": "TEI_ATTRIBUTE",
     "program": "eBAyeGv0exc",
-    "dataElement": "oZg33kd9taw"
+    "trackedEntityAttribute": "oZg33kd9taw"
   },
   {
     "name": "woman smoking",

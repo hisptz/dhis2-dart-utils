@@ -115,7 +115,11 @@ class ProgramRuleEngine {
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.assignField &&
                 condition.runtimeType == bool) {
-              String id = dataElement ?? (trackedEntityAttribute ?? '');
+              String id = (dataElement ?? '').isNotEmpty
+                  ? dataElement!
+                  : (trackedEntityAttribute ?? '').isNotEmpty
+                      ? trackedEntityAttribute!
+                      : '';
               if (id.isNotEmpty) {
                 if (condition) {
                   assignedFields[id] =
