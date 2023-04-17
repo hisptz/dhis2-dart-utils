@@ -1,3 +1,13 @@
+## 1.1.7
+
+- Bugfix: Program rule engine failures:
+  - Fixed the assignment of data id (either data element or tracked entity attribute) after evaluation of program rules expression before performing program rule actions.
+
+## 1.1.6
+
+- Bugfix: Program rule engine failures:
+  - Fixed the bug with .
+
 ## 1.1.5
 
 - Model fixing for type casting in Dhis2Organization fromJson function
