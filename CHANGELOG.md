@@ -1,3 +1,9 @@
+## 1.1.8
+
+- Bugfix: Program rule engine failures:
+  - Fixed the bug caused by DHIS2 2.38 and above where program rules could assign values within single and double quotes.
+    - The fix involved additional sanitization of the values before auto-assignment
+
 ## 1.1.7
 
 - Bugfix: Program rule engine failures:

@@ -1,6 +1,6 @@
 name: dhis2_dart_utils
 description: A collection of data models, constants and utilities used to build a DHIS2 app in dart.
-version: 1.1.7
+version: 1.1.8
 homepage: https://github.com/hisptz/dhis2-dart-utils
 
 environment:
