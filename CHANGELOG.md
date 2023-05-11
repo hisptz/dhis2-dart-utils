@@ -1,3 +1,7 @@
+## 1.1.9
+
+- Enhancement on enrollment data model transformation
+
 ## 1.1.8
 
 - Bugfix: Program rule engine failures:
