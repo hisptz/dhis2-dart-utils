@@ -16,10 +16,7 @@ class MathematicalOperationsUtil {
     String sanitizedValue =
         value == DefaultValues.dataObjectValue ? '0' : value;
     if (value.runtimeType == String) {
-      value = sanitizedValue
-          .replaceAll(RegExp(r'[\s]+'), '')
-          .replaceAll("'", '')
-          .trim();
+      value = sanitizedValue.replaceAll("'", '').trim();
       try {
         return double.parse(value);
       } catch (error) {
