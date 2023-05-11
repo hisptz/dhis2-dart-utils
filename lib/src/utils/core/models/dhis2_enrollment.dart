@@ -71,6 +71,8 @@ class Dhis2Enrollment {
     data['orgUnit'] = orgUnit;
     data['trackedEntityInstance'] = trackedEntityInstance;
     data['status'] = status;
+    data['syncStatus'] = syncStatus;
+    data['searchableValue'] = searchableValue;
     data['created'] = created ?? now;
     data['lastUpdated'] = lastUpdated ?? now;
     return data;
@@ -85,6 +87,8 @@ class Dhis2Enrollment {
     orgUnit = mapData['orgUnit'];
     trackedEntityInstance = mapData['trackedEntityInstance'];
     status = mapData['status'];
+    syncStatus = mapData['syncStatus'];
+    searchableValue = mapData['searchableValue'];
     created = mapData['created'];
     lastUpdated = mapData['lastUpdated'];
   }
@@ -94,17 +98,17 @@ class Dhis2Enrollment {
   factory Dhis2Enrollment.fromJson(dynamic json) {
     var now = DateTime.now().toIso8601String();
     return Dhis2Enrollment(
-      enrollment: json['enrollment'] ?? '',
-      enrollmentDate: "${json['enrollmentDate']}".split('T')[0],
-      incidentDate: "${json['incidentDate']}".split('T')[0],
-      program: json['program'],
-      orgUnit: json['orgUnit'],
-      trackedEntityInstance: json['trackedEntityInstance'],
-      syncStatus: json['syncStatus'] ?? 'synced',
-      status: json['status'],
-      created: json['created'] ?? now,
-      lastUpdated: json['lastUpdated'] ?? now,
-    );
+        enrollment: json['enrollment'] ?? '',
+        enrollmentDate: "${json['enrollmentDate']}".split('T')[0],
+        incidentDate: "${json['incidentDate']}".split('T')[0],
+        program: json['program'],
+        orgUnit: json['orgUnit'],
+        trackedEntityInstance: json['trackedEntityInstance'],
+        syncStatus: json['syncStatus'] ?? 'synced',
+        status: json['status'],
+        created: json['created'] ?? now,
+        lastUpdated: json['lastUpdated'] ?? now,
+        searchableValue: json['searchableValue'] ?? '');
   }
 
   /// This is the `toString()` method that return the string representation of the `Dhis2Enrollment`
