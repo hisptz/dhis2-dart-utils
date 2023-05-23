@@ -22,4 +22,30 @@ class StringHelpers {
     }
     return string;
   }
+
+  ///
+  /// `StringHelpers.covertCamelCaseToSnakeCase`  is a method that converts a camelCase string into snake_case.
+  ///  The method accepts a `String` text parameter and returns back a snake_case conversion
+  ///
+  static String covertCamelCaseToSnakeCase(String text) {
+    RegExp expression = RegExp(r'(?<=[a-z])[A-Z]');
+    return text
+        .replaceAllMapped(expression, (Match match) => '_${match.group(0)}')
+        .toLowerCase();
+  }
+
+  ///
+  /// `StringHelpers.convertSnakeCaseToCamelCase` is a method that converts snake_case into a camelCase string
+  ///  The method accepts a `String` text parameter and returns the camelCase converted string
+  ///
+  static String convertSnakeCaseToCamelCase(String text) {
+    var sanitizedText = text
+        .split('_')
+        .map((String str) =>
+            "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}")
+        .toList()
+        .join('');
+
+    return "${sanitizedText[0].toLowerCase()}${sanitizedText.substring(1)}";
+  }
 }
