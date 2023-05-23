@@ -77,7 +77,11 @@ class D2OperationsUtils {
         bool expressionValue = !_isValueNull(expressionSections.first);
         expression = expression.replaceRange(
             startIndex, endIndex + 1, "$expressionValue");
-      } else {
+      }
+
+      // TODO add condition for periods
+
+      else {
         expression = expression.replaceRange(startIndex, endIndex + 1, value);
       }
     } else {

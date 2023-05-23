@@ -80,6 +80,9 @@ class ProgramRuleEngine {
                   value = "${dataObject[ruleVariableDataElementAttributeId]}";
                 }
               }
+
+              // TODO check if DHIS2 built-in variables exists and substitute appropriately
+
               if (programRuleVariable.name != null &&
                   sanitizedCondition.contains(programRuleVariable.name!)) {
                 sanitizedCondition = ProgramRuleHelper.sanitizeExpression(
@@ -122,7 +125,7 @@ class ProgramRuleEngine {
                       : '';
               if (id.isNotEmpty) {
                 if (condition) {
-                  var assignedValue = _escapeQuotes(
+                  var assignedValue = StringHelpers.escapeQuotes(
                       ProgramRuleHelper.evaluateLogicalCondition(
                           evalDataCondition!));
                   assignedFields[id] = assignedValue;
@@ -223,21 +226,5 @@ class ProgramRuleEngine {
       "hiddenProgramStages": hiddenProgramStages,
       "errorOrWarningMessage": errorOrWarningMessage
     };
-  }
-
-  ///
-  /// `_escapeQuotes` is and helper function that escapes the string quotations on a string value
-  ///  The functions takes a `String` parameter and returns a sanitized `String` with no quotations.
-  ///
-  static String _escapeQuotes(String string) {
-    String doubleQuotesPattern = '"';
-    var singleQuotePosition = string.lastIndexOf("'").clamp(0, string.length);
-    return string.contains(doubleQuotesPattern)
-        ? string.replaceAll(doubleQuotesPattern, '')
-        : string.startsWith("'") && string.endsWith("'")
-            ? string
-                .replaceFirst("'", "", singleQuotePosition)
-                .replaceFirst("'", "", 0)
-            : string;
   }
 }

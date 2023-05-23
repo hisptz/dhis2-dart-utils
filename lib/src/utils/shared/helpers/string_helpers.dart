@@ -48,4 +48,20 @@ class StringHelpers {
 
     return "${sanitizedText[0].toLowerCase()}${sanitizedText.substring(1)}";
   }
+
+  ///
+  /// `StringHelpers.escapeQuotes` is an helper function that escapes the string quotations on a string value
+  ///  The functions takes a `String` parameter and returns a sanitized `String` with no quotations.
+  ///
+  static String escapeQuotes(String string) {
+    String doubleQuotesPattern = '"';
+    var singleQuotePosition = string.lastIndexOf("'").clamp(0, string.length);
+    return string.contains(doubleQuotesPattern)
+        ? string.replaceAll(doubleQuotesPattern, '')
+        : string.startsWith("'") && string.endsWith("'")
+            ? string
+                .replaceFirst("'", "", singleQuotePosition)
+                .replaceFirst("'", "", 0)
+            : string;
+  }
 }
