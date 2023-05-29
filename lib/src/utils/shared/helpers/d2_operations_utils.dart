@@ -1,6 +1,8 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'package:dhis2_dart_utils/src/utils/shared/helpers/date_helpers.dart';
+
 import '../constants/default_values.dart';
 import '../constants/operators_constants.dart';
 import 'mathematical_operations_util.dart';
@@ -34,12 +36,15 @@ class D2OperationsUtils {
             d2Expression.indexOf('(') + 1,
             d2Expression.lastIndexOf(')'),
           )
-          .split(',');
+          .split(',')
+          .map((expressionSection) => expressionSection.trim())
+          .toList();
 
       /// for `if` and `d2:condition` operators
       if (d2Expression.contains('d2:condition(') ||
           d2Expression.contains('if(')) {
-        var condition = expressionSections.first.replaceAll("'", '');
+        var condition =
+            expressionSections.first.replaceAll("'", '').replaceAll("'", '');
         var conditionResults =
             MathematicalOperationsUtil.evaluateMathematicalOperation(
           condition,
@@ -60,28 +65,90 @@ class D2OperationsUtils {
 
       /// for `d2:hasValue` operator
       else if (d2Expression.contains('d2:hasValue(')) {
-        bool expressionValue = !_isValueNull(expressionSections.first);
+        bool expressionValue =
+            !_isValueNull(expressionSections.first.replaceAll("'", ''));
         expression = expression.replaceRange(
             startIndex, endIndex + 1, "$expressionValue");
       }
 
       /// for `isNull` operator
       else if (d2Expression.contains('isNull(')) {
-        bool expressionValue = _isValueNull(expressionSections.first);
+        bool expressionValue =
+            _isValueNull(expressionSections.first.replaceAll("'", ''));
         expression = expression.replaceRange(
             startIndex, endIndex + 1, "$expressionValue");
       }
 
       /// for `isNotNull` operator
       else if (d2Expression.contains('isNotNull(')) {
-        bool expressionValue = !_isValueNull(expressionSections.first);
+        bool expressionValue =
+            !_isValueNull(expressionSections.first.replaceAll("'", ''));
         expression = expression.replaceRange(
             startIndex, endIndex + 1, "$expressionValue");
       }
 
-      // TODO add condition for periods
+      /// for `d2:daysBetween` operator
+      else if (d2Expression.contains('d2:daysBetween(')) {
+        if (expressionSections.length == 2) {
+          var startDate =
+              DateTime.parse(expressionSections.first.replaceAll("'", ''));
+          var endDate =
+              DateTime.parse(expressionSections.last.replaceAll("'", ''));
+          int daysBetween = DateHelpers.calculateDaysBetweenDates(
+            startDate: startDate,
+            endDate: endDate,
+          );
+          value = '$daysBetween';
+        }
+        expression = expression.replaceRange(startIndex, endIndex + 1, value);
+      }
 
-      else {
+      // for `d2:weeksBetween` operator
+      else if (d2Expression.contains('d2:weeksBetween(')) {
+        if (expressionSections.length == 2) {
+          var startDate =
+              DateTime.parse(expressionSections.first.replaceAll("'", ''));
+          var endDate =
+              DateTime.parse(expressionSections.last.replaceAll("'", ''));
+          int weeksBetween = DateHelpers.calculateWeeksBetweenDates(
+            startDate: startDate,
+            endDate: endDate,
+          );
+          value = '$weeksBetween';
+        }
+        expression = expression.replaceRange(startIndex, endIndex + 1, value);
+      }
+
+      // for `d2:monthsBetween` operator
+      else if (d2Expression.contains('d2:monthsBetween(')) {
+        if (expressionSections.length == 2) {
+          var startDate =
+              DateTime.parse(expressionSections.first.replaceAll("'", ''));
+          var endDate =
+              DateTime.parse(expressionSections.last.replaceAll("'", ''));
+          int monthsBetween = DateHelpers.calculateMonthsBetweenDates(
+            startDate: startDate,
+            endDate: endDate,
+          );
+          value = '$monthsBetween';
+        }
+        expression = expression.replaceRange(startIndex, endIndex + 1, value);
+      }
+      // for `d2:yearsBetween` operator
+      else if (d2Expression.contains('d2:yearsBetween(')) {
+        if (expressionSections.length == 2) {
+          var startDate =
+              DateTime.parse(expressionSections.first.replaceAll("'", ''));
+          var endDate =
+              DateTime.parse(expressionSections.last.replaceAll("'", ''));
+          int yearsBetween = DateHelpers.calculateYearsBetweenDates(
+            startDate: startDate,
+            endDate: endDate,
+          );
+          value = '$yearsBetween';
+        }
+        expression = expression.replaceRange(startIndex, endIndex + 1, value);
+      } else {
         expression = expression.replaceRange(startIndex, endIndex + 1, value);
       }
     } else {
