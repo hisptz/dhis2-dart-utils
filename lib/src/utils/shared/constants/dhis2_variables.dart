@@ -32,7 +32,7 @@ class Dhis2Variables {
   static String eventStatus = 'event_status';
   static String dueDate = 'due_date';
   static String eventCount = 'event_count';
-  static String enrollmentDate = 'enrollemnt_date';
+  static String enrollmentDate = 'enrollment_date';
   static String incidentDate = 'incident_date';
   static String enrollmentId = 'enrollment_id';
   static String eventId = 'event_id';
