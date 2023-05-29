@@ -39,12 +39,14 @@ class StringHelpers {
   ///  The method accepts a `String` text parameter and returns the camelCase converted string
   ///
   static String convertSnakeCaseToCamelCase(String text) {
-    var sanitizedText = text
-        .split('_')
-        .map((String str) =>
-            "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}")
-        .toList()
-        .join('');
+    var sanitizedText = text.contains('_')
+        ? text
+            .split('_')
+            .map((String str) =>
+                "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}")
+            .toList()
+            .join('')
+        : text.replaceAll(RegExp(r"\s+"), '');
 
     return "${sanitizedText[0].toLowerCase()}${sanitizedText.substring(1)}";
   }
