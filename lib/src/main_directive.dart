@@ -1,3 +1,7 @@
+/// Core helpers
+export './utils/shared/helpers/date_helpers.dart' show DateHelpers;
+export './utils/shared/helpers/string_helpers.dart' show StringHelpers;
+
 /// Period
 export './utils/period_engine/models/period.dart' show Period;
 export './utils/period_engine/models/period_type.dart' show PeriodType;
