@@ -4,6 +4,20 @@ void main() {
   //  EXAMPLE: program rule engine
   List<ProgramRule> programRules = [
     {
+      "id": "PbSbImJMR4K",
+      "condition": "d2:hasValue(A{Date of birth}) == true",
+      "program": "eBAyeGv0exc",
+      "programRuleActions": [
+        {
+          "id": "exRtxsdU7rn",
+          "programRuleActionType": "ASSIGN",
+          "programRule": "PbSbImJMR4K",
+          "trackedEntityAttribute": "s5tV4k4buG9",
+          "data": "d2:yearsBetween(A{Date of birth}, V{enrollment_date})"
+        }
+      ]
+    },
+    {
       "id": "fd3wL1quxGb",
       "condition": "#{gender of client} == 'Male'",
       "program": "eBAyeGv0exc",
@@ -58,6 +72,13 @@ void main() {
       "trackedEntityAttribute": "oZg33kd9taw"
     },
     {
+      "name": "Date of birth",
+      "id": "zINGRka3g9N",
+      "programRuleVariableSourceType": "TEI_ATTRIBUTE",
+      "program": "eBAyeGv0exc",
+      "trackedEntityAttribute": "XZg33kd9taw"
+    },
+    {
       "name": "woman smoking",
       "id": "Z92dJO9gIje",
       "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
@@ -70,6 +91,8 @@ void main() {
       .toList();
   Map programRuleEngineDataObject = {
     "oZg33kd9taw": "Male",
+    "XZg33kd9taw": "1997-03-07",
+    "enrollmentDate": "2023-06-01"
   };
 
   print(

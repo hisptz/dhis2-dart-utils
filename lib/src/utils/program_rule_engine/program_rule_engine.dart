@@ -1,6 +1,8 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'package:dhis2_dart_utils/src/utils/shared/constants/dhis2_variables.dart';
+
 import '../shared/constants/string_constants.dart';
 import '../shared/helpers/string_helpers.dart';
 import 'constants/program_rule_actions_constants.dart';
@@ -50,7 +52,7 @@ class ProgramRuleEngine {
           );
           String? data = programRuleAction.data;
           String? content = programRuleAction.content;
-          String? evalDataCondition = programRuleAction.data;
+          String dataExpression = programRuleAction.data ?? '';
           var dataElement = programRuleAction.dataElement;
           var trackedEntityAttribute = programRuleAction.trackedEntityAttribute;
           String? programRuleActionType =
@@ -80,6 +82,12 @@ class ProgramRuleEngine {
                   value = "${dataObject[ruleVariableDataElementAttributeId]}";
                 }
               }
+
+              sanitizedCondition = escapeStandardDhis2Variables(
+                dataObject: dataObject,
+                expression: sanitizedCondition,
+              );
+
               if (programRuleVariable.name != null &&
                   sanitizedCondition.contains(programRuleVariable.name!)) {
                 sanitizedCondition = ProgramRuleHelper.sanitizeExpression(
@@ -91,8 +99,8 @@ class ProgramRuleEngine {
               if (data != null &&
                   programRuleVariable.name != null &&
                   data.contains(programRuleVariable.name!)) {
-                evalDataCondition = ProgramRuleHelper.sanitizeExpression(
-                  expression: evalDataCondition!,
+                dataExpression = ProgramRuleHelper.sanitizeExpression(
+                  expression: dataExpression,
                   programRuleVariable: programRuleVariable.name ?? '',
                   value: value,
                 );
@@ -122,9 +130,15 @@ class ProgramRuleEngine {
                       : '';
               if (id.isNotEmpty) {
                 if (condition) {
-                  var assignedValue = _escapeQuotes(
-                      ProgramRuleHelper.evaluateLogicalCondition(
-                          evalDataCondition!));
+                  var sanitizedDataExpression = escapeStandardDhis2Variables(
+                    expression: dataExpression,
+                    dataObject: dataObject,
+                  );
+                  var assignedValue = StringHelpers.escapeQuotes(
+                    ProgramRuleHelper.evaluateLogicalCondition(
+                      sanitizedDataExpression,
+                    ),
+                  );
                   assignedFields[id] = assignedValue;
                 }
               }
@@ -226,18 +240,29 @@ class ProgramRuleEngine {
   }
 
   ///
-  /// `_escapeQuotes` is and helper function that escapes the string quotations on a string value
-  ///  The functions takes a `String` parameter and returns a sanitized `String` with no quotations.
+  /// Replacing the DHIS2 standard variables with values from data object
   ///
-  static String _escapeQuotes(String string) {
-    String doubleQuotesPattern = '"';
-    var singleQuotePosition = string.lastIndexOf("'").clamp(0, string.length);
-    return string.contains(doubleQuotesPattern)
-        ? string.replaceAll(doubleQuotesPattern, '')
-        : string.startsWith("'") && string.endsWith("'")
-            ? string
-                .replaceFirst("'", "", singleQuotePosition)
-                .replaceFirst("'", "", 0)
-            : string;
+  static String escapeStandardDhis2Variables({
+    String expression = '',
+    Map dataObject = const {},
+  }) {
+    var dhis2Variables = Dhis2Variables.getStandardVariables();
+    if (dhis2Variables.any(
+      (variable) => expression.contains(variable),
+    )) {
+      for (var variable in dhis2Variables) {
+        String sanitizedVariable =
+            StringHelpers.convertSnakeCaseToCamelCase(variable);
+        expression = dataObject.keys.contains(sanitizedVariable)
+            ? ProgramRuleHelper.sanitizeExpression(
+                expression: expression,
+                programRuleVariable: variable,
+                value: dataObject[sanitizedVariable],
+              )
+            : expression;
+      }
+    }
+
+    return expression;
   }
 }

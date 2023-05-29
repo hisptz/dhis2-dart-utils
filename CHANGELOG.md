@@ -1,3 +1,12 @@
+## 1.1.10
+
+- Enhancement of program rule evaluations
+  - Added support for date evaluation program rules for:
+    - Years Between
+    - Months Between
+    - Weeks Between
+    - Days Between
+
 ## 1.1.9
 
 - Enhancement on enrollment data model transformation
