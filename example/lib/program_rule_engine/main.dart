@@ -5,7 +5,8 @@ void main() {
   List<ProgramRule> programRules = [
     {
       "id": "PbSbImJMR4K",
-      "condition": "d2:hasValue(A{Date of birth}) == true",
+      "condition":
+          "#{gender of client} == 'Male' && d2:hasValue(A{Date of birth}) == true",
       "program": "eBAyeGv0exc",
       "programRuleActions": [
         {

@@ -44,12 +44,13 @@ class ProgramRuleEngine {
     if (programRules.isNotEmpty) {
       for (ProgramRule programRule in programRules) {
         String condition = programRule.condition ?? '';
+        String sanitizedCondition = StringHelpers.escapeCharacter(
+          condition,
+          escapeChar: StringConstants.escapedCharacters,
+        );
+
         for (ProgramRuleAction programRuleAction
             in programRule.programRuleActions ?? []) {
-          String sanitizedCondition = StringHelpers.escapeCharacter(
-            condition,
-            escapeChar: StringConstants.escapedCharacters,
-          );
           String? data = programRuleAction.data;
           String? content = programRuleAction.content;
           String dataExpression = programRuleAction.data ?? '';
@@ -59,54 +60,18 @@ class ProgramRuleEngine {
               programRuleAction.programRuleActionType;
           var programStage = programRuleAction.programStage;
           var programStageSection = programRuleAction.programStageSection;
-          for (ProgramRuleVariable programRuleVariable
-              in programRuleVariables) {
-            String ruleVariableDataElementAttributeId =
-                programRuleVariable.dataElement != null &&
-                        programRuleVariable.dataElement != ''
-                    ? programRuleVariable.dataElement!
-                    : programRuleVariable.trackedEntityAttribute != null &&
-                            programRuleVariable.trackedEntityAttribute != ''
-                        ? programRuleVariable.trackedEntityAttribute!
-                        : '';
-            var value = "''";
-            if (dataObject.isNotEmpty &&
-                dataObject[ruleVariableDataElementAttributeId] != null) {
-              try {
-                double doubleValue = double.parse(
-                    dataObject[ruleVariableDataElementAttributeId]);
-                value = doubleValue as String;
-              } catch (error) {
-                value = "${dataObject[ruleVariableDataElementAttributeId]}";
-                if (dataObject[ruleVariableDataElementAttributeId] != '') {
-                  value = "${dataObject[ruleVariableDataElementAttributeId]}";
-                }
-              }
 
-              sanitizedCondition = escapeStandardDhis2Variables(
-                dataObject: dataObject,
-                expression: sanitizedCondition,
-              );
+          dataExpression = decodeExpressionWithProgramRuleVariables(
+            programRuleVariables: programRuleVariables,
+            expression: dataExpression,
+            dataObject: dataObject,
+          );
+          sanitizedCondition = decodeExpressionWithProgramRuleVariables(
+            programRuleVariables: programRuleVariables,
+            expression: sanitizedCondition,
+            dataObject: dataObject,
+          );
 
-              if (programRuleVariable.name != null &&
-                  sanitizedCondition.contains(programRuleVariable.name!)) {
-                sanitizedCondition = ProgramRuleHelper.sanitizeExpression(
-                  expression: sanitizedCondition,
-                  programRuleVariable: programRuleVariable.name ?? '',
-                  value: value,
-                );
-              }
-              if (data != null &&
-                  programRuleVariable.name != null &&
-                  data.contains(programRuleVariable.name!)) {
-                dataExpression = ProgramRuleHelper.sanitizeExpression(
-                  expression: dataExpression,
-                  programRuleVariable: programRuleVariable.name ?? '',
-                  value: value,
-                );
-              }
-            }
-          }
           try {
             var condition =
                 ProgramRuleHelper.evaluateLogicalCondition(sanitizedCondition);
@@ -237,6 +202,59 @@ class ProgramRuleEngine {
       "hiddenProgramStages": hiddenProgramStages,
       "errorOrWarningMessage": errorOrWarningMessage
     };
+  }
+
+  ///
+  /// `ProgramRuleEngine.decodeExpressionWithProgramRuleVariables` is a helper function that decodes and expression by replacing data object values with the program rule variables
+  ///  The function accepts `String` expression, `Map` data object and a `List` of `ProgramRuleVariable` .
+  ///  It returns a sanitized `String` expression
+  static String decodeExpressionWithProgramRuleVariables({
+    required String expression,
+    required List<ProgramRuleVariable> programRuleVariables,
+    Map dataObject = const {},
+  }) {
+    String sanitizedExpression = expression;
+
+    for (ProgramRuleVariable programRuleVariable in programRuleVariables) {
+      String ruleVariableDataElementAttributeId =
+          programRuleVariable.dataElement != null &&
+                  programRuleVariable.dataElement != ''
+              ? programRuleVariable.dataElement!
+              : programRuleVariable.trackedEntityAttribute != null &&
+                      programRuleVariable.trackedEntityAttribute != ''
+                  ? programRuleVariable.trackedEntityAttribute!
+                  : '';
+      var value = "''";
+      if (dataObject.isNotEmpty &&
+          dataObject[ruleVariableDataElementAttributeId] != null) {
+        try {
+          double doubleValue = double.parse(
+            dataObject[ruleVariableDataElementAttributeId] ?? '0.0',
+          );
+          value = doubleValue as String;
+        } catch (error) {
+          value = "${dataObject[ruleVariableDataElementAttributeId]}";
+          if (dataObject[ruleVariableDataElementAttributeId] != '') {
+            value = "${dataObject[ruleVariableDataElementAttributeId]}";
+          }
+        }
+
+        sanitizedExpression = escapeStandardDhis2Variables(
+          dataObject: dataObject,
+          expression: sanitizedExpression,
+        );
+
+        if (programRuleVariable.name != null &&
+            sanitizedExpression.contains(programRuleVariable.name!)) {
+          sanitizedExpression = ProgramRuleHelper.sanitizeExpression(
+            expression: sanitizedExpression,
+            programRuleVariable: programRuleVariable.name ?? '',
+            value: value,
+          );
+        }
+      }
+    }
+    return sanitizedExpression;
   }
 
   ///
