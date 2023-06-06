@@ -1,3 +1,9 @@
+## 1.1.11
+
+- Bugfix: Program rule evaluations:
+  - Fixed the issues with decoding of program rule variables
+  - Fixed the evaluation of joint operators such as && and ||
+
 ## 1.1.10
 
 - Enhancement of program rule evaluations
