@@ -56,30 +56,30 @@ class ProgramRuleEngine {
           dataObject: dataObject,
         );
 
-        // Evaluating the logical condition
-        var evaluatedConditionResults =
-            ProgramRuleHelper.evaluateLogicalCondition(sanitizedCondition);
+        try {
+          // Evaluating the logical condition
+          var evaluatedConditionResults =
+              ProgramRuleHelper.evaluateLogicalCondition(sanitizedCondition);
 
-        for (ProgramRuleAction programRuleAction
-            in programRule.programRuleActions ?? []) {
-          String? data = programRuleAction.data;
-          String? content = programRuleAction.content;
-          String dataExpression = programRuleAction.data ?? '';
-          var dataElement = programRuleAction.dataElement;
-          var trackedEntityAttribute = programRuleAction.trackedEntityAttribute;
-          String? programRuleActionType =
-              programRuleAction.programRuleActionType;
-          var programStage = programRuleAction.programStage;
-          var programStageSection = programRuleAction.programStageSection;
+          for (ProgramRuleAction programRuleAction
+              in programRule.programRuleActions ?? []) {
+            String? data = programRuleAction.data;
+            String? content = programRuleAction.content;
+            String dataExpression = programRuleAction.data ?? '';
+            var dataElement = programRuleAction.dataElement;
+            var trackedEntityAttribute =
+                programRuleAction.trackedEntityAttribute;
+            String? programRuleActionType =
+                programRuleAction.programRuleActionType;
+            var programStage = programRuleAction.programStage;
+            var programStageSection = programRuleAction.programStageSection;
 
-          // Decoding the expression with program rule variables
-          dataExpression = decodeExpressionWithProgramRuleVariables(
-            programRuleVariables: programRuleVariables,
-            expression: dataExpression,
-            dataObject: dataObject,
-          );
-
-          try {
+            // Decoding the expression with program rule variables
+            dataExpression = decodeExpressionWithProgramRuleVariables(
+              programRuleVariables: programRuleVariables,
+              expression: dataExpression,
+              dataObject: dataObject,
+            );
             if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideField &&
                 evaluatedConditionResults.runtimeType == bool) {
@@ -192,11 +192,11 @@ class ProgramRuleEngine {
                 };
               }
             }
-          } catch (error) {
-            var exception = ProgramRuleException(
-                'evaluateProgramRule(${programRule.id}): $error');
-            print(exception.toString());
           }
+        } catch (error) {
+          var exception = ProgramRuleException(
+              'evaluateProgramRule(${programRule.id}): $error');
+          print(exception.toString());
         }
       }
     }
