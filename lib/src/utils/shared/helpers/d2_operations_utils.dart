@@ -71,6 +71,45 @@ class D2OperationsUtils {
             startIndex, endIndex + 1, "$expressionValue");
       }
 
+      /// for `d2:ceil` operator
+      else if (d2Expression.contains('d2:ceil(')) {
+        double expressionValue =
+            double.parse(expressionSections.first.replaceAll("'", ''))
+                .ceilToDouble();
+        expression = expression.replaceRange(
+            startIndex, endIndex + 1, "$expressionValue");
+      }
+
+      /// for `d2:modulus` operator
+      else if (d2Expression.contains('d2:modulus(')) {
+        double expressionValue =
+            double.parse(expressionSections.first.replaceAll("'", '')) %
+                double.parse(expressionSections.last.replaceAll("'", ''));
+        expression = expression.replaceRange(
+            startIndex, endIndex + 1, "$expressionValue");
+      }
+
+      /// for `d2:floor` operator
+      else if (d2Expression.contains('d2:floor(')) {
+        double expressionValue =
+            double.parse(expressionSections.first.replaceAll("'", ''))
+                .floorToDouble();
+        expression = expression.replaceRange(
+            startIndex, endIndex + 1, "$expressionValue");
+      }
+
+      /// for `d2:round` operator
+      else if (d2Expression.contains('d2:round(')) {
+        int decimalPlaces = expressionSections.length == 2
+            ? int.parse(expressionSections.last.replaceAll("'", ''))
+            : 0;
+        String expressionValue =
+            double.parse(expressionSections.first.replaceAll("'", ''))
+                .toStringAsFixed(decimalPlaces);
+        expression =
+            expression.replaceRange(startIndex, endIndex + 1, expressionValue);
+      }
+
       /// for `isNull` operator
       else if (d2Expression.contains('isNull(')) {
         bool expressionValue =

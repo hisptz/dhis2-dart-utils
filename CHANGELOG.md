@@ -1,3 +1,11 @@
+## 1.1.13
+
+- Added d2 mathematical operators
+  - d2:modulus
+  - d2:ceil
+  - d2:floor
+  - d2:round
+
 ## 1.1.12
 
 - Performance improvement on Program rule evaluation
