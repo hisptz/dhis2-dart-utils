@@ -28,6 +28,14 @@ class OperatorsConstants {
     'd2:hasValue',
     'if',
     'isNull',
-    'isNotNull'
+    'isNotNull',
+    "d2:yearsBetween",
+    "d2:monthsBetween",
+    "d2:weeksBetween",
+    "d2:daysBetween",
+    "d2:ceil",
+    "d2:floor",
+    "d2:modulus",
+    "d2:round",
   ];
 }
