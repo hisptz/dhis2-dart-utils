@@ -1,3 +1,27 @@
+## 1.1.12
+
+- Performance improvement on Program rule evaluation
+  - Improved the Performance of the program rule engine by moving the evaluation program rule condition to be done on each program rule rather than each action
+
+## 1.1.11
+
+- Bugfix: Program rule evaluations:
+  - Fixed the issues with decoding of program rule variables
+  - Fixed the evaluation of joint operators such as && and ||
+
+## 1.1.10
+
+- Enhancement of program rule evaluations
+  - Added support for date evaluation program rules for:
+    - Years Between
+    - Months Between
+    - Weeks Between
+    - Days Between
+
+## 1.1.9
+
+- Enhancement on enrollment data model transformation
+
 ## 1.1.8
 
 - Bugfix: Program rule engine failures:

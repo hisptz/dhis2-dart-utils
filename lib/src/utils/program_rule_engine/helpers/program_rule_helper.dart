@@ -1,6 +1,8 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'package:dhis2_dart_utils/src/utils/shared/helpers/d2_operations_utils.dart';
+
 import '../../shared/helpers/mathematical_operations_util.dart';
 
 ///
@@ -12,6 +14,7 @@ class ProgramRuleHelper {
   /// It accepts the condition as a `String` and returns a `dynamic` value from the condition
   ///
   static dynamic evaluateLogicalCondition(String condition) {
+    condition = D2OperationsUtils.evaluatedD2BuiltInFunctions(condition);
     if (condition.contains('(') || condition.contains(')')) {
       int startIndex = condition.lastIndexOf('(');
       int endIndex = condition.indexOf(')', startIndex);

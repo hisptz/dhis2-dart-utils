@@ -10,14 +10,14 @@ class OperatorsConstants {
 
   // This is a list of all logical operators supported by the library
   static List<String> logicalOperators = [
+    '&&',
+    '||',
     '>=',
     '===',
     '==',
     '<=',
     '!=',
-    '&&',
     '!',
-    '||',
     '>',
     '<',
   ];
