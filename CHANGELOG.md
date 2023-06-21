@@ -1,3 +1,8 @@
+## 1.1.12
+
+- Performance improvement on Program rule evaluation
+  - Improved the Performance of the program rule engine by moving the evaluation program rule condition to be done on each program rule rather than each action
+
 ## 1.1.11
 
 - Bugfix: Program rule evaluations:
