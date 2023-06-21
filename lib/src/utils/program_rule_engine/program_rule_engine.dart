@@ -49,6 +49,17 @@ class ProgramRuleEngine {
           escapeChar: StringConstants.escapedCharacters,
         );
 
+        // Decoding the expression with program rule variables
+        sanitizedCondition = decodeExpressionWithProgramRuleVariables(
+          programRuleVariables: programRuleVariables,
+          expression: sanitizedCondition,
+          dataObject: dataObject,
+        );
+
+        // Evaluating the logical condition
+        var evaluatedConditionResults =
+            ProgramRuleHelper.evaluateLogicalCondition(sanitizedCondition);
+
         for (ProgramRuleAction programRuleAction
             in programRule.programRuleActions ?? []) {
           String? data = programRuleAction.data;
@@ -61,40 +72,34 @@ class ProgramRuleEngine {
           var programStage = programRuleAction.programStage;
           var programStageSection = programRuleAction.programStageSection;
 
+          // Decoding the expression with program rule variables
           dataExpression = decodeExpressionWithProgramRuleVariables(
             programRuleVariables: programRuleVariables,
             expression: dataExpression,
             dataObject: dataObject,
           );
-          sanitizedCondition = decodeExpressionWithProgramRuleVariables(
-            programRuleVariables: programRuleVariables,
-            expression: sanitizedCondition,
-            dataObject: dataObject,
-          );
 
           try {
-            var condition =
-                ProgramRuleHelper.evaluateLogicalCondition(sanitizedCondition);
             if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideField &&
-                condition.runtimeType == bool) {
+                evaluatedConditionResults.runtimeType == bool) {
               if (dataElement != null) {
                 String id = dataElement;
-                hiddenFields[id] = condition;
+                hiddenFields[id] = evaluatedConditionResults;
               } else if (trackedEntityAttribute != null) {
                 String id = trackedEntityAttribute;
-                hiddenFields[id] = condition;
+                hiddenFields[id] = evaluatedConditionResults;
               }
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.assignField &&
-                condition.runtimeType == bool) {
+                evaluatedConditionResults.runtimeType == bool) {
               String id = (dataElement ?? '').isNotEmpty
                   ? dataElement!
                   : (trackedEntityAttribute ?? '').isNotEmpty
                       ? trackedEntityAttribute!
                       : '';
               if (id.isNotEmpty) {
-                if (condition) {
+                if (evaluatedConditionResults) {
                   var sanitizedDataExpression = escapeStandardDhis2Variables(
                     expression: dataExpression,
                     dataObject: dataObject,
@@ -109,20 +114,20 @@ class ProgramRuleEngine {
               }
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideSection &&
-                condition.runtimeType == bool) {
+                evaluatedConditionResults.runtimeType == bool) {
               if (programStageSection != null) {
                 String sectionId = programStageSection;
-                hiddenSections[sectionId] = condition;
+                hiddenSections[sectionId] = evaluatedConditionResults;
               }
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideProgramStage &&
-                condition.runtimeType == bool) {
+                evaluatedConditionResults.runtimeType == bool) {
               if (programStage != null) {
                 String stageId = programStage;
-                hiddenSections[stageId] = condition;
+                hiddenSections[stageId] = evaluatedConditionResults;
               }
-            } else if (condition.runtimeType == bool &&
-                condition == true &&
+            } else if (evaluatedConditionResults.runtimeType == bool &&
+                evaluatedConditionResults == true &&
                 (programRuleActionType ==
                         ProgramRuleActionsConstants.showError ||
                     programRuleActionType ==
@@ -149,7 +154,8 @@ class ProgramRuleEngine {
                 "isComplete": isOnComplete,
                 "messageType": messageType
               };
-            } else if (condition.runtimeType == bool && condition == true) {
+            } else if (evaluatedConditionResults.runtimeType == bool &&
+                evaluatedConditionResults == true) {
               var message = '';
               String messageType = programRuleActionType ==
                           ProgramRuleActionsConstants.showError ||
