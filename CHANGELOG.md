@@ -1,3 +1,6 @@
+## 1.1.14
+- Bugfix: fixed the targeting of the data items that are affected by the program rules
+
 ## 1.1.13
 
 - Added d2 mathematical operators
