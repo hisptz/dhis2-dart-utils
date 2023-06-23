@@ -66,13 +66,24 @@ class ProgramRuleEngine {
             String? data = programRuleAction.data;
             String? content = programRuleAction.content;
             String dataExpression = programRuleAction.data ?? '';
+            String? programRuleActionType =
+                programRuleAction.programRuleActionType;
             var dataElement = programRuleAction.dataElement;
             var trackedEntityAttribute =
                 programRuleAction.trackedEntityAttribute;
-            String? programRuleActionType =
-                programRuleAction.programRuleActionType;
             var programStage = programRuleAction.programStage;
             var programStageSection = programRuleAction.programStageSection;
+
+            String dataItemTargetedByProgramAction =
+                (dataElement ?? '').isNotEmpty
+                    ? dataElement!
+                    : (trackedEntityAttribute ?? '').isNotEmpty
+                        ? trackedEntityAttribute!
+                        : (programStage ?? '').isNotEmpty
+                            ? programStage!
+                            : (programStageSection ?? '').isNotEmpty
+                                ? programStageSection!
+                                : '';
 
             // Decoding the expression with program rule variables
             dataExpression = decodeExpressionWithProgramRuleVariables(
@@ -83,22 +94,12 @@ class ProgramRuleEngine {
             if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideField &&
                 evaluatedConditionResults.runtimeType == bool) {
-              if (dataElement != null) {
-                String id = dataElement;
-                hiddenFields[id] = evaluatedConditionResults;
-              } else if (trackedEntityAttribute != null) {
-                String id = trackedEntityAttribute;
-                hiddenFields[id] = evaluatedConditionResults;
-              }
+              hiddenFields[dataItemTargetedByProgramAction] =
+                  evaluatedConditionResults;
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.assignField &&
                 evaluatedConditionResults.runtimeType == bool) {
-              String id = (dataElement ?? '').isNotEmpty
-                  ? dataElement!
-                  : (trackedEntityAttribute ?? '').isNotEmpty
-                      ? trackedEntityAttribute!
-                      : '';
-              if (id.isNotEmpty) {
+              if (dataItemTargetedByProgramAction.isNotEmpty) {
                 if (evaluatedConditionResults) {
                   var sanitizedDataExpression = escapeStandardDhis2Variables(
                     expression: dataExpression,
@@ -109,21 +110,22 @@ class ProgramRuleEngine {
                       sanitizedDataExpression,
                     ),
                   );
-                  assignedFields[id] = assignedValue;
+                  assignedFields[dataItemTargetedByProgramAction] =
+                      assignedValue;
                 }
               }
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideSection &&
                 evaluatedConditionResults.runtimeType == bool) {
-              if (programStageSection != null) {
-                String sectionId = programStageSection;
+              if (programStageSection?.isNotEmpty == true) {
+                String sectionId = programStageSection!;
                 hiddenSections[sectionId] = evaluatedConditionResults;
               }
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideProgramStage &&
                 evaluatedConditionResults.runtimeType == bool) {
-              if (programStage != null) {
-                String stageId = programStage;
+              if (programStage?.isNotEmpty == true) {
+                String stageId = programStage!;
                 hiddenSections[stageId] = evaluatedConditionResults;
               }
             } else if (evaluatedConditionResults.runtimeType == bool &&
@@ -148,8 +150,7 @@ class ProgramRuleEngine {
                           ProgramRuleActionsConstants.errorOnComplete
                   ? true
                   : false;
-              String? id = dataElement;
-              errorOrWarningMessage[id] = {
+              errorOrWarningMessage[dataItemTargetedByProgramAction] = {
                 "message": content,
                 "isComplete": isOnComplete,
                 "messageType": messageType
@@ -175,22 +176,11 @@ class ProgramRuleEngine {
               if (data != null) {
                 message += ' $data';
               }
-              if (dataElement != null) {
-                String id = dataElement;
-                errorOrWarningMessage[id] = {
+              errorOrWarningMessage[dataItemTargetedByProgramAction] = {
                   message: message,
                   isOnComplete: isOnComplete,
                   messageType: messageType,
-                };
-              }
-              if (trackedEntityAttribute != null) {
-                String id = trackedEntityAttribute;
-                errorOrWarningMessage[id] = {
-                  message: message,
-                  isOnComplete: isOnComplete,
-                  messageType: messageType,
-                };
-              }
+              };
             }
           }
         } catch (error) {
