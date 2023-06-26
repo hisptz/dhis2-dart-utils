@@ -13,7 +13,7 @@ import 'mathematical_operations_util.dart';
 ///
 class D2OperationsUtils {
   static bool _isValueNull(String value) {
-    return value == DefaultValues.dataObjectValue;
+    return value.isEmpty || value == DefaultValues.dataObjectValue;
   }
 
   ///
@@ -65,8 +65,8 @@ class D2OperationsUtils {
 
       /// for `d2:hasValue` operator
       else if (d2Expression.contains('d2:hasValue(')) {
-        bool expressionValue =
-            !_isValueNull(expressionSections.first.replaceAll("'", ''));
+        String param = expressionSections.first.replaceAll("'", '').trim();
+        bool expressionValue = !_isValueNull(param);
         expression = expression.replaceRange(
             startIndex, endIndex + 1, "$expressionValue");
       }
