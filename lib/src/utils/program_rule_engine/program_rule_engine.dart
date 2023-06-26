@@ -105,10 +105,12 @@ class ProgramRuleEngine {
                     expression: dataExpression,
                     dataObject: dataObject,
                   );
+                  var evaluatedDataExpression =
+                      ProgramRuleHelper.evaluateLogicalCondition(
+                    sanitizedDataExpression,
+                  );
                   var assignedValue = StringHelpers.escapeQuotes(
-                    ProgramRuleHelper.evaluateLogicalCondition(
-                      sanitizedDataExpression,
-                    ),
+                    '$evaluatedDataExpression',
                   );
                   assignedFields[dataItemTargetedByProgramAction] =
                       assignedValue;
@@ -177,9 +179,9 @@ class ProgramRuleEngine {
                 message += ' $data';
               }
               errorOrWarningMessage[dataItemTargetedByProgramAction] = {
-                  message: message,
-                  isOnComplete: isOnComplete,
-                  messageType: messageType,
+                message: message,
+                isOnComplete: isOnComplete,
+                messageType: messageType,
               };
             }
           }

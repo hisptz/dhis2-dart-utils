@@ -95,13 +95,13 @@ class MathematicalOperationsUtil {
     if (!hasOperator) {
       try {
         var value = expression.trim();
-        return value;
-      } catch (e) {
-        return expression.toLowerCase() == 'true'
+        return value.toLowerCase() == 'true'
             ? true
-            : expression.toLowerCase() == 'false'
+            : value.toLowerCase() == 'false'
                 ? false
-                : expression;
+                : value;
+      } catch (e) {
+        return expression;
       }
     }
     return resolveToNumber == true ? 0 : false;
