@@ -65,6 +65,8 @@ class MathematicalOperationsUtil {
       int operatorIndex = expression.indexOf(logicalOperator);
       if (operatorIndex >= 0) {
         hasOperator = true;
+
+        // TODO add a check for 0 and 1 in comparison
         String leftOperand = expression.substring(0, operatorIndex).trim();
         String rightOperand =
             expression.substring(operatorIndex + logicalOperator.length).trim();
@@ -74,12 +76,18 @@ class MathematicalOperationsUtil {
 
         var sanitizedLeftValue = sanitizeStringValue(leftValue);
         var sanitizedRightValue = sanitizeStringValue(rightValue);
-        var val = evaluateLogicalOperation(
-          operator: logicalOperator,
-          leftOperand: sanitizedLeftValue,
-          rightOperand: sanitizedRightValue,
-        );
-        return val;
+
+        try {
+          var val = evaluateLogicalOperation(
+            operator: logicalOperator,
+            leftOperand: sanitizedLeftValue,
+            rightOperand: sanitizedRightValue,
+          );
+          return val;
+        } catch (e) {
+          print('Error: $e');
+          return false;
+        }
       }
     }
     if (expression.contains('!')) {
