@@ -153,6 +153,24 @@ class MathematicalOperationsUtil {
     required dynamic leftOperand,
     required dynamic rightOperand,
   }) {
+    // check for 1 and 0 used together with boolean operators
+    if ([leftOperand, rightOperand]
+            .any((operand) => [0.0, 1.0].contains(operand)) &&
+        [leftOperand, rightOperand]
+            .any((operand) => ['true', 'false'].contains('$operand'))) {
+      leftOperand = leftOperand.runtimeType == double
+          ? leftOperand == 1.0
+              ? "true"
+              : "false"
+          : leftOperand;
+
+      rightOperand = rightOperand.runtimeType == double
+          ? rightOperand == 1.0
+              ? "true"
+              : "false"
+          : rightOperand;
+    }
+
     switch (operator) {
       case '>':
         return leftOperand > rightOperand;
