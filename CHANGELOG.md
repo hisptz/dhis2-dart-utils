@@ -1,3 +1,10 @@
+## 1.1.16
+
+- Improvement: improved the program rule evaluations by:
+  - Supporting sorting of program rules by priorities
+  - Implemented casting of 1's and 0's on the logical operations with boolean values
+  - Fixed the bugs with logical operators in the program rules evaluations
+
 ## 1.1.15
 
 - Bugfix: fixed the bug with d2:hasValue operator and boolean handling
