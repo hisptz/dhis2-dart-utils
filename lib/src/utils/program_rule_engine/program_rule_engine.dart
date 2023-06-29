@@ -41,6 +41,8 @@ class ProgramRuleEngine {
     var hiddenProgramStages = {};
     var errorOrWarningMessage = {};
 
+    programRules = _sortProgramRulesByPriority(programRules);
+
     if (programRules.isNotEmpty) {
       for (ProgramRule programRule in programRules) {
         String condition = programRule.condition ?? '';
@@ -280,5 +282,25 @@ class ProgramRuleEngine {
     }
 
     return expression;
+  }
+
+  ///
+  /// `ProgramRuleEngine._sortProgramRulesByPriority` is a  private helper function that sorts the program rules by priority
+  /// The function accepts a `List` of `ProgramRule` and returns a sorted `List` of `ProgramRule`
+  /// The function returns a sorted `List` of `ProgramRule`
+  ///
+  static List<ProgramRule> _sortProgramRulesByPriority(
+      List<ProgramRule> programRules) {
+    var prioritizedProgramRules = programRules
+        .where((programRule) => programRule.priority != null)
+        .toList();
+    prioritizedProgramRules.sort((firstProgramRule, secondProgramRule) =>
+        firstProgramRule.priority!.compareTo(secondProgramRule.priority!));
+    return [
+      ...prioritizedProgramRules,
+      ...(programRules
+          .where((programRule) => programRule.priority == null)
+          .toList())
+    ];
   }
 }

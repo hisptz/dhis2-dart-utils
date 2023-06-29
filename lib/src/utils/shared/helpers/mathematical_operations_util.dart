@@ -65,6 +65,8 @@ class MathematicalOperationsUtil {
       int operatorIndex = expression.indexOf(logicalOperator);
       if (operatorIndex >= 0) {
         hasOperator = true;
+
+        // TODO add a check for 0 and 1 in comparison
         String leftOperand = expression.substring(0, operatorIndex).trim();
         String rightOperand =
             expression.substring(operatorIndex + logicalOperator.length).trim();
@@ -74,12 +76,18 @@ class MathematicalOperationsUtil {
 
         var sanitizedLeftValue = sanitizeStringValue(leftValue);
         var sanitizedRightValue = sanitizeStringValue(rightValue);
-        var val = evaluateLogicalOperation(
-          operator: logicalOperator,
-          leftOperand: sanitizedLeftValue,
-          rightOperand: sanitizedRightValue,
-        );
-        return val;
+
+        try {
+          var val = evaluateLogicalOperation(
+            operator: logicalOperator,
+            leftOperand: sanitizedLeftValue,
+            rightOperand: sanitizedRightValue,
+          );
+          return val;
+        } catch (e) {
+          print('Error: $e');
+          return false;
+        }
       }
     }
     if (expression.contains('!')) {
@@ -145,6 +153,24 @@ class MathematicalOperationsUtil {
     required dynamic leftOperand,
     required dynamic rightOperand,
   }) {
+    // check for 1 and 0 used together with boolean operators
+    if ([leftOperand, rightOperand]
+            .any((operand) => [0.0, 1.0].contains(operand)) &&
+        [leftOperand, rightOperand]
+            .any((operand) => ['true', 'false'].contains('$operand'))) {
+      leftOperand = leftOperand.runtimeType == double
+          ? leftOperand == 1.0
+              ? "true"
+              : "false"
+          : leftOperand;
+
+      rightOperand = rightOperand.runtimeType == double
+          ? rightOperand == 1.0
+              ? "true"
+              : "false"
+          : rightOperand;
+    }
+
     switch (operator) {
       case '>':
         return leftOperand > rightOperand;
