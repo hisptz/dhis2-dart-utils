@@ -20,12 +20,15 @@ class ProgramRule {
   /// This is a list of `ProgramRuleAction` that are performed when the `ProgramRule` condition is `true`.
   List<ProgramRuleAction>? programRuleActions;
 
+  int? priority;
+
   ///
   /// This is a default constructor for `ProgramRule`
   ///
   ProgramRule({
     required this.id,
     required this.program,
+    this.priority,
     this.condition = '',
     this.programRuleActions = const [],
   });
@@ -38,6 +41,7 @@ class ProgramRule {
     data['id'] = id;
     data['program'] = program;
     data['condition'] = condition;
+    data['priority'] = priority;
     return data;
   }
 
@@ -49,6 +53,9 @@ class ProgramRule {
     id = mapData['id'];
     program = mapData['program'];
     condition = mapData['condition'];
+    priority = mapData['priority'] != null
+        ? int.parse(mapData['priority'].toString())
+        : mapData['priority'];
     programRuleActions =
         ((mapData['programRuleActions'] as List<Map<String, dynamic>>?) ?? [])
             .map((programRuleAction) =>
@@ -67,6 +74,9 @@ class ProgramRule {
       id: json['id'],
       program: program['id'] ?? '',
       condition: json['condition'],
+      priority: json['priority'] != null
+          ? int.parse(json['priority'].toString())
+          : null,
     );
   }
 
