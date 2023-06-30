@@ -216,42 +216,42 @@ class ProgramRuleEngine {
     String sanitizedExpression = expression;
 
     for (ProgramRuleVariable programRuleVariable in programRuleVariables) {
-      String ruleVariableDataElementAttributeId =
-          programRuleVariable.dataElement != null &&
-                  programRuleVariable.dataElement != ''
-              ? programRuleVariable.dataElement!
-              : programRuleVariable.trackedEntityAttribute != null &&
-                      programRuleVariable.trackedEntityAttribute != ''
-                  ? programRuleVariable.trackedEntityAttribute!
-                  : '';
       var value = "''";
-      if (dataObject.isNotEmpty &&
-          dataObject[ruleVariableDataElementAttributeId] != null) {
-        try {
-          double doubleValue = double.parse(
-            dataObject[ruleVariableDataElementAttributeId] ?? '0.0',
-          );
-          value = doubleValue as String;
-        } catch (error) {
-          value = "${dataObject[ruleVariableDataElementAttributeId]}";
-          if (dataObject[ruleVariableDataElementAttributeId] != '') {
+      if (programRuleVariable.name != null &&
+          sanitizedExpression.contains(programRuleVariable.name!)) {
+        String ruleVariableDataElementAttributeId =
+            programRuleVariable.dataElement != null &&
+                    programRuleVariable.dataElement != ''
+                ? programRuleVariable.dataElement!
+                : programRuleVariable.trackedEntityAttribute != null &&
+                        programRuleVariable.trackedEntityAttribute != ''
+                    ? programRuleVariable.trackedEntityAttribute!
+                    : '';
+
+        if (dataObject.isNotEmpty &&
+            dataObject[ruleVariableDataElementAttributeId] != null) {
+          try {
+            double doubleValue = double.parse(
+              dataObject[ruleVariableDataElementAttributeId] ?? '0.0',
+            );
+            value = doubleValue as String;
+          } catch (error) {
             value = "${dataObject[ruleVariableDataElementAttributeId]}";
+            if (dataObject[ruleVariableDataElementAttributeId] != '') {
+              value = "${dataObject[ruleVariableDataElementAttributeId]}";
+            }
           }
-        }
-
-        sanitizedExpression = escapeStandardDhis2Variables(
-          dataObject: dataObject,
-          expression: sanitizedExpression,
-        );
-
-        if (programRuleVariable.name != null &&
-            sanitizedExpression.contains(programRuleVariable.name!)) {
-          sanitizedExpression = ProgramRuleHelper.sanitizeExpression(
+          sanitizedExpression = escapeStandardDhis2Variables(
+            dataObject: dataObject,
             expression: sanitizedExpression,
-            programRuleVariable: programRuleVariable.name ?? '',
-            value: value,
           );
         }
+
+        sanitizedExpression = ProgramRuleHelper.sanitizeExpression(
+          expression: sanitizedExpression,
+          programRuleVariable: programRuleVariable.name!,
+          value: value,
+        );
       }
     }
     return sanitizedExpression;

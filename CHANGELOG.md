@@ -1,3 +1,7 @@
+## 1.1.17
+
+- Improvement: improved the performance of decoding of program rule variables
+
 ## 1.1.16
 
 - Improvement: improved the program rule evaluations by:
