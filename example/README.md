@@ -7,6 +7,7 @@
 - [UID generator](#uid)
 - [Program Indicator](#programIndicator)
 - [Program Rule](#programRule)
+- [Http Services](#httpServices)
 - [Indicator](#indicator)
 - [Validation Rules](#validation)
 
@@ -140,6 +141,88 @@ void main() {
       programRuleVariables: programRuleVariables,
       dataObject: programRuleEngineDataObject,
     )
+}
+```
+
+## Http Services <a name = "httpServices"></a>
+
+```
+import 'dart:convert';
+import 'dart:math';
+import 'package:dhis2_dart_utils/dhis2_dart_utils.dart';
+
+void main() {
+    // Credentials
+    Map<String, dynamic> credentials = {
+    "username": "system",
+    "password": "District1#",
+    "serverUrl": "https://dev.hisptz.com/dhis2/"
+  };
+    //Query Parameters
+  Map<String, dynamic> queryParameters = {};
+
+//Api Endpoint
+  String url = "api/dataStore/httpTests/${Random().nextInt(77)}";
+
+//Body
+  Map<String, dynamic> body = {
+    "id": Random().nextInt(77),
+    "name": "Testing Http Service functions",
+  };
+
+    String domainHost = HttpService(
+                    username: credentials["username"],
+                    password: credentials["password"],
+                    serverUrl: credentials["serverUrl"])
+                .domainHost,
+
+    String domainPath = HttpService(
+                    username: credentials["username"],
+                    password: credentials["password"],
+                    serverUrl: credentials["serverUrl"])
+                .domainPath,
+
+    final uri = HttpService(
+                username: credentials["username"],
+                password: credentials["password"],
+                serverUrl: credentials["serverUrl"])
+            .getApiUrl(url, queryParameters: queryParameters);
+
+     final response = await HttpService(
+                username: credentials["username"],
+                password: credentials["password"],
+                serverUrl: credentials["serverUrl"])
+            .httpPost(url, jsonEncode(body));
+
+      final response = await HttpService(
+                username: credentials["username"],
+                password: credentials["password"],
+                serverUrl: credentials["serverUrl"])
+            .httpGet(url);
+
+      final response = await HttpService(
+                username: credentials["username"],
+                password: credentials["password"],
+                serverUrl: credentials["serverUrl"])
+            .httpDelete(url);
+
+    final response = await HttpService(
+                username: credentials["username"],
+                password: credentials["password"],
+                serverUrl: credentials["serverUrl"])
+            .httpPut(url, jsonEncode(body));
+
+      final response = await HttpService(
+                username: credentials["username"],
+                password: credentials["password"],
+                serverUrl: credentials["serverUrl"])
+            .httpGetPagination(url, queryParameters);
+
+    String serverUrl =  HttpService(
+                  username: credentials["username"],
+                  password: credentials["password"],
+                  serverUrl: credentials["serverUrl"])
+              .toString();
 }
 ```
 
