@@ -13,6 +13,7 @@ Map<String, dynamic> credentials = {
 Map<String, dynamic> queryParameters = {};
 
 String url = "api/dataStore/httpTests/${Random().nextInt(77)}";
+String apiToken = "d2pat_oz1mQxGlckO14bjHvi3r7Or5EOAxCn2K2104519092";
 
 Map<String, dynamic> body = {
   "id": Random().nextInt(77),
@@ -27,7 +28,8 @@ void main() {
             HttpService(
                     username: credentials["username"],
                     password: credentials["password"],
-                    serverUrl: credentials["serverUrl"])
+                    serverUrl: credentials["serverUrl"],
+                    apiToken: apiToken)
                 .domainHost,
             isNotEmpty);
       });
@@ -37,7 +39,8 @@ void main() {
             HttpService(
                     username: credentials["username"],
                     password: credentials["password"],
-                    serverUrl: credentials["serverUrl"])
+                    serverUrl: credentials["serverUrl"],
+                    apiToken: apiToken)
                 .domainPath,
             isNotEmpty);
       });
@@ -48,7 +51,8 @@ void main() {
         final uri = HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl"],
+                apiToken: apiToken)
             .getApiUrl(url, queryParameters: queryParameters);
         expect(uri, uri);
       });
@@ -59,7 +63,8 @@ void main() {
         final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl"],
+                apiToken: apiToken)
             .httpPost(url, jsonEncode(body));
         expect(response.statusCode, 201);
       });
@@ -68,7 +73,8 @@ void main() {
         final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl"],
+                apiToken: apiToken)
             .httpGet(url);
         expect(response.statusCode, 200);
       });
@@ -77,7 +83,8 @@ void main() {
         final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl"],
+                apiToken: apiToken)
             .httpDelete(url);
         expect(response.statusCode, 200);
       });
@@ -86,7 +93,8 @@ void main() {
         final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl"],
+                apiToken: apiToken)
             .httpPut(url, jsonEncode(body));
         expect(response.statusCode, 200);
       });
@@ -95,7 +103,8 @@ void main() {
         final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl"],
+                apiToken: apiToken)
             .httpGetPagination(url, queryParameters);
         expect(response.statusCode, 200);
       });
@@ -106,7 +115,8 @@ void main() {
           HttpService(
                   username: credentials["username"],
                   password: credentials["password"],
-                  serverUrl: credentials["serverUrl"])
+                  serverUrl: credentials["serverUrl"],
+                  apiToken: apiToken)
               .toString(),
           isNotEmpty);
     });

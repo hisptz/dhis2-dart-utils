@@ -14,35 +14,37 @@ Future<void> main() async {
 
   String url = "api/dataStore/httpTests/${Random().nextInt(77)}";
 
+  String apiToken = "d2pat_oz1mQxGlckO14bjHvi3r7Or5EOAxCn2K2104519092";
+
   Map<String, dynamic> body = {
     "id": Random().nextInt(77),
     "name": "Testing Http Service functions",
   };
 
   print(
-      'Domain Host function returns a string: ${HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"]).domainHost}');
+      'Domain Host function returns a string: ${HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"], apiToken: apiToken).domainHost}');
 
   print(
-      'Domain Path function returns a string: ${HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"]).domainPath}');
+      'Domain Path function returns a string: ${HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"], apiToken: apiToken).domainPath}');
 
   print(
-      'Generate Api Url: ${HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"]).getApiUrl(url, queryParameters: queryParameters)}');
+      'Generate Api Url: ${HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"], apiToken: apiToken).getApiUrl(url, queryParameters: queryParameters)}');
 
   print(
-      'Send POST Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"]).httpPost(url, jsonEncode(body))}');
+      'Send POST Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"], apiToken: apiToken).httpPost(url, jsonEncode(body))}');
 
   print(
-      'Send GET Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"]).httpGet(url)}');
+      'Send GET Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"], apiToken: apiToken).httpGet(url)}');
 
   print(
-      'Send DELETE Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"]).httpDelete(url)}');
+      'Send DELETE Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"], apiToken: apiToken).httpDelete(url)}');
 
   print(
-      'Send PUT Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"]).httpPut(url, jsonEncode(body))}');
+      'Send PUT Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"], apiToken: apiToken).httpPut(url, jsonEncode(body))}');
 
   print(
-      'Send GET Pagination Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"]).httpGetPagination(url, queryParameters)}');
+      'Send GET Pagination Request: ${await HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"], apiToken: apiToken).httpGetPagination(url, queryParameters)}');
 
   print(
-      'Server Url String: ${HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"]).toString()}');
+      'Server Url String: ${HttpService(username: credentials["username"], password: credentials["password"], serverUrl: credentials["serverUrl"], apiToken: apiToken).toString()}');
 }

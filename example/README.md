@@ -164,6 +164,9 @@ void main() {
 //Api Endpoint
   String url = "api/dataStore/httpTests/${Random().nextInt(77)}";
 
+//Api Token
+   String apiToken = "d2pat_oz1mQxGlckO14bjHvi3r7Or5EOAxCn2K2104519092";
+
 //Body
   Map<String, dynamic> body = {
     "id": Random().nextInt(77),
@@ -173,55 +176,69 @@ void main() {
     String domainHost = HttpService(
                     username: credentials["username"],
                     password: credentials["password"],
-                    serverUrl: credentials["serverUrl"])
+                    serverUrl: credentials["serverUrl",
+                    apiToken: apiToken])
                 .domainHost,
 
     String domainPath = HttpService(
                     username: credentials["username"],
                     password: credentials["password"],
-                    serverUrl: credentials["serverUrl"])
+                    serverUrl: credentials["serverUrl",
+                    apiToken: apiToken])
                 .domainPath,
 
     final uri = HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl",
+                apiToken: apiToken])
             .getApiUrl(url, queryParameters: queryParameters);
 
+    //POST Request
      final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl",
+                apiToken: apiToken])
             .httpPost(url, jsonEncode(body));
 
+    //GET Request
       final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl",
+                apiToken: apiToken])
             .httpGet(url);
 
+   //DELETE Request
       final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl",
+                apiToken: apiToken])
             .httpDelete(url);
 
+    //PUT Request
     final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl",
+                apiToken: apiToken])
             .httpPut(url, jsonEncode(body));
 
+    //GET Pagination Request
       final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"])
+                serverUrl: credentials["serverUrl",
+                apiToken: apiToken])
             .httpGetPagination(url, queryParameters);
 
     String serverUrl =  HttpService(
                   username: credentials["username"],
                   password: credentials["password"],
-                  serverUrl: credentials["serverUrl"])
+                  serverUrl: credentials["serverUrl",
+                  apiToken: apiToken])
               .toString();
 }
 ```

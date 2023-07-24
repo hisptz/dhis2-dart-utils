@@ -22,12 +22,15 @@ class HttpService {
   //This is the String of Basic Authorization of the account of the DHIS2 Instance
   String? basicAuth;
 
+  //This is the String of Basic Authorization of the account of the DHIS2 Instance
+  String? apiToken;
+
 //This is the Constructor of the HttpService Class
-  HttpService({
-    required this.username,
-    required this.password,
-    required this.serverUrl,
-  }) {
+  HttpService(
+      {required this.username,
+      required this.password,
+      required this.serverUrl,
+      required this.apiToken}) {
     basicAuth = base64Encode(utf8.encode('$username:$password'));
   }
 
@@ -73,6 +76,7 @@ class HttpService {
       apiUrl,
       headers: {
         HttpHeaders.authorizationHeader: 'Basic $basicAuth',
+        'Authorization': 'ApiToken $apiToken',
         'Content-Type': 'application/json',
       },
       body: body,
@@ -92,6 +96,7 @@ class HttpService {
       apiUrl,
       headers: {
         HttpHeaders.authorizationHeader: 'Basic $basicAuth',
+        'Authorization': 'ApiToken $apiToken',
         'Content-Type': 'application/json',
       },
       body: body,
@@ -108,6 +113,7 @@ class HttpService {
     Uri apiUrl = getApiUrl(url, queryParameters: queryParameters);
     return await http.delete(apiUrl, headers: {
       HttpHeaders.authorizationHeader: 'Basic $basicAuth',
+      'Authorization': 'ApiToken $apiToken',
     });
   }
 
@@ -121,6 +127,7 @@ class HttpService {
     Uri apiUrl = getApiUrl(url, queryParameters: queryParameters);
     return await http.get(apiUrl, headers: {
       HttpHeaders.authorizationHeader: 'Basic $basicAuth',
+      'Authorization': 'ApiToken $apiToken',
     });
   }
 
