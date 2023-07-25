@@ -53,6 +53,7 @@ export './utils/period_engine/constants/relative_period_types.dart'
 /// ENGINE
 ///
 export './utils/core/core.dart' show Core;
+export './utils/http/http.dart' show HttpService;
 export './utils/indicator_engine/indicator_engine.dart' show IndicatorEngine;
 export './utils/validation_rule_engine/validation_rule_engine.dart'
     show ValidationRuleEngine;
