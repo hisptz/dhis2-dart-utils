@@ -2,7 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
@@ -11,13 +10,13 @@ import 'package:http/http.dart' as http;
 ///
 class HttpService {
   //This is the Username of the authorized account of the DHIS2 Instance
-  final String? username;
+  String? username;
 
   //This is the Password of the authorized account of the DHIS2 Instance
-  final String? password;
+  String? password;
 
   //This is the Server Url of the authorized account of the DHIS2 Instance
-  final String? serverUrl;
+  String serverUrl;
 
   //This is the String of Basic Authorization of the account of the DHIS2 Instance
   String? basicAuth;
@@ -27,17 +26,21 @@ class HttpService {
 
 //This is the Constructor of the HttpService Class
   HttpService(
-      {required this.username,
-      required this.password,
-      required this.serverUrl,
-      required this.apiToken}) {
-    basicAuth = base64Encode(utf8.encode('$username:$password'));
+      {this.username, this.password, required this.serverUrl, this.apiToken});
+
+//This function generates an Authorizaton Header
+//Depending on the provided inputs, It returns either a Api Token or a Basic Authentication
+//High Priority is given to Api Token Authentication
+  String getAuthorizationHeader() {
+    return apiToken != null
+        ? 'ApiToken ' + apiToken!
+        : 'Basic ' + base64Encode(utf8.encode('$username:$password'));
   }
 
 //This function creates a domainPath with proper syntax
   //This method accepts serverUrl and returns a String
   String get domainPath {
-    return serverUrl!
+    return serverUrl
         .replaceAll('https://', '')
         .replaceAll('http://', '')
         .split('/')
@@ -49,7 +52,7 @@ class HttpService {
 //This function creates a domainHost with proper syntax
 //This method accepts serverUrl and returns a String
   String get domainHost {
-    return serverUrl!
+    return serverUrl
         .replaceAll('https://', '')
         .replaceAll('http://', '')
         .split('/')
@@ -75,8 +78,7 @@ class HttpService {
     return http.post(
       apiUrl,
       headers: {
-        HttpHeaders.authorizationHeader: 'Basic $basicAuth',
-        'Authorization': 'ApiToken $apiToken',
+        'Authorization': getAuthorizationHeader(),
         'Content-Type': 'application/json',
       },
       body: body,
@@ -95,8 +97,7 @@ class HttpService {
     return http.put(
       apiUrl,
       headers: {
-        HttpHeaders.authorizationHeader: 'Basic $basicAuth',
-        'Authorization': 'ApiToken $apiToken',
+        'Authorization': getAuthorizationHeader(),
         'Content-Type': 'application/json',
       },
       body: body,
@@ -112,8 +113,7 @@ class HttpService {
   }) async {
     Uri apiUrl = getApiUrl(url, queryParameters: queryParameters);
     return await http.delete(apiUrl, headers: {
-      HttpHeaders.authorizationHeader: 'Basic $basicAuth',
-      'Authorization': 'ApiToken $apiToken',
+      'Authorization': getAuthorizationHeader(),
     });
   }
 
@@ -126,8 +126,7 @@ class HttpService {
   }) async {
     Uri apiUrl = getApiUrl(url, queryParameters: queryParameters);
     return await http.get(apiUrl, headers: {
-      HttpHeaders.authorizationHeader: 'Basic $basicAuth',
-      'Authorization': 'ApiToken $apiToken',
+      'Authorization': getAuthorizationHeader(),
     });
   }
 

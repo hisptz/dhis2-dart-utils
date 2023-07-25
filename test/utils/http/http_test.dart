@@ -12,7 +12,7 @@ Map<String, dynamic> credentials = {
 
 Map<String, dynamic> queryParameters = {};
 
-String url = "api/dataStore/httpTests/${Random().nextInt(77)}";
+String url = "api/dataStore/httpTests/${Random().nextInt(777)}";
 String apiToken = "d2pat_oz1mQxGlckO14bjHvi3r7Or5EOAxCn2K2104519092";
 
 Map<String, dynamic> body = {
@@ -25,22 +25,14 @@ void main() {
     group('Domain Host and Path tests: ', () {
       test('Domain Host function returns a string', () {
         expect(
-            HttpService(
-                    username: credentials["username"],
-                    password: credentials["password"],
-                    serverUrl: credentials["serverUrl"],
-                    apiToken: apiToken)
+            HttpService(serverUrl: credentials["serverUrl"], apiToken: apiToken)
                 .domainHost,
             isNotEmpty);
       });
 
       test('Domain Path function returns a string', () {
         expect(
-            HttpService(
-                    username: credentials["username"],
-                    password: credentials["password"],
-                    serverUrl: credentials["serverUrl"],
-                    apiToken: apiToken)
+            HttpService(serverUrl: credentials["serverUrl"], apiToken: apiToken)
                 .domainPath,
             isNotEmpty);
       });
@@ -48,12 +40,9 @@ void main() {
 
     group('ApiUrl Tests', () {
       test('Get ApiURl function returns a Uri', () {
-        final uri = HttpService(
-                username: credentials["username"],
-                password: credentials["password"],
-                serverUrl: credentials["serverUrl"],
-                apiToken: apiToken)
-            .getApiUrl(url, queryParameters: queryParameters);
+        final uri =
+            HttpService(serverUrl: credentials["serverUrl"], apiToken: apiToken)
+                .getApiUrl(url, queryParameters: queryParameters);
         expect(uri, uri);
       });
     });
@@ -61,30 +50,23 @@ void main() {
     group('CRUD Service Tests', () {
       test('Http Post function returns a 201 Status Code', () async {
         final response = await HttpService(
-                username: credentials["username"],
-                password: credentials["password"],
-                serverUrl: credentials["serverUrl"],
-                apiToken: apiToken)
-            .httpPost(url, jsonEncode(body));
+          username: credentials["username"],
+          password: credentials["password"],
+          serverUrl: credentials["serverUrl"],
+        ).httpPost(url, jsonEncode(body));
         expect(response.statusCode, 201);
       });
 
       test('Http Get function returns a 200 Status Code', () async {
         final response = await HttpService(
-                username: credentials["username"],
-                password: credentials["password"],
-                serverUrl: credentials["serverUrl"],
-                apiToken: apiToken)
+                serverUrl: credentials["serverUrl"], apiToken: apiToken)
             .httpGet(url);
         expect(response.statusCode, 200);
       });
 
       test('Http Delete function returns a 200 Status Code', () async {
         final response = await HttpService(
-                username: credentials["username"],
-                password: credentials["password"],
-                serverUrl: credentials["serverUrl"],
-                apiToken: apiToken)
+                serverUrl: credentials["serverUrl"], apiToken: apiToken)
             .httpDelete(url);
         expect(response.statusCode, 200);
       });
@@ -93,18 +75,14 @@ void main() {
         final response = await HttpService(
                 username: credentials["username"],
                 password: credentials["password"],
-                serverUrl: credentials["serverUrl"],
-                apiToken: apiToken)
+                serverUrl: credentials["serverUrl"])
             .httpPut(url, jsonEncode(body));
         expect(response.statusCode, 200);
       });
 
       test('Http Get Pagination function returns a 200 Status Code', () async {
         final response = await HttpService(
-                username: credentials["username"],
-                password: credentials["password"],
-                serverUrl: credentials["serverUrl"],
-                apiToken: apiToken)
+                serverUrl: credentials["serverUrl"], apiToken: apiToken)
             .httpGetPagination(url, queryParameters);
         expect(response.statusCode, 200);
       });
@@ -112,11 +90,7 @@ void main() {
 
     test('To String function returns a String', () {
       expect(
-          HttpService(
-                  username: credentials["username"],
-                  password: credentials["password"],
-                  serverUrl: credentials["serverUrl"],
-                  apiToken: apiToken)
+          HttpService(serverUrl: credentials["serverUrl"], apiToken: apiToken)
               .toString(),
           isNotEmpty);
     });
