@@ -28,13 +28,13 @@ class HttpService {
   HttpService(
       {this.username, this.password, required this.serverUrl, this.apiToken});
 
-//This function generates an Authorizaton Header
+//This function generates an Authorization Header
 //Depending on the provided inputs, It returns either a Api Token or a Basic Authentication
 //High Priority is given to Api Token Authentication
-  String getAuthorizationHeader() {
+  String _getAuthorizationHeader() {
     return apiToken != null
-        ? 'ApiToken ' + apiToken!
-        : 'Basic ' + base64Encode(utf8.encode('$username:$password'));
+        ? 'ApiToken ${apiToken!}'
+        : 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
   }
 
 //This function creates a domainPath with proper syntax
@@ -78,7 +78,7 @@ class HttpService {
     return http.post(
       apiUrl,
       headers: {
-        'Authorization': getAuthorizationHeader(),
+        'Authorization': _getAuthorizationHeader(),
         'Content-Type': 'application/json',
       },
       body: body,
@@ -97,7 +97,7 @@ class HttpService {
     return http.put(
       apiUrl,
       headers: {
-        'Authorization': getAuthorizationHeader(),
+        'Authorization': _getAuthorizationHeader(),
         'Content-Type': 'application/json',
       },
       body: body,
@@ -113,7 +113,7 @@ class HttpService {
   }) async {
     Uri apiUrl = getApiUrl(url, queryParameters: queryParameters);
     return await http.delete(apiUrl, headers: {
-      'Authorization': getAuthorizationHeader(),
+      'Authorization': _getAuthorizationHeader(),
     });
   }
 
@@ -126,7 +126,7 @@ class HttpService {
   }) async {
     Uri apiUrl = getApiUrl(url, queryParameters: queryParameters);
     return await http.get(apiUrl, headers: {
-      'Authorization': getAuthorizationHeader(),
+      'Authorization': _getAuthorizationHeader(),
     });
   }
 
