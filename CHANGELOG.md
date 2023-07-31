@@ -1,3 +1,7 @@
+## 1.1.18
+
+- Added HTTP request support with token authorization, enabling seamless communication with external APIs and providing enhanced security through Personal Access Tokens.
+
 ## 1.1.17
 
 - Improvement: improved the performance of decoding of program rule variables
