@@ -12,7 +12,7 @@
 
 ## Features
 
-Available features in this util library are:
+This util library offers the following features:
 
 <ul>
   <li>Generator function for DHIS2 uid.</li>

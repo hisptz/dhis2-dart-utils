@@ -1,3 +1,7 @@
+## 1.1.19
+
+- Improvement:updated the README's util features section.
+
 ## 1.1.18
 
 - Added HTTP request support with token authorization, enabling seamless communication with external APIs and providing enhanced security through Personal Access Tokens.
