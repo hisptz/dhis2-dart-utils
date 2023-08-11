@@ -12,13 +12,14 @@
 
 ## Features
 
-Available features in this util libary are:
+Available features in this util library are:
 
 <ul>
   <li>Generator function for DHIS2 uid.</li>
-  <li>Utilities, data models and constants for DHI2 periods.</li>
-  <li>DHI2 Program indicator engine.</li>
-  <li>DHI2 Program rule engine.</li>
+  <li>Utilities, data models and constants for DHIS2 periods.</li>
+  <li>DHIS2 Program indicator engine.</li>
+  <li>DHIS2 Program rule engine.</li>
+  <li>DHIS2 Program HTTP service.</li>
 </ul>
 
 ## Getting Started <a name = "getting_started"></a>
