@@ -18,9 +18,9 @@ class Dhis2TrackedEntityInstance {
   /// This is the DHIS2 id for the `Dhis2OrganisationUnit` to which the event occured
   String? orgUnit;
 
-  /// This is the coordinates for the tracked entity instance
+  /// This is the coordinate for the tracked entity instance
   /// It is formatted as `latitude,longitude`
-  String? coordinates;
+  String? coordinate;
 
   ///  This is the list of `Dhis2TrackedEntityInstanceValue` associated with the TrackedEntityInstance
   List<Dhis2TrackedEntityInstanceValue>? attributes;
@@ -35,7 +35,7 @@ class Dhis2TrackedEntityInstance {
     required this.orgUnit,
     this.attributes = const [],
     this.syncStatus = 'synced',
-    this.coordinates = '',
+    this.coordinate = '',
   });
 
   /// This is a getter for the offline `syncStatus` of a `Dhis2TrackedEntityInstance`
@@ -49,7 +49,7 @@ class Dhis2TrackedEntityInstance {
     mapData['orgUnit'] = orgUnit;
     mapData['syncStatus'] = syncStatus;
     mapData['attributes'] = attributes;
-    mapData['coordinates'] = coordinates;
+    mapData['coordinate'] = coordinate;
     return mapData;
   }
 
@@ -60,7 +60,7 @@ class Dhis2TrackedEntityInstance {
     orgUnit = mapData['orgUnit'] ?? '';
     syncStatus = mapData['syncStatus'] ?? '';
     attributes = mapData['attributes'] ?? [];
-    coordinates = mapData['coordinates'] ?? '';
+    coordinate = mapData['coordinate'] ?? '';
   }
 
   /// `Dhis2TrackedEntityInstance.fromJson` is a factory constructor that generated a `Dhis2TrackedEntityInstance` from a `dynamic` json
@@ -72,9 +72,12 @@ class Dhis2TrackedEntityInstance {
       trackedEntityType: json['trackedEntityType'] ?? '',
       orgUnit: json['orgUnit'] ?? '',
       attributes: getAttributeValues(json, trackedEntityInstanceId),
-      coordinates: CoordinatesHelpers.getStringifiedCoordinates(
-        json['geometry'] ?? {},
-      ),
+      coordinate: json['coordinate'] != null
+          ? CoordinatesHelpers.getStringifiedCoordinatesFromCoordinatesObject(
+              json['coordinate'])
+          : CoordinatesHelpers.getStringifiedCoordinatesFromGeometry(
+              json['geometry'] ?? {},
+            ),
     );
   }
 

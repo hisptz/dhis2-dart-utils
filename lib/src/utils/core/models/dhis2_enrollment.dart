@@ -41,9 +41,9 @@ class Dhis2Enrollment {
   /// This is the time stamp for the last updating time of the `Dhis2Enrollment`
   String? lastUpdated;
 
-  /// This is the coordinates for the enrollment
+  /// This is the coordinate for the enrollment
   /// It is formatted as `latitude,longitude`
-  String? coordinates;
+  String? coordinate;
 
   // This String value in case of searching criteria for TEI through enrollment
   String? searchableValue;
@@ -61,7 +61,7 @@ class Dhis2Enrollment {
     this.lastUpdated,
     this.syncStatus = 'synced',
     this.searchableValue = '',
-    this.coordinates = '',
+    this.coordinate = '',
   });
 
   /// This is a getter for the offline `syncStatus` of a `Dhis2Enrollment`
@@ -82,7 +82,7 @@ class Dhis2Enrollment {
     data['searchableValue'] = searchableValue;
     data['created'] = created ?? now;
     data['lastUpdated'] = lastUpdated ?? now;
-    data['coordinates'] = coordinates;
+    data['coordinate'] = coordinate;
     return data;
   }
 
@@ -99,7 +99,7 @@ class Dhis2Enrollment {
     searchableValue = mapData['searchableValue'];
     created = mapData['created'];
     lastUpdated = mapData['lastUpdated'];
-    coordinates = mapData['coordinates'];
+    coordinate = mapData['coordinate'];
   }
 
   /// `Dhis2Enrollment.fromJson` is a factory constructor that generated a `Dhis2Enrollment` from a `dynamic` json
@@ -118,9 +118,12 @@ class Dhis2Enrollment {
       created: json['created'] ?? now,
       lastUpdated: json['lastUpdated'] ?? now,
       searchableValue: json['searchableValue'] ?? '',
-      coordinates: CoordinatesHelpers.getStringifiedCoordinates(
-        json['geometry'] ?? {},
-      ),
+      coordinate: json['coordinate'] != null
+          ? CoordinatesHelpers.getStringifiedCoordinatesFromCoordinatesObject(
+              json['coordinate'])
+          : CoordinatesHelpers.getStringifiedCoordinatesFromGeometry(
+              json['geometry'] ?? {},
+            ),
     );
   }
 
