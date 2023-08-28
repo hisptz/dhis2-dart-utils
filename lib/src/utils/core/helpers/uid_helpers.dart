@@ -5,8 +5,7 @@ import 'dart:math';
 
 /// Collection of helpers for generation of DHIS2 uid
 /// The class exposes a single static method `generateUid() `that generates the random id
-///
-///
+
 class UidHelpers {
   /// This is a method for generating random uids with DHIS2 requirements
   /// Uid returned needs to be of 11  alphanumeric character length starting with an alphabet
