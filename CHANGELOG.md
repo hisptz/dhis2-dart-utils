@@ -1,3 +1,8 @@
+## 1.1.20
+
+- Improvement: Improvement on the models for DHIS2 events, enrollments and tracked entity instance
+  - Added coordinate attribute that stringifies the geometry object given that it's of type Point
+
 ## 1.1.19
 
 - Improvement:updated the README's util features section.

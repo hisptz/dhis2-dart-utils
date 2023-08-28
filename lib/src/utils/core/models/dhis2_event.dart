@@ -1,6 +1,8 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'package:dhis2_dart_utils/src/utils/core/helpers/coordinates_helpers.dart';
+
 import 'dhis2_event_data_value.dart';
 
 ///
@@ -45,6 +47,10 @@ class Dhis2Event {
   ///  It holds two values, `synced` and `not-synced`
   String? syncStatus;
 
+  /// This is the coordinate for the event
+  /// It is formatted as `latitude,longitude`
+  String? coordinate;
+
   ///  This is the list of `Dhis2EventDataValue` associated with the event
   List<Dhis2EventDataValue>? dataValues;
 
@@ -60,6 +66,7 @@ class Dhis2Event {
     this.storedBy = '',
     this.completedDate = '',
     this.syncStatus = 'synced',
+    this.coordinate = '',
     this.dataValues = const [],
   }) {
     id = event;
@@ -82,6 +89,7 @@ class Dhis2Event {
     data['storedBy'] = storedBy;
     data['completedDate'] = completedDate;
     data['syncStatus'] = syncStatus;
+    data['coordinate'] = coordinate;
     return data;
   }
 
@@ -99,6 +107,7 @@ class Dhis2Event {
     completedDate = (mapData['completedDate'] ?? '').split('T')[0];
     syncStatus = mapData['syncStatus'] ?? '';
     dataValues = mapData['dataValues'] ?? [];
+    coordinate = mapData['coordinate'] ?? '';
   }
 
   /// `Dhis2Event.fromJson` is a factory constructor that generated a `Dhis2Event` from a `dynamic` json
@@ -118,6 +127,12 @@ class Dhis2Event {
       completedDate: json['completedDate'] ?? '',
       syncStatus: json['syncStatus'] ?? 'synced',
       dataValues: getDataValues(json, event),
+      coordinate: json['coordinate'] != null
+          ? CoordinatesHelpers.getStringifiedCoordinatesFromCoordinatesObject(
+              json['coordinate'])
+          : CoordinatesHelpers.getStringifiedCoordinatesFromGeometry(
+              json['geometry'] ?? {},
+            ),
     );
   }
 
