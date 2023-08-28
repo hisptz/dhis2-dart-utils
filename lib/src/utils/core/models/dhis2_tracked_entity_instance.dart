@@ -1,6 +1,8 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'package:dhis2_dart_utils/src/utils/core/helpers/coordinates_helpers.dart';
+
 import 'dhis2_tracked_entity_instance_value.dart';
 
 ///
@@ -16,6 +18,10 @@ class Dhis2TrackedEntityInstance {
   /// This is the DHIS2 id for the `Dhis2OrganisationUnit` to which the event occured
   String? orgUnit;
 
+  /// This is the coordinates for the tracked entity instance
+  /// It is formatted as `latitude,longitude`
+  String? coordinates;
+
   ///  This is the list of `Dhis2TrackedEntityInstanceValue` associated with the TrackedEntityInstance
   List<Dhis2TrackedEntityInstanceValue>? attributes;
 
@@ -29,6 +35,7 @@ class Dhis2TrackedEntityInstance {
     required this.orgUnit,
     this.attributes = const [],
     this.syncStatus = 'synced',
+    this.coordinates = '',
   });
 
   /// This is a getter for the offline `syncStatus` of a `Dhis2TrackedEntityInstance`
@@ -42,6 +49,7 @@ class Dhis2TrackedEntityInstance {
     mapData['orgUnit'] = orgUnit;
     mapData['syncStatus'] = syncStatus;
     mapData['attributes'] = attributes;
+    mapData['coordinates'] = coordinates;
     return mapData;
   }
 
@@ -52,6 +60,7 @@ class Dhis2TrackedEntityInstance {
     orgUnit = mapData['orgUnit'] ?? '';
     syncStatus = mapData['syncStatus'] ?? '';
     attributes = mapData['attributes'] ?? [];
+    coordinates = mapData['coordinates'] ?? '';
   }
 
   /// `Dhis2TrackedEntityInstance.fromJson` is a factory constructor that generated a `Dhis2TrackedEntityInstance` from a `dynamic` json
@@ -62,14 +71,17 @@ class Dhis2TrackedEntityInstance {
       syncStatus: json['syncStatus'] ?? 'synced',
       trackedEntityType: json['trackedEntityType'] ?? '',
       orgUnit: json['orgUnit'] ?? '',
-      attributes: getAtributeValues(json, trackedEntityInstanceId),
+      attributes: getAttributeValues(json, trackedEntityInstanceId),
+      coordinates: CoordinatesHelpers.getStringifiedCoordinates(
+        json['geometry'] ?? {},
+      ),
     );
   }
 
   /// This is a method that gets a `List` of all `Dhis2TrackedEntityInstanceValue` associate with a given `Dhis2TrackedEntityInstance`
   /// The method accepts a `dynamic` attribute json and `String` id for the TEI
   /// The method return a `List<Dhis2TrackedEntityInstanceValue>`
-  static List<Dhis2TrackedEntityInstanceValue> getAtributeValues(
+  static List<Dhis2TrackedEntityInstanceValue> getAttributeValues(
     dynamic json,
     String trackedEntityInstanceId,
   ) {

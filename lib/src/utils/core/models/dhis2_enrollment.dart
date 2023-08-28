@@ -1,6 +1,8 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'package:dhis2_dart_utils/src/utils/core/helpers/coordinates_helpers.dart';
+
 ///
 /// `Dhis2Enrollment` is a data model class for the DHIS2 enrollment metadata
 ///
@@ -39,7 +41,11 @@ class Dhis2Enrollment {
   /// This is the time stamp for the last updating time of the `Dhis2Enrollment`
   String? lastUpdated;
 
-  // This String value in case of searching ceriterial for TEI throug enrollment
+  /// This is the coordinates for the enrollment
+  /// It is formatted as `latitude,longitude`
+  String? coordinates;
+
+  // This String value in case of searching criteria for TEI through enrollment
   String? searchableValue;
 
   /// This is the default constructor for the `Dhis2Enrollment`
@@ -55,6 +61,7 @@ class Dhis2Enrollment {
     this.lastUpdated,
     this.syncStatus = 'synced',
     this.searchableValue = '',
+    this.coordinates = '',
   });
 
   /// This is a getter for the offline `syncStatus` of a `Dhis2Enrollment`
@@ -75,6 +82,7 @@ class Dhis2Enrollment {
     data['searchableValue'] = searchableValue;
     data['created'] = created ?? now;
     data['lastUpdated'] = lastUpdated ?? now;
+    data['coordinates'] = coordinates;
     return data;
   }
 
@@ -91,6 +99,7 @@ class Dhis2Enrollment {
     searchableValue = mapData['searchableValue'];
     created = mapData['created'];
     lastUpdated = mapData['lastUpdated'];
+    coordinates = mapData['coordinates'];
   }
 
   /// `Dhis2Enrollment.fromJson` is a factory constructor that generated a `Dhis2Enrollment` from a `dynamic` json
@@ -98,17 +107,21 @@ class Dhis2Enrollment {
   factory Dhis2Enrollment.fromJson(dynamic json) {
     var now = DateTime.now().toIso8601String();
     return Dhis2Enrollment(
-        enrollment: json['enrollment'] ?? '',
-        enrollmentDate: "${json['enrollmentDate']}".split('T')[0],
-        incidentDate: "${json['incidentDate']}".split('T')[0],
-        program: json['program'],
-        orgUnit: json['orgUnit'],
-        trackedEntityInstance: json['trackedEntityInstance'],
-        syncStatus: json['syncStatus'] ?? 'synced',
-        status: json['status'],
-        created: json['created'] ?? now,
-        lastUpdated: json['lastUpdated'] ?? now,
-        searchableValue: json['searchableValue'] ?? '');
+      enrollment: json['enrollment'] ?? '',
+      enrollmentDate: "${json['enrollmentDate']}".split('T')[0],
+      incidentDate: "${json['incidentDate']}".split('T')[0],
+      program: json['program'],
+      orgUnit: json['orgUnit'],
+      trackedEntityInstance: json['trackedEntityInstance'],
+      syncStatus: json['syncStatus'] ?? 'synced',
+      status: json['status'],
+      created: json['created'] ?? now,
+      lastUpdated: json['lastUpdated'] ?? now,
+      searchableValue: json['searchableValue'] ?? '',
+      coordinates: CoordinatesHelpers.getStringifiedCoordinates(
+        json['geometry'] ?? {},
+      ),
+    );
   }
 
   /// This is the `toString()` method that return the string representation of the `Dhis2Enrollment`

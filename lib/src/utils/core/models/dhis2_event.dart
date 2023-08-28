@@ -1,6 +1,8 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'package:dhis2_dart_utils/src/utils/core/helpers/coordinates_helpers.dart';
+
 import 'dhis2_event_data_value.dart';
 
 ///
@@ -45,6 +47,10 @@ class Dhis2Event {
   ///  It holds two values, `synced` and `not-synced`
   String? syncStatus;
 
+  /// This is the coordinates for the event
+  /// It is formatted as `latitude,longitude`
+  String? coordinates;
+
   ///  This is the list of `Dhis2EventDataValue` associated with the event
   List<Dhis2EventDataValue>? dataValues;
 
@@ -60,6 +66,7 @@ class Dhis2Event {
     this.storedBy = '',
     this.completedDate = '',
     this.syncStatus = 'synced',
+    this.coordinates = '',
     this.dataValues = const [],
   }) {
     id = event;
@@ -82,6 +89,7 @@ class Dhis2Event {
     data['storedBy'] = storedBy;
     data['completedDate'] = completedDate;
     data['syncStatus'] = syncStatus;
+    data['coordinates'] = coordinates;
     return data;
   }
 
@@ -99,6 +107,7 @@ class Dhis2Event {
     completedDate = (mapData['completedDate'] ?? '').split('T')[0];
     syncStatus = mapData['syncStatus'] ?? '';
     dataValues = mapData['dataValues'] ?? [];
+    coordinates = mapData['coordinates'] ?? '';
   }
 
   /// `Dhis2Event.fromJson` is a factory constructor that generated a `Dhis2Event` from a `dynamic` json
@@ -107,18 +116,20 @@ class Dhis2Event {
   ) {
     String event = json['event'] ?? '';
     return Dhis2Event(
-      event: event,
-      trackedEntityInstance: json['trackedEntityInstance'] ?? '',
-      eventDate: json['eventDate'] ?? '',
-      orgUnit: json['orgUnit'] ?? '',
-      program: json['program'] ?? '',
-      programStage: json['programStage'] ?? '',
-      status: json['status'] ?? '',
-      storedBy: json['storedBy'] ?? '',
-      completedDate: json['completedDate'] ?? '',
-      syncStatus: json['syncStatus'] ?? 'synced',
-      dataValues: getDataValues(json, event),
-    );
+        event: event,
+        trackedEntityInstance: json['trackedEntityInstance'] ?? '',
+        eventDate: json['eventDate'] ?? '',
+        orgUnit: json['orgUnit'] ?? '',
+        program: json['program'] ?? '',
+        programStage: json['programStage'] ?? '',
+        status: json['status'] ?? '',
+        storedBy: json['storedBy'] ?? '',
+        completedDate: json['completedDate'] ?? '',
+        syncStatus: json['syncStatus'] ?? 'synced',
+        dataValues: getDataValues(json, event),
+        coordinates: CoordinatesHelpers.getStringifiedCoordinates(
+          json['geometry'] ?? {},
+        ));
   }
 
   /// This is a method that gets a `List` of all `Dhis2EventDataValue` associate with a given `Dhis2Event`
