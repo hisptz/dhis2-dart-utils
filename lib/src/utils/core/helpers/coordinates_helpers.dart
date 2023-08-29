@@ -15,8 +15,8 @@ class CoordinatesHelpers {
   static String getStringifiedCoordinatesFromGeometry(
       Map<String, dynamic> geometry) {
     if ('${geometry['type']}'.toUpperCase() == 'POINT') {
-      List<dynamic> coordinate = geometry['coordinate'];
-      return '${coordinate.first},${coordinate.last}';
+      List<dynamic> coordinates = geometry['coordinates'];
+      return '${coordinates.first},${coordinates.last}';
     } else {
       return '';
     }
