@@ -1,3 +1,6 @@
+## 1.1.21
+- Bugfix: fixed the misspelled variables on the events, enrollment and tracked entity instance for capturing location in geometry formats
+
 ## 1.1.20
 
 - Improvement: Improvement on the models for DHIS2 events, enrollments and tracked entity instance
