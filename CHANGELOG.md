@@ -1,4 +1,9 @@
+## 1.1.22
+
+- Improvement: Added the geometry attribute to the DHIS2 organisation unit model
+
 ## 1.1.21
+
 - Bugfix: fixed the misspelled variables on the events, enrollment and tracked entity instance for capturing location in geometry formats
 
 ## 1.1.20

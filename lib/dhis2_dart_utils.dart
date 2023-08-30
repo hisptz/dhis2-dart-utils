@@ -28,6 +28,8 @@ export 'src/main_directive.dart'
         relativePeriodTypes,
         fixedPeriodTypes,
         Core,
+        StringHelpers,
+        CoordinatesHelpers,
         HttpService,
         IndicatorEngine,
         ValidationRuleEngine,
