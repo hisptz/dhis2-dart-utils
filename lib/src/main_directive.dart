@@ -1,25 +1,35 @@
+///
 /// Core helpers
+///
 export './utils/shared/helpers/date_helpers.dart' show DateHelpers;
 export './utils/shared/helpers/string_helpers.dart' show StringHelpers;
+export './utils/core/helpers/coordinates_helpers.dart' show CoordinatesHelpers;
 
+///
 /// Period
+///
 export './utils/period_engine/models/period.dart' show Period;
 export './utils/period_engine/models/period_type.dart' show PeriodType;
 export './utils/period_engine/models/period_utility.dart' show PeriodUtility;
 
+///
 /// Program rules data models
+///
 export './utils/program_rule_engine/models/program_rule.dart' show ProgramRule;
 export './utils/program_rule_engine/models/program_rule_variable.dart'
     show ProgramRuleVariable;
 export './utils/program_rule_engine/models/program_rule_action.dart'
     show ProgramRuleAction;
 
+///
 /// Program indicator data models
+///
 export './utils/program_indicator_engine/models/program_indicator.dart'
     show ProgramIndicator;
 
+///
 /// Core data models
-
+///
 export './utils/core/models/dhis2_data_element.dart' show Dhis2DataElement;
 export './utils/core/models/dhis2_enrollment.dart' show Dhis2Enrollment;
 export './utils/core/models/dhis2_event_data_value.dart'
