@@ -36,6 +36,37 @@ class CoordinatesHelpers {
     return distance <= radiusInMeters;
   }
 
+  /// This is a method for checking if a coordinate is within a given polygon
+  /// It takes a `List<double>` coordinates and a `List<List<double>>` polygonCoordinates as named arguments
+  /// The `List<double>` arguments are expected to have the format `[latitude, longitude]`
+  /// The method returns a `bool` value
+  static bool areCoordinatesWithinPolygon({
+    required List<double> coordinates,
+    required List<List<double>> polygonCoordinates,
+  }) {
+    int coordinatedCrossing = 0;
+
+    for (int index = 0; index < polygonCoordinates.length; index++) {
+      List<double> firstPoint = polygonCoordinates[index];
+      List<double> secondPoint = polygonCoordinates[(index + 1) % 4];
+
+      if (firstPoint.last <= coordinates.last &&
+              secondPoint.last > coordinates.last ||
+          secondPoint.last <= coordinates.last &&
+              firstPoint.last > coordinates.last) {
+        double slope = (secondPoint.first - firstPoint.first) /
+            (secondPoint.last - firstPoint.last);
+        double intersectX =
+            firstPoint.first + slope * (coordinates.last - firstPoint.last);
+
+        if (coordinates.first < intersectX) {
+          coordinatedCrossing++;
+        }
+      }
+    }
+    return coordinatedCrossing % 2 == 1;
+  }
+
   /// This is a method for converting DHIS2 coordinate metadata to a string
   /// It takes a `Map<String, dynamic>` object as an argument
   /// the input is has a format like:
