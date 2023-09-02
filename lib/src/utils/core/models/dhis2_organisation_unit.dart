@@ -61,7 +61,7 @@ class Dhis2OrganisationUnit {
     data['code'] = code;
     data['level'] = level;
     data['path'] = path;
-    data['geometry'] = jsonEncode(geometry);
+    data['geometry'] = jsonEncode(geometry ?? {});
     return data;
   }
 
@@ -73,7 +73,7 @@ class Dhis2OrganisationUnit {
     code = mapData['code'];
     level = int.parse(mapData['level']);
     parent = mapData['parent'];
-    geometry = jsonDecode(mapData['geometry']);
+    geometry = jsonDecode(mapData['geometry'] ?? '{}');
   }
 
   /// `Dhis2OrganisationUnit.fromJson` is a factory constructor that generated a `Dhis2OrganisationUnit` from a `dynamic` json
