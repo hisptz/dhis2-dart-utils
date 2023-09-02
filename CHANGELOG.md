@@ -1,3 +1,7 @@
+## 1.1.23
+
+- Bugfix: fixed the fromMap and toMap constructors for the DHIS2 organisation unit model
+
 ## 1.1.22
 
 - Improvement: Added the geometry attribute to the DHIS2 organisation unit model
