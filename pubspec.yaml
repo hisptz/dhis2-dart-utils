@@ -9,9 +9,9 @@ environment:
 dependencies:
   collection: ^1.17.0
   dart_date: ^1.1.1
-  flutter_map: ^5.0.0
+  flutter_map: ^6.1.0
   http: ^1.1.0
 
 dev_dependencies:
-  lints: ^2.0.0
+  lints: ^3.0.0
   test: ^1.16.0
