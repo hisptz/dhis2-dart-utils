@@ -1,3 +1,8 @@
+## 1.1.25
+
+- Removed the unused packages
+  - flutter_map
+
 ## 1.1.24
 
 - Updated package dependencies
