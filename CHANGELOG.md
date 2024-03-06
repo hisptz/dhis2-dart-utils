@@ -1,3 +1,12 @@
+## 1.1.25
+
+- Removed the unused packages
+  - flutter_map
+
+## 1.1.24
+
+- Updated package dependencies
+
 ## 1.1.23
 
 - Bugfix: fixed the fromMap and toMap constructors for the DHIS2 organisation unit model
