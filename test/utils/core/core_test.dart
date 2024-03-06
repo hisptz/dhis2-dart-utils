@@ -22,4 +22,11 @@ void main() {
       });
     });
   });
+
+// TODO: add tests for the coordinates helper methods
+  group('Coordinates Helper Tests', () {
+    setUp(() {
+      // Additional setup goes here.
+    });
+  });
 }
