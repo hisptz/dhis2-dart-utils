@@ -3,30 +3,30 @@
 
 import 'package:dart_date/dart_date.dart';
 
-/// This is a period data model.
-/// It is a collection of properties and different methods necessary for period manipulation
+// This is a period data model.
+// It is a collection of properties and different methods necessary for period manipulation
 
 class Period {
-  /// This is the period identifier
+  // This is the period identifier
   late String id;
 
-  /// This is the period display name as per DHIS2 standards
+  // This is the period display name as per DHIS2 standards
   late String name;
 
-  /// This is the starting '`DateTime` for the respective period
+  // This is the starting '`DateTime` for the respective period
   late DateTime? start;
 
-  /// This is the ending '`DateTime` for the respective period
+  // This is the ending '`DateTime` for the respective period
   late DateTime? end;
 
-  /// This is the type of the current period. It is a `String` representation of the period type
+  // This is the type of the current period. It is a `String` representation of the period type
   late String type;
 
-  /// This is the category of the current period. It is a `String` representation of the period category
+  // This is the category of the current period. It is a `String` representation of the period category
   late String category;
 
-  /// `Period.fromObject` is a constructor method that creates a Period from a `Map` object.
-  /// The constructor accepts a `Map<String, dynamic>` object, `String` period type and  `String` period category as required parameters
+  // `Period.fromObject` is a constructor method that creates a Period from a `Map` object.
+  // The constructor accepts a `Map<String, dynamic>` object, `String` period type and  `String` period category as required parameters
   Period.fromObject(Map<String, dynamic> object,
       {required this.type, required this.category}) {
     id = object['id'];
@@ -35,7 +35,7 @@ class Period {
     end = null;
   }
 
-  /// `Period.fromInterval` is a constructor function that generates period based on the passed `interval`, `idGenerator` function, `nameGenerator` function, `String` period type and  `String` period category as required parameters
+  // `Period.fromInterval` is a constructor function that generates period based on the passed `interval`, `idGenerator` function, `nameGenerator` function, `String` period type and  `String` period category as required parameters
   Period.fromInterval(Interval interval,
       {required Function idGenerator,
       required Function nameGenerator,
@@ -47,7 +47,7 @@ class Period {
     name = nameGenerator(interval);
   }
 
-  /// This is the `toString()` method that return the string representation of the `Period`
+  // This is the `toString()` method that return the string representation of the `Period`
   @override
   String toString() {
     return "$id $name ${start != null ? "(${start?.toHumanString() ?? ''} - ${end?.toHumanString() ?? ''})" : ""}";

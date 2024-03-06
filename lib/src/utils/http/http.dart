@@ -5,9 +5,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-/// The HttpService class contains different DHIS2 http service functions
-///
-///
+// The HttpService class contains different DHIS2 http service functions
+//
+//
 class HttpService {
   //This is the Username of the authorized account of the DHIS2 Instance
   String? username;
@@ -132,7 +132,7 @@ class HttpService {
 
 //This is the function that sends a Get Request to the DHIS2 Instance
 //The function Reads entities in the DHIS2 Instance Server
-  ///This method accepts url String, query parameters and returns a response object with a page size of 1
+  //This method accepts url String, query parameters and returns a response object with a page size of 1
   Future<http.Response> httpGetPagination(
     String url,
     Map<String, dynamic> queryParameters,
@@ -146,7 +146,7 @@ class HttpService {
     return await httpGet(url, queryParameters: dataQueryParameters);
   }
 
-  ///This method returns a String of server url
+  //This method returns a String of server url
   @override
   String toString() {
     return '$serverUrl => $username : $password';

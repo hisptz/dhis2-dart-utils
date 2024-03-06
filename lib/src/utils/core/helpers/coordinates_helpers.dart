@@ -3,17 +3,17 @@
 
 import 'dart:math';
 
-/// `CoordinatesHelpers` is a helper class for converting DHIS2 coordinate metadata
+// `CoordinatesHelpers` is a helper class for converting DHIS2 coordinate metadata
 class CoordinatesHelpers {
-  /// This is a method for converting coordinate number to radian
+  // This is a method for converting coordinate number to radian
   static double _getRadian(double? coordinateNumber) {
     return coordinateNumber == null ? 0 : coordinateNumber * pi / 180;
   }
 
-  /// This is a method for checking if two coordinates are within a given radius
-  /// It takes a `List<double>` firstPoint,`List<double>` second point and the `double` radius in meters  as named arguments
-  /// The `List<double>` arguments are expected to have the format `[latitude, longitude]`
-  /// The method returns a `bool` value
+  // This is a method for checking if two coordinates are within a given radius
+  // It takes a `List<double>` firstPoint,`List<double>` second point and the `double` radius in meters  as named arguments
+  // The `List<double>` arguments are expected to have the format `[latitude, longitude]`
+  // The method returns a `bool` value
   static bool areCoordinatesWithinRadius({
     required List<double> firstPoint,
     required List<double> secondPoint,
@@ -36,10 +36,10 @@ class CoordinatesHelpers {
     return distance <= radiusInMeters;
   }
 
-  /// This is a method for checking if a coordinate is within a given polygon
-  /// It takes a `List<double>` coordinates and a `List<List<double>>` polygonCoordinates as named arguments
-  /// The `List<double>` arguments are expected to have the format `[latitude, longitude]`
-  /// The method returns a `bool` value
+  // This is a method for checking if a coordinate is within a given polygon
+  // It takes a `List<double>` coordinates and a `List<List<double>>` polygonCoordinates as named arguments
+  // The `List<double>` arguments are expected to have the format `[latitude, longitude]`
+  // The method returns a `bool` value
   static bool areCoordinatesWithinPolygon({
     required List<double> coordinates,
     required List<List<double>> polygonCoordinates,
@@ -67,15 +67,15 @@ class CoordinatesHelpers {
     return coordinatedCrossing % 2 == 1;
   }
 
-  /// This is a method for converting DHIS2 coordinate metadata to a string
-  /// It takes a `Map<String, dynamic>` object as an argument
-  /// the input is has a format like:
-  /// ```
-  /// {
-  ///  "type": "POINT",
-  /// "coordinate": [1, 1]
-  /// }
-  /// ```
+  // This is a method for converting DHIS2 coordinate metadata to a string
+  // It takes a `Map<String, dynamic>` object as an argument
+  // the input is has a format like:
+  // ```
+  // {
+  //  "type": "POINT",
+  // "coordinate": [1, 1]
+  // }
+  // ```
   static String getStringifiedCoordinatesFromGeometry(
       Map<String, dynamic> geometry) {
     if ('${geometry['type']}'.toUpperCase() == 'POINT') {
@@ -86,15 +86,15 @@ class CoordinatesHelpers {
     }
   }
 
-  /// This is a method for converting DHIS2 coordinate metadata to a string
-  /// It takes a `Map<String, dynamic>` object as an argument
-  /// the input is has a format like:
-  /// ```
-  /// {
-  /// "latitude": 1,
-  /// "longitude": 1
-  /// }
-  /// ```
+  // This is a method for converting DHIS2 coordinate metadata to a string
+  // It takes a `Map<String, dynamic>` object as an argument
+  // the input is has a format like:
+  // ```
+  // {
+  // "latitude": 1,
+  // "longitude": 1
+  // }
+  // ```
 
   static getStringifiedCoordinatesFromCoordinatesObject(
       Map<String, dynamic> coordinate) {

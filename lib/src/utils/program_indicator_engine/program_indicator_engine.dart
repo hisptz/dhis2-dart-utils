@@ -4,15 +4,15 @@
 import 'helpers/program_indicator_helper.dart';
 import 'models/program_indicator.dart';
 
-///
-/// `ProgramIndicatorEngine` is the engine class for evaluating the program indicators
-///
+//
+// `ProgramIndicatorEngine` is the engine class for evaluating the program indicators
+//
 class ProgramIndicatorEngine {
-  ///
-  /// This is the static method for evaluation of program indicators on the given form data object
-  ///  `ProgramIndicatorEngine.evaluateProgramIndicators` takes in a `List<ProgramIndicator>` and a `Map` of form data object.
-  ///   It returns the new `Map` of form data object with the evaluated values
-  ///
+  //
+  // This is the static method for evaluation of program indicators on the given form data object
+  //  `ProgramIndicatorEngine.evaluateProgramIndicators` takes in a `List<ProgramIndicator>` and a `Map` of form data object.
+  //   It returns the new `Map` of form data object with the evaluated values
+  //
   static Map evaluateProgramIndicators(
       {required List<ProgramIndicator> programIndicators,
       Map dataObject = const {}}) {

@@ -1,71 +1,71 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
-///
-/// `Dhis2SystemInfo` is a data model class for the DHIS2 System info metadata
-///
+//
+// `Dhis2SystemInfo` is a data model class for the DHIS2 System info metadata
+//
 class Dhis2SystemInfo {
-  /// this is the DHIS2 context path
+  // this is the DHIS2 context path
   String? contextPath;
 
-  /// this is the DHIS2 system Id
+  // this is the DHIS2 system Id
   String? systemId;
 
-  /// this is the DHIS2 system name
+  // this is the DHIS2 system name
   String? systemName;
 
-  /// this is the DHIS2 user Agent
+  // this is the DHIS2 user Agent
   String? userAgent;
 
-  /// this is the calender that is configured on the DHIS2 instance
+  // this is the calender that is configured on the DHIS2 instance
   String? calendar;
 
-  /// this is the date format for the DHIS2 instance
+  // this is the date format for the DHIS2 instance
   String? dateFormat;
 
-  /// this is the `date ISO` string representation of the last time a DHIS2 analytics table was created successful
+  // this is the `date ISO` string representation of the last time a DHIS2 analytics table was created successful
   String? lastAnalyticsTableSuccess;
 
-  /// this is the string representation of the duration it took to create the last DHIS2 analytics table was created
+  // this is the string representation of the duration it took to create the last DHIS2 analytics table was created
   String? lastAnalyticsTableRuntime;
 
-  /// this is a version of DHIS2
+  // this is a version of DHIS2
   String? version;
 
-  /// this is revision of the DHIS2
+  // this is revision of the DHIS2
   String? revision;
 
-  /// this is the jasper Reports version as on DHIS2 instance
+  // this is the jasper Reports version as on DHIS2 instance
   String? jasperReportsVersion;
 
   // this is the DHIS2 environment variable
   String? environmentVariable;
 
-  /// this is a DHIS2 file store provider
+  // this is a DHIS2 file store provider
   String? fileStoreProvider;
 
-  /// this is the DHIS2 instance read only mode
+  // this is the DHIS2 instance read only mode
   String? readOnlyMode;
 
-  /// this is the DHIS2 java version
+  // this is the DHIS2 java version
   String? javaVersion;
 
-  /// this is the DHIS2 instance operating system name
+  // this is the DHIS2 instance operating system name
   String? osName;
 
-  /// this is the DHIS2 instance operating system architecture
+  // this is the DHIS2 instance operating system architecture
   String? osArchitecture;
 
-  /// this is the DHIS2 instance operating system version
+  // this is the DHIS2 instance operating system version
   String? osVersion;
 
-  /// this is the DHIS2 memory information
+  // this is the DHIS2 memory information
   String? memoryInfo;
 
-  /// this is the DHIS2 instance CPU cores
+  // this is the DHIS2 instance CPU cores
   String? cpuCores;
 
-  /// this is the default constructor for the `Dhis2SystemInfo`
+  // this is the default constructor for the `Dhis2SystemInfo`
   Dhis2SystemInfo({
     this.contextPath,
     this.systemId,
@@ -89,7 +89,7 @@ class Dhis2SystemInfo {
     this.cpuCores,
   });
 
-  /// `Dhis2SystemInfo.toMap` is a method that converts the `Dhis2SystemInfo` to a `Map` object
+  // `Dhis2SystemInfo.toMap` is a method that converts the `Dhis2SystemInfo` to a `Map` object
   Map<String, dynamic> toMap() {
     var data = <String, dynamic>{};
 
@@ -117,7 +117,7 @@ class Dhis2SystemInfo {
     return data;
   }
 
-  /// `Dhis2SystemInfo.fromMap` is a constructor that generated a `Dhis2SystemInfo` from a `Map` object
+  // `Dhis2SystemInfo.fromMap` is a constructor that generated a `Dhis2SystemInfo` from a `Map` object
   Dhis2SystemInfo.fromMap(Map<String, dynamic> map) {
     contextPath = map['contextPath'];
     systemId = map['systemId'];
@@ -141,7 +141,7 @@ class Dhis2SystemInfo {
     cpuCores = map['cpuCores'];
   }
 
-  /// `Dhis2SystemInfo.fromJson` is a factory constructor that generated a `Dhis2SystemInfo` from a `dynamic` json
+  // `Dhis2SystemInfo.fromJson` is a factory constructor that generated a `Dhis2SystemInfo` from a `dynamic` json
   factory Dhis2SystemInfo.fromJson(dynamic json) {
     return Dhis2SystemInfo(
       contextPath: json['contextPath'] ?? '',
@@ -167,7 +167,7 @@ class Dhis2SystemInfo {
     );
   }
 
-  /// this is the `toString()` method that return the string representation of the `Dhis2SystemInfo`
+  // this is the `toString()` method that return the string representation of the `Dhis2SystemInfo`
   @override
   String toString() {
     return '<$systemId $systemName>';

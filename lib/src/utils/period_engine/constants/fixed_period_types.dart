@@ -7,10 +7,10 @@ import '../helpers/date.dart';
 import 'period_categories.dart';
 import 'period_types.dart';
 
-/// This is a list of all DHIS2 supported fixed period types
+// This is a list of all DHIS2 supported fixed period types
 // / Each individual period item from this list is a fixed period formatted onto a map necessary for different DHIS2 functionalities
-///
-///
+//
+//
 List<Map<String, dynamic>> fixedPeriodTypes = [
   {
     "id": PeriodTypes.weekly,

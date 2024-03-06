@@ -12,24 +12,24 @@ import 'models/program_rule.dart';
 import 'models/program_rule_action.dart';
 import 'models/program_rule_variable.dart';
 
-///
-/// `ProgramRuleEngine` is the engine class for evaluation of DHI2 program rules
-///
+//
+// `ProgramRuleEngine` is the engine class for evaluation of DHI2 program rules
+//
 class ProgramRuleEngine {
-  ///
-  /// `ProgramRuleEngine.evaluateProgramRule` is a helper function for evaluation of program rule on given form data object
-  ///  The function takes a list of `ProgramRule`, a list of `ProgramRuleVariable` and a `Map` of form data object to return a `Map` result
-  ///  The result from this function follows below format:
-  /// ```dart
-  ///   {
-  ///     "hiddenFields" : {...}
-  ///     "assignedFields" : {...}
-  ///     "hiddenSections" : {...}
-  ///     "hiddenProgramStages" : {...}
-  ///     "errorOrWarningMessage" : {...}
-  ///   }
-  /// ```
-  ///
+  //
+  // `ProgramRuleEngine.evaluateProgramRule` is a helper function for evaluation of program rule on given form data object
+  //  The function takes a list of `ProgramRule`, a list of `ProgramRuleVariable` and a `Map` of form data object to return a `Map` result
+  //  The result from this function follows below format:
+  // ```dart
+  //   {
+  //     "hiddenFields" : {...}
+  //     "assignedFields" : {...}
+  //     "hiddenSections" : {...}
+  //     "hiddenProgramStages" : {...}
+  //     "errorOrWarningMessage" : {...}
+  //   }
+  // ```
+  //
   static Map evaluateProgramRule({
     required List<ProgramRule> programRules,
     required List<ProgramRuleVariable> programRuleVariables,
@@ -204,10 +204,10 @@ class ProgramRuleEngine {
     };
   }
 
-  ///
-  /// `ProgramRuleEngine.decodeExpressionWithProgramRuleVariables` is a helper function that decodes and expression by replacing data object values with the program rule variables
-  ///  The function accepts `String` expression, `Map` data object and a `List` of `ProgramRuleVariable` .
-  ///  It returns a sanitized `String` expression
+  //
+  // `ProgramRuleEngine.decodeExpressionWithProgramRuleVariables` is a helper function that decodes and expression by replacing data object values with the program rule variables
+  //  The function accepts `String` expression, `Map` data object and a `List` of `ProgramRuleVariable` .
+  //  It returns a sanitized `String` expression
   static String decodeExpressionWithProgramRuleVariables({
     required String expression,
     required List<ProgramRuleVariable> programRuleVariables,
@@ -257,9 +257,9 @@ class ProgramRuleEngine {
     return sanitizedExpression;
   }
 
-  ///
-  /// Replacing the DHIS2 standard variables with values from data object
-  ///
+  //
+  // Replacing the DHIS2 standard variables with values from data object
+  //
   static String escapeStandardDhis2Variables({
     String expression = '',
     Map dataObject = const {},
@@ -284,11 +284,11 @@ class ProgramRuleEngine {
     return expression;
   }
 
-  ///
-  /// `ProgramRuleEngine._sortProgramRulesByPriority` is a  private helper function that sorts the program rules by priority
-  /// The function accepts a `List` of `ProgramRule` and returns a sorted `List` of `ProgramRule`
-  /// The function returns a sorted `List` of `ProgramRule`
-  ///
+  //
+  // `ProgramRuleEngine._sortProgramRulesByPriority` is a  private helper function that sorts the program rules by priority
+  // The function accepts a `List` of `ProgramRule` and returns a sorted `List` of `ProgramRule`
+  // The function returns a sorted `List` of `ProgramRule`
+  //
   static List<ProgramRule> _sortProgramRulesByPriority(
       List<ProgramRule> programRules) {
     var prioritizedProgramRules = programRules

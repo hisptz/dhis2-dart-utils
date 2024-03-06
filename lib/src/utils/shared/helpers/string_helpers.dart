@@ -1,18 +1,18 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
-///
-/// `StringHelpers` is a collection of custom helper functions for manipulating `String`
-///
+//
+// `StringHelpers` is a collection of custom helper functions for manipulating `String`
+//
 class StringHelpers {
-  ///
-  /// `StringHelpers.escapeCharacter` is a method that escapes specified characters from a `String` to return a
-  /// The method accepts a `String` to be sanitized and a list of `String` characters to be escaped as parameters, and returns a sanitized `String`
-  ///  ```dart
-  ///  String val = "Hello\n\"";
-  ///  val = StringHelpers.escapeCharacter(val, escapeChar: ["\n", "\""]); // this makes val = "Hello"
-  /// ```
-  ///
+  //
+  // `StringHelpers.escapeCharacter` is a method that escapes specified characters from a `String` to return a
+  // The method accepts a `String` to be sanitized and a list of `String` characters to be escaped as parameters, and returns a sanitized `String`
+  //  ```dart
+  //  String val = "Hello\n\"";
+  //  val = StringHelpers.escapeCharacter(val, escapeChar: ["\n", "\""]); // this makes val = "Hello"
+  // ```
+  //
   static String escapeCharacter(
     String string, {
     List<String> escapeChar = const [],
@@ -23,10 +23,10 @@ class StringHelpers {
     return string;
   }
 
-  ///
-  /// `StringHelpers.covertCamelCaseToSnakeCase`  is a method that converts a camelCase string into snake_case.
-  ///  The method accepts a `String` text parameter and returns back a snake_case conversion
-  ///
+  //
+  // `StringHelpers.covertCamelCaseToSnakeCase`  is a method that converts a camelCase string into snake_case.
+  //  The method accepts a `String` text parameter and returns back a snake_case conversion
+  //
   static String covertCamelCaseToSnakeCase(String text) {
     RegExp expression = RegExp(r'(?<=[a-z])[A-Z]');
     return text
@@ -34,10 +34,10 @@ class StringHelpers {
         .toLowerCase();
   }
 
-  ///
-  /// `StringHelpers.convertSnakeCaseToCamelCase` is a method that converts snake_case into a camelCase string
-  ///  The method accepts a `String` text parameter and returns the camelCase converted string
-  ///
+  //
+  // `StringHelpers.convertSnakeCaseToCamelCase` is a method that converts snake_case into a camelCase string
+  //  The method accepts a `String` text parameter and returns the camelCase converted string
+  //
   static String convertSnakeCaseToCamelCase(String text) {
     var sanitizedText = text.contains('_')
         ? text
@@ -51,10 +51,10 @@ class StringHelpers {
     return "${sanitizedText[0].toLowerCase()}${sanitizedText.substring(1)}";
   }
 
-  ///
-  /// `StringHelpers.escapeQuotes` is an helper function that escapes the string quotations on a string value
-  ///  The functions takes a `String` parameter and returns a sanitized `String` with no quotations.
-  ///
+  //
+  // `StringHelpers.escapeQuotes` is an helper function that escapes the string quotations on a string value
+  //  The functions takes a `String` parameter and returns a sanitized `String` with no quotations.
+  //
   static String escapeQuotes(String string) {
     String doubleQuotesPattern = '"';
     var singleQuotePosition = string.lastIndexOf("'").clamp(0, string.length);

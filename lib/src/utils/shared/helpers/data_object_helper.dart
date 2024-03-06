@@ -4,14 +4,14 @@
 import '../constants/default_values.dart';
 import '../exceptions/data_object_exception.dart';
 
-///
-/// `DataObjectHelper` is a collection of helper functions for manipulating the form data object
-///
+//
+// `DataObjectHelper` is a collection of helper functions for manipulating the form data object
+//
 class DataObjectHelper {
-  ///
-  /// `DataObjectHelper.getValueFromDataObject` is a function for getting a value from the the provided data object
-  ///  The function takes id of type `String` and a `Map` form data object, and returns a string that is a representation of the value from the data object
-  ///
+  //
+  // `DataObjectHelper.getValueFromDataObject` is a function for getting a value from the the provided data object
+  //  The function takes id of type `String` and a `Map` form data object, and returns a string that is a representation of the value from the data object
+  //
   static String getValueFromDataObject(String uid, Map dataObject) {
     var value = DefaultValues.dataObjectValue;
     try {

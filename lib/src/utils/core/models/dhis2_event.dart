@@ -5,56 +5,56 @@ import 'package:dhis2_dart_utils/src/utils/core/helpers/coordinates_helpers.dart
 
 import 'dhis2_event_data_value.dart';
 
-///
-/// `Dhis2Event` is a data model class for the DHIS2 Event metadata
-///
+//
+// `Dhis2Event` is a data model class for the DHIS2 Event metadata
+//
 class Dhis2Event {
-  /// This is a DHIS2 uid for a given event
-  /// It is used if needed to have it events have to alteratively to conform to other platform metadata structure
+  // This is a DHIS2 uid for a given event
+  // It is used if needed to have it events have to alteratively to conform to other platform metadata structure
   String? id;
 
-  /// This is a DHIS2 uid for a given event
+  // This is a DHIS2 uid for a given event
   String? event;
 
-  /// This is a DHIS2 uid for a given trackedEntityInstance
+  // This is a DHIS2 uid for a given trackedEntityInstance
   String? trackedEntityInstance;
 
-  /// This is a string representation of a date when the `Dhis2Event` occured
-  /// It conforms to the structure `YYYY-MM-DD`
+  // This is a string representation of a date when the `Dhis2Event` occured
+  // It conforms to the structure `YYYY-MM-DD`
   String? eventDate;
 
-  /// This is the DHIS2 id for the `Dhis2OrganisationUnit` to which the event occured
+  // This is the DHIS2 id for the `Dhis2OrganisationUnit` to which the event occured
   String? orgUnit;
 
-  /// This is the DHIS2 id for the Program to which a given event belongs
+  // This is the DHIS2 id for the Program to which a given event belongs
   String? program;
 
-  /// This is the DHIS2 id for the Program stage to which a given event belongs
+  // This is the DHIS2 id for the Program stage to which a given event belongs
   String? programStage;
 
-  /// This is the DHIS2 username for a user who registered the event
+  // This is the DHIS2 username for a user who registered the event
   String? storedBy;
 
-  /// This is the date to which the DHIS2 status of an event turned to `COMPLETED`
-  /// `completedDate` is formatted to `date ISO` string in form like `YYYY-MM-DDT...`
+  // This is the date to which the DHIS2 status of an event turned to `COMPLETED`
+  // `completedDate` is formatted to `date ISO` string in form like `YYYY-MM-DDT...`
   String? completedDate;
 
-  /// This is a DHIS2 defined status for an event
-  /// Status could be `ACTIVE`, `SCHEDULED` or `COMPLETED`
+  // This is a DHIS2 defined status for an event
+  // Status could be `ACTIVE`, `SCHEDULED` or `COMPLETED`
   String? status;
 
-  ///  This is the offline synchronization status for an event
-  ///  It holds two values, `synced` and `not-synced`
+  //  This is the offline synchronization status for an event
+  //  It holds two values, `synced` and `not-synced`
   String? syncStatus;
 
-  /// This is the coordinate for the event
-  /// It is formatted as `latitude,longitude`
+  // This is the coordinate for the event
+  // It is formatted as `latitude,longitude`
   String? coordinate;
 
-  ///  This is the list of `Dhis2EventDataValue` associated with the event
+  //  This is the list of `Dhis2EventDataValue` associated with the event
   List<Dhis2EventDataValue>? dataValues;
 
-  /// This is the default constructor for the `Dhis2Event`
+  // This is the default constructor for the `Dhis2Event`
   Dhis2Event({
     required this.event,
     required this.eventDate,
@@ -72,10 +72,10 @@ class Dhis2Event {
     id = event;
   }
 
-  /// This is a getter for the offline `syncStatus` of a `Dhis2Event`
+  // This is a getter for the offline `syncStatus` of a `Dhis2Event`
   bool get isSynced => syncStatus == "synced";
 
-  /// `Dhis2Event.toMap` is a method that converts the `Dhis2Event` to a `Map` object
+  // `Dhis2Event.toMap` is a method that converts the `Dhis2Event` to a `Map` object
   Map<String, dynamic> toMap() {
     var data = <String, dynamic>{};
     data['id'] = id;
@@ -93,7 +93,7 @@ class Dhis2Event {
     return data;
   }
 
-  /// `Dhis2Event.fromMap` is a constructor that generated a `Dhis2Event` from a `Map` object
+  // `Dhis2Event.fromMap` is a constructor that generated a `Dhis2Event` from a `Map` object
   Dhis2Event.fromMap(Map<String, dynamic> mapData) {
     id = mapData['id'];
     event = mapData['event'];
@@ -110,7 +110,7 @@ class Dhis2Event {
     coordinate = mapData['coordinate'] ?? '';
   }
 
-  /// `Dhis2Event.fromJson` is a factory constructor that generated a `Dhis2Event` from a `dynamic` json
+  // `Dhis2Event.fromJson` is a factory constructor that generated a `Dhis2Event` from a `dynamic` json
   factory Dhis2Event.fromJson(
     dynamic json,
   ) {
@@ -136,9 +136,9 @@ class Dhis2Event {
     );
   }
 
-  /// This is a method that gets a `List` of all `Dhis2EventDataValue` associate with a given `Dhis2Event`
-  /// The method accepts a `dynamic` event json and `String` id for the event
-  /// The method return a `List<Dhis2EventDataValue>`
+  // This is a method that gets a `List` of all `Dhis2EventDataValue` associate with a given `Dhis2Event`
+  // The method accepts a `dynamic` event json and `String` id for the event
+  // The method return a `List<Dhis2EventDataValue>`
   static List<Dhis2EventDataValue> getDataValues(dynamic json, String eventId) {
     List<Dhis2EventDataValue> dhis2DataValues = [];
     try {
@@ -154,7 +154,7 @@ class Dhis2Event {
     return dhis2DataValues;
   }
 
-  /// This is the `toString()` method that return the string representation of the `Dhis2Event`
+  // This is the `toString()` method that return the string representation of the `Dhis2Event`
   @override
   String toString() {
     return '$event $eventDate';
