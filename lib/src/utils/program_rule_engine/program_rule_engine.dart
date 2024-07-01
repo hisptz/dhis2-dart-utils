@@ -12,24 +12,24 @@ import 'models/program_rule.dart';
 import 'models/program_rule_action.dart';
 import 'models/program_rule_variable.dart';
 
-///
-/// `ProgramRuleEngine` is the engine class for evaluation of DHI2 program rules
-///
+//
+// `ProgramRuleEngine` is the engine class for evaluation of DHI2 program rules
+//
 class ProgramRuleEngine {
-  ///
-  /// `ProgramRuleEngine.evaluateProgramRule` is a helper function for evaluation of program rule on given form data object
-  ///  The function takes a list of `ProgramRule`, a list of `ProgramRuleVariable` and a `Map` of form data object to return a `Map` result
-  ///  The result from this function follows below format:
-  /// ```dart
-  ///   {
-  ///     "hiddenFields" : {...}
-  ///     "assignedFields" : {...}
-  ///     "hiddenSections" : {...}
-  ///     "hiddenProgramStages" : {...}
-  ///     "errorOrWarningMessage" : {...}
-  ///   }
-  /// ```
-  ///
+  //
+  // `ProgramRuleEngine.evaluateProgramRule` is a helper function for evaluation of program rule on given form data object
+  //  The function takes a list of `ProgramRule`, a list of `ProgramRuleVariable` and a `Map` of form data object to return a `Map` result
+  //  The result from this function follows below format:
+  // ```dart
+  //   {
+  //     "hiddenFields" : {...}
+  //     "assignedFields" : {...}
+  //     "hiddenSections" : {...}
+  //     "hiddenProgramStages" : {...}
+  //     "errorOrWarningMessage" : {...}
+  //   }
+  // ```
+  //
   static Map evaluateProgramRule({
     required List<ProgramRule> programRules,
     required List<ProgramRuleVariable> programRuleVariables,
@@ -40,6 +40,8 @@ class ProgramRuleEngine {
     var hiddenSections = {};
     var hiddenProgramStages = {};
     var errorOrWarningMessage = {};
+
+    programRules = _sortProgramRulesByPriority(programRules);
 
     if (programRules.isNotEmpty) {
       for (ProgramRule programRule in programRules) {
@@ -56,74 +58,78 @@ class ProgramRuleEngine {
           dataObject: dataObject,
         );
 
-        // Evaluating the logical condition
-        var evaluatedConditionResults =
-            ProgramRuleHelper.evaluateLogicalCondition(sanitizedCondition);
+        try {
+          // Evaluating the logical condition
+          var evaluatedConditionResults =
+              ProgramRuleHelper.evaluateLogicalCondition(sanitizedCondition);
 
-        for (ProgramRuleAction programRuleAction
-            in programRule.programRuleActions ?? []) {
-          String? data = programRuleAction.data;
-          String? content = programRuleAction.content;
-          String dataExpression = programRuleAction.data ?? '';
-          var dataElement = programRuleAction.dataElement;
-          var trackedEntityAttribute = programRuleAction.trackedEntityAttribute;
-          String? programRuleActionType =
-              programRuleAction.programRuleActionType;
-          var programStage = programRuleAction.programStage;
-          var programStageSection = programRuleAction.programStageSection;
+          for (ProgramRuleAction programRuleAction
+              in programRule.programRuleActions ?? []) {
+            String? data = programRuleAction.data;
+            String? content = programRuleAction.content;
+            String dataExpression = programRuleAction.data ?? '';
+            String? programRuleActionType =
+                programRuleAction.programRuleActionType;
+            var dataElement = programRuleAction.dataElement;
+            var trackedEntityAttribute =
+                programRuleAction.trackedEntityAttribute;
+            var programStage = programRuleAction.programStage;
+            var programStageSection = programRuleAction.programStageSection;
 
-          // Decoding the expression with program rule variables
-          dataExpression = decodeExpressionWithProgramRuleVariables(
-            programRuleVariables: programRuleVariables,
-            expression: dataExpression,
-            dataObject: dataObject,
-          );
+            String dataItemTargetedByProgramAction =
+                (dataElement ?? '').isNotEmpty
+                    ? dataElement!
+                    : (trackedEntityAttribute ?? '').isNotEmpty
+                        ? trackedEntityAttribute!
+                        : (programStage ?? '').isNotEmpty
+                            ? programStage!
+                            : (programStageSection ?? '').isNotEmpty
+                                ? programStageSection!
+                                : '';
 
-          try {
+            // Decoding the expression with program rule variables
+            dataExpression = decodeExpressionWithProgramRuleVariables(
+              programRuleVariables: programRuleVariables,
+              expression: dataExpression,
+              dataObject: dataObject,
+            );
             if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideField &&
                 evaluatedConditionResults.runtimeType == bool) {
-              if (dataElement != null) {
-                String id = dataElement;
-                hiddenFields[id] = evaluatedConditionResults;
-              } else if (trackedEntityAttribute != null) {
-                String id = trackedEntityAttribute;
-                hiddenFields[id] = evaluatedConditionResults;
-              }
+              hiddenFields[dataItemTargetedByProgramAction] =
+                  evaluatedConditionResults;
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.assignField &&
                 evaluatedConditionResults.runtimeType == bool) {
-              String id = (dataElement ?? '').isNotEmpty
-                  ? dataElement!
-                  : (trackedEntityAttribute ?? '').isNotEmpty
-                      ? trackedEntityAttribute!
-                      : '';
-              if (id.isNotEmpty) {
+              if (dataItemTargetedByProgramAction.isNotEmpty) {
                 if (evaluatedConditionResults) {
                   var sanitizedDataExpression = escapeStandardDhis2Variables(
                     expression: dataExpression,
                     dataObject: dataObject,
                   );
-                  var assignedValue = StringHelpers.escapeQuotes(
-                    ProgramRuleHelper.evaluateLogicalCondition(
-                      sanitizedDataExpression,
-                    ),
+                  var evaluatedDataExpression =
+                      ProgramRuleHelper.evaluateLogicalCondition(
+                    sanitizedDataExpression,
                   );
-                  assignedFields[id] = assignedValue;
+                  var assignedValue = StringHelpers.escapeQuotes(
+                    '$evaluatedDataExpression',
+                  );
+                  assignedFields[dataItemTargetedByProgramAction] =
+                      assignedValue;
                 }
               }
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideSection &&
                 evaluatedConditionResults.runtimeType == bool) {
-              if (programStageSection != null) {
-                String sectionId = programStageSection;
+              if (programStageSection?.isNotEmpty == true) {
+                String sectionId = programStageSection!;
                 hiddenSections[sectionId] = evaluatedConditionResults;
               }
             } else if (programRuleActionType ==
                     ProgramRuleActionsConstants.hideProgramStage &&
                 evaluatedConditionResults.runtimeType == bool) {
-              if (programStage != null) {
-                String stageId = programStage;
+              if (programStage?.isNotEmpty == true) {
+                String stageId = programStage!;
                 hiddenSections[stageId] = evaluatedConditionResults;
               }
             } else if (evaluatedConditionResults.runtimeType == bool &&
@@ -148,8 +154,7 @@ class ProgramRuleEngine {
                           ProgramRuleActionsConstants.errorOnComplete
                   ? true
                   : false;
-              String? id = dataElement;
-              errorOrWarningMessage[id] = {
+              errorOrWarningMessage[dataItemTargetedByProgramAction] = {
                 "message": content,
                 "isComplete": isOnComplete,
                 "messageType": messageType
@@ -175,28 +180,17 @@ class ProgramRuleEngine {
               if (data != null) {
                 message += ' $data';
               }
-              if (dataElement != null) {
-                String id = dataElement;
-                errorOrWarningMessage[id] = {
-                  message: message,
-                  isOnComplete: isOnComplete,
-                  messageType: messageType,
-                };
-              }
-              if (trackedEntityAttribute != null) {
-                String id = trackedEntityAttribute;
-                errorOrWarningMessage[id] = {
-                  message: message,
-                  isOnComplete: isOnComplete,
-                  messageType: messageType,
-                };
-              }
+              errorOrWarningMessage[dataItemTargetedByProgramAction] = {
+                message: message,
+                isOnComplete: isOnComplete,
+                messageType: messageType,
+              };
             }
-          } catch (error) {
-            var exception = ProgramRuleException(
-                'evaluateProgramRule(${programRule.id}): $error');
-            print(exception.toString());
           }
+        } catch (error) {
+          var exception = ProgramRuleException(
+              'evaluateProgramRule(${programRule.id}): $error');
+          print(exception.toString());
         }
       }
     }
@@ -210,10 +204,10 @@ class ProgramRuleEngine {
     };
   }
 
-  ///
-  /// `ProgramRuleEngine.decodeExpressionWithProgramRuleVariables` is a helper function that decodes and expression by replacing data object values with the program rule variables
-  ///  The function accepts `String` expression, `Map` data object and a `List` of `ProgramRuleVariable` .
-  ///  It returns a sanitized `String` expression
+  //
+  // `ProgramRuleEngine.decodeExpressionWithProgramRuleVariables` is a helper function that decodes and expression by replacing data object values with the program rule variables
+  //  The function accepts `String` expression, `Map` data object and a `List` of `ProgramRuleVariable` .
+  //  It returns a sanitized `String` expression
   static String decodeExpressionWithProgramRuleVariables({
     required String expression,
     required List<ProgramRuleVariable> programRuleVariables,
@@ -222,50 +216,50 @@ class ProgramRuleEngine {
     String sanitizedExpression = expression;
 
     for (ProgramRuleVariable programRuleVariable in programRuleVariables) {
-      String ruleVariableDataElementAttributeId =
-          programRuleVariable.dataElement != null &&
-                  programRuleVariable.dataElement != ''
-              ? programRuleVariable.dataElement!
-              : programRuleVariable.trackedEntityAttribute != null &&
-                      programRuleVariable.trackedEntityAttribute != ''
-                  ? programRuleVariable.trackedEntityAttribute!
-                  : '';
       var value = "''";
-      if (dataObject.isNotEmpty &&
-          dataObject[ruleVariableDataElementAttributeId] != null) {
-        try {
-          double doubleValue = double.parse(
-            dataObject[ruleVariableDataElementAttributeId] ?? '0.0',
-          );
-          value = doubleValue as String;
-        } catch (error) {
-          value = "${dataObject[ruleVariableDataElementAttributeId]}";
-          if (dataObject[ruleVariableDataElementAttributeId] != '') {
+      if (programRuleVariable.name != null &&
+          sanitizedExpression.contains(programRuleVariable.name!)) {
+        String ruleVariableDataElementAttributeId =
+            programRuleVariable.dataElement != null &&
+                    programRuleVariable.dataElement != ''
+                ? programRuleVariable.dataElement!
+                : programRuleVariable.trackedEntityAttribute != null &&
+                        programRuleVariable.trackedEntityAttribute != ''
+                    ? programRuleVariable.trackedEntityAttribute!
+                    : '';
+
+        if (dataObject.isNotEmpty &&
+            dataObject[ruleVariableDataElementAttributeId] != null) {
+          try {
+            double doubleValue = double.parse(
+              dataObject[ruleVariableDataElementAttributeId] ?? '0.0',
+            );
+            value = doubleValue as String;
+          } catch (error) {
             value = "${dataObject[ruleVariableDataElementAttributeId]}";
+            if (dataObject[ruleVariableDataElementAttributeId] != '') {
+              value = "${dataObject[ruleVariableDataElementAttributeId]}";
+            }
           }
-        }
-
-        sanitizedExpression = escapeStandardDhis2Variables(
-          dataObject: dataObject,
-          expression: sanitizedExpression,
-        );
-
-        if (programRuleVariable.name != null &&
-            sanitizedExpression.contains(programRuleVariable.name!)) {
-          sanitizedExpression = ProgramRuleHelper.sanitizeExpression(
+          sanitizedExpression = escapeStandardDhis2Variables(
+            dataObject: dataObject,
             expression: sanitizedExpression,
-            programRuleVariable: programRuleVariable.name ?? '',
-            value: value,
           );
         }
+
+        sanitizedExpression = ProgramRuleHelper.sanitizeExpression(
+          expression: sanitizedExpression,
+          programRuleVariable: programRuleVariable.name!,
+          value: value,
+        );
       }
     }
     return sanitizedExpression;
   }
 
-  ///
-  /// Replacing the DHIS2 standard variables with values from data object
-  ///
+  //
+  // Replacing the DHIS2 standard variables with values from data object
+  //
   static String escapeStandardDhis2Variables({
     String expression = '',
     Map dataObject = const {},
@@ -288,5 +282,25 @@ class ProgramRuleEngine {
     }
 
     return expression;
+  }
+
+  //
+  // `ProgramRuleEngine._sortProgramRulesByPriority` is a  private helper function that sorts the program rules by priority
+  // The function accepts a `List` of `ProgramRule` and returns a sorted `List` of `ProgramRule`
+  // The function returns a sorted `List` of `ProgramRule`
+  //
+  static List<ProgramRule> _sortProgramRulesByPriority(
+      List<ProgramRule> programRules) {
+    var prioritizedProgramRules = programRules
+        .where((programRule) => programRule.priority != null)
+        .toList();
+    prioritizedProgramRules.sort((firstProgramRule, secondProgramRule) =>
+        firstProgramRule.priority!.compareTo(secondProgramRule.priority!));
+    return [
+      ...prioritizedProgramRules,
+      ...(programRules
+          .where((programRule) => programRule.priority == null)
+          .toList())
+    ];
   }
 }

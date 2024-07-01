@@ -5,14 +5,14 @@ import 'package:dhis2_dart_utils/src/utils/shared/helpers/d2_operations_utils.da
 
 import '../../shared/helpers/mathematical_operations_util.dart';
 
-///
-/// `ProgramRuleHelper` is a collection of helper functions for evaluation of a `ProgramRule`
-///
+//
+// `ProgramRuleHelper` is a collection of helper functions for evaluation of a `ProgramRule`
+//
 class ProgramRuleHelper {
-  ///
-  /// This is a helper function for evaluating the logical condition.
-  /// It accepts the condition as a `String` and returns a `dynamic` value from the condition
-  ///
+  //
+  // This is a helper function for evaluating the logical condition.
+  // It accepts the condition as a `String` and returns a `dynamic` value from the condition
+  //
   static dynamic evaluateLogicalCondition(String condition) {
     condition = D2OperationsUtils.evaluatedD2BuiltInFunctions(condition);
     if (condition.contains('(') || condition.contains(')')) {
@@ -29,10 +29,10 @@ class ProgramRuleHelper {
     }
   }
 
-  ///
-  /// `evaluateLogicalConditionWithinBrackets` evaluates the atomic condition having none of the brackets in it.
-  /// The function accepts a `String` condition and returns a `dynamic` evaluated value.
-  ///
+  //
+  // `evaluateLogicalConditionWithinBrackets` evaluates the atomic condition having none of the brackets in it.
+  // The function accepts a `String` condition and returns a `dynamic` evaluated value.
+  //
   static dynamic evaluateLogicalConditionWithinBrackets(String condition) {
     return MathematicalOperationsUtil.evaluateMathematicalOperation(
       condition,
@@ -40,11 +40,11 @@ class ProgramRuleHelper {
     );
   }
 
-  ///
-  /// `sanitizeExpression` sanitizes the program rule expression by replacing the program rule variables with actual values
-  /// function accepts `String` expression, `String` program rule variable name and a `String` value
-  /// This function returns a sanitized `String` having the expression with replaced with appropriate values
-  ///
+  //
+  // `sanitizeExpression` sanitizes the program rule expression by replacing the program rule variables with actual values
+  // function accepts `String` expression, `String` program rule variable name and a `String` value
+  // This function returns a sanitized `String` having the expression with replaced with appropriate values
+  //
   static String sanitizeExpression({
     required String expression,
     required String programRuleVariable,

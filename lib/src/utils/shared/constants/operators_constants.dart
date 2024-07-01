@@ -1,9 +1,9 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
-///
-/// `OperatorsConstants` is a collection of supported operators for different computations by the library
-///
+//
+// `OperatorsConstants` is a collection of supported operators for different computations by the library
+//
 class OperatorsConstants {
   // This is a list of arithmetic operators supported by the library
   static List<String> arithmeticOperators = ['+', '-', '*', '/', '%'];
@@ -28,6 +28,14 @@ class OperatorsConstants {
     'd2:hasValue',
     'if',
     'isNull',
-    'isNotNull'
+    'isNotNull',
+    "d2:yearsBetween",
+    "d2:monthsBetween",
+    "d2:weeksBetween",
+    "d2:daysBetween",
+    "d2:ceil",
+    "d2:floor",
+    "d2:modulus",
+    "d2:round",
   ];
 }

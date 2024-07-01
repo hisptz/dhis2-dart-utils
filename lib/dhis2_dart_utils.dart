@@ -1,6 +1,6 @@
-///
-/// Entry point to the library
-///
+//
+// Entry point to the library
+//
 library dhis2_dart_utils;
 
 export 'src/main_directive.dart'
@@ -28,6 +28,9 @@ export 'src/main_directive.dart'
         relativePeriodTypes,
         fixedPeriodTypes,
         Core,
+        StringHelpers,
+        CoordinatesHelpers,
+        HttpService,
         IndicatorEngine,
         ValidationRuleEngine,
         ProgramIndicatorEngine,

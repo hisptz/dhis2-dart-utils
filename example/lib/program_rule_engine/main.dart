@@ -93,7 +93,7 @@ void main() {
   Map programRuleEngineDataObject = {
     "oZg33kd9taw": "Male",
     "XZg33kd9taw": "1997-03-07",
-    "enrollmentDate": "2023-06-01"
+    "enrollmentDate": "2023-06-01",
   };
 
   print(

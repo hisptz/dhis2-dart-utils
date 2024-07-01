@@ -1,14 +1,14 @@
 // Copyright (c) 2022, HISP Tanzania Developers.
 // All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 
-///
-/// `Dhis2Variables` is a collection of DHIS2 supported variables
-///
+//
+// `Dhis2Variables` is a collection of DHIS2 supported variables
+//
 
 class Dhis2Variables {
-  ///
-  /// `Dhis2Variables.getStandardVariables()` is the function that returns the list of standard variables supported by DHIS2
-  ///
+  //
+  // `Dhis2Variables.getStandardVariables()` is the function that returns the list of standard variables supported by DHIS2
+  //
   static List<String> getStandardVariables() {
     return [
       currentDate,

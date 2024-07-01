@@ -1,3 +1,67 @@
+## 1.1.26
+- Package update
+
+## 1.1.25
+
+- Removed the unused packages
+  - flutter_map
+
+## 1.1.24
+
+- Updated package dependencies
+
+## 1.1.23
+
+- Bugfix: fixed the fromMap and toMap constructors for the DHIS2 organisation unit model
+
+## 1.1.22
+
+- Improvement: Added the geometry attribute to the DHIS2 organisation unit model
+
+## 1.1.21
+
+- Bugfix: fixed the misspelled variables on the events, enrollment and tracked entity instance for capturing location in geometry formats
+
+## 1.1.20
+
+- Improvement: Improvement on the models for DHIS2 events, enrollments and tracked entity instance
+  - Added coordinate attribute that stringifies the geometry object given that it's of type Point
+
+## 1.1.19
+
+- Improvement:updated the README's util features section.
+
+## 1.1.18
+
+- Added HTTP request support with token authorization, enabling seamless communication with external APIs and providing enhanced security through Personal Access Tokens.
+
+## 1.1.17
+
+- Improvement: improved the performance of decoding of program rule variables
+
+## 1.1.16
+
+- Improvement: improved the program rule evaluations by:
+  - Supporting sorting of program rules by priorities
+  - Implemented casting of 1's and 0's on the logical operations with boolean values
+  - Fixed the bugs with logical operators in the program rules evaluations
+
+## 1.1.15
+
+- Bugfix: fixed the bug with d2:hasValue operator and boolean handling
+
+## 1.1.14
+
+- Bugfix: fixed the targeting of the data items that are affected by the program rules
+
+## 1.1.13
+
+- Added d2 mathematical operators
+  - d2:modulus
+  - d2:ceil
+  - d2:floor
+  - d2:round
+
 ## 1.1.12
 
 - Performance improvement on Program rule evaluation
