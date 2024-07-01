@@ -1,3 +1,6 @@
+## 1.1.26
+- Package update
+
 ## 1.1.25
 
 - Removed the unused packages
